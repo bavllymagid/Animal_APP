@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_app_nav_graph"
+    app:startDestination="@id/feedsFragment">
+
+    <fragment
+        android:id="@+id/bookingsFragment"
+        android:name="com.evapharma.animalhealth.applicationflow.presentation.ui.fragments.BookingsFragment"
+        android:label="fragment_bookings"
+        tools:layout="@layout/fragment_bookings" />
+    <fragment
+        android:id="@+id/feedsFragment"
+        android:name="com.evapharma.animalhealth.applicationflow.presentation.ui.fragments.FeedsFragment"
+        android:label="fragment_feeds"
+        tools:layout="@layout/fragment_feeds" >
+        <action
+            android:id="@+id/action_feedsFragment_to_bookAppointmentFragment"
+            app:destination="@id/bookAppointmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookAppointmentFragment"
+        android:name="com.evapharma.animalhealth.applicationflow.presentation.ui.fragments.BookAppointmentFragment"
+        android:label="fragment_book_appointement"
+        tools:layout="@layout/fragment_book_appointement" />
+</navigation>
