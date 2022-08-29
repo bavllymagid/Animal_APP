@@ -4,6 +4,7 @@
     package="com.evapharma.animalhealth">
 
     <application
+        android:name=".application.AnimalHealthApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimalHealth"
         tools:targetApi="31">
+        <activity
+            android:name=".ApplicationActivity"
+            android:exported="false" />
         <activity
             android:name="com.evapharma.animalhealth.MainActivity"
             android:exported="true">
