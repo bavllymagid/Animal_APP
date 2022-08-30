@@ -2,4 +2,13 @@
     <string name="app_name">Animal Health</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bookings">Bookings</string>
+    <string name="home">Home</string>
+    <string name="book_doctor">Book a Doctor \n Appointment</string>
+    <string name="post_text">post text</string>
+    <string name="date">Date</string>
+    <string name="post_image">postImage</string>
+    <string name="doctors">Doctors</string>
+    <string name="book_an_appointment">Book An Appointment</string>
+    <string name="available">available</string>
 </resources>
