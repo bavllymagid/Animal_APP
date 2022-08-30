@@ -8,4 +8,7 @@
     <string name="post_text">post text</string>
     <string name="date">Date</string>
     <string name="post_image">postImage</string>
+    <string name="doctors">Doctors</string>
+    <string name="book_an_appointment">Book An Appointment</string>
+    <string name="available">available</string>
 </resources>

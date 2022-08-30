@@ -27,9 +27,9 @@ class FeedsFragment : Fragment() {
     ): View {
         (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.VISIBLE
         adapter = FeedAdapter()
-        val list = listOf(FeedModel("dg","dgdfg",BitmapFactory.decodeResource(resources, R.drawable.book_doctor_img),"dfgfdg"),
-            FeedModel("d2g","dgdfg",BitmapFactory.decodeResource(resources, R.drawable.book_doctor_img),"dfgfdg"),
-            FeedModel("dg3","dgdfg",BitmapFactory.decodeResource(resources, R.drawable.book_doctor_img),"dfgfdg"))
+        val list = listOf(FeedModel("dg","Medicine Article",BitmapFactory.decodeResource(resources, R.drawable.book_doctor_img),"1h"),
+            FeedModel("d2g","Medical Post",BitmapFactory.decodeResource(resources, R.drawable.book_doctor_img),"2d"),
+            FeedModel("dg3","Medical Post",BitmapFactory.decodeResource(resources, R.drawable.book_doctor_img),"2m"))
 
         adapter.submitList(list)
 
@@ -44,12 +44,13 @@ class FeedsFragment : Fragment() {
     }
 
     private fun transferTo(){
-        val bookAppointmentFragment = BookAppointmentFragment()
-        (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
+        val selectDoctorFragment = SelectDoctorFragment()
         requireActivity().supportFragmentManager.commit {
             addToBackStack(this.toString())
-            replace(R.id.nav_container, bookAppointmentFragment)
+            replace(R.id.nav_container, selectDoctorFragment)
         }
+
+        (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
     }
 
 
