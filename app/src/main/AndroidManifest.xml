@@ -17,9 +17,6 @@
             android:exported="false"/>
         <activity
             android:name=".applicationflow.presentation.ui.ApplicationActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.evapharma.animalhealth.applicationflow.presentation.ui.ApplicationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
