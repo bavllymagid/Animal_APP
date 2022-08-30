@@ -12,13 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimalHealth"
         tools:targetApi="31">
+
         <activity android:name=".authflow.presentation.ui.AuthActivity"
             android:exported="false"/>
         <activity
             android:name=".applicationflow.presentation.ui.ApplicationActivity"
             android:exported="false" />
         <activity
-            android:name="com.evapharma.animalhealth.MainActivity"
+            android:name="com.evapharma.animalhealth.applicationflow.presentation.ui.ApplicationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
