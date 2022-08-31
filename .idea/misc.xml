@@ -3,18 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1025" />
-        <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/drawable/buttons_shape.xml" value="0.136" />
-        <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/drawable/custom_background.xml" value="0.1425" />
-        <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/drawable/custom_shape.xml" value="0.136" />
-        <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/drawable/divider_custom.xml" value="0.136" />
-        <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1425" />
-        <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/drawable/text_field_shape.xml" value="0.136" />
-        <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/layout/activity_application.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/layout/activity_auth.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/layout/fragment_login.xml" value="0.25" />
-        <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/layout/fragment_register.xml" value="0.20416666666666666" />
+        <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1435" />
+        <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable/buttons_shape.xml" value="0.1" />
+        <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable/custom_background.xml" value="0.1435" />
+        <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable/custom_shape.xml" value="0.177" />
+        <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable/divider_custom.xml" value="0.177" />
+        <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.1555" />
+        <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1435" />
+        <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable/text_field_shape.xml" value="0.177" />
+        <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_login.xml" value="0.2" />
+        <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_register.xml" value="0.2" />
       </map>
     </option>
   </component>
