@@ -12,4 +12,6 @@
     <string name="book_an_appointment">Book An Appointment</string>
     <string name="available">available</string>
     <string name="next_button">next button</string>
+    <string name="exit">exit</string>
+    <string name="book_an_appointment_v2">Book An Appointment</string>
 </resources>
