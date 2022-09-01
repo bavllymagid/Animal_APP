@@ -40,15 +40,17 @@ class BookAppointmentFragment : Fragment() , TimeAdaptor.OnItemSelected{
 
         adapter = TimeAdaptor(ArrayList(items) , this)
 
-        binding.nextButton.setOnClickListener{
+        binding.nextBtn.setOnClickListener{
             if(cnt == 0) {
                 binding.calenderCard.visibility = View.INVISIBLE
                 binding.timeRc.visibility = View.VISIBLE
+                binding.nextBtn.setImageResource(R.drawable.right)
                 cnt++
             }else{
                 transferTo(FeedsFragment())
             }
         }
+
         val calendar = Calendar.getInstance()
         binding.calendarView.apply {
             calendar.set(Calendar.DATE,4)
@@ -75,6 +77,7 @@ class BookAppointmentFragment : Fragment() , TimeAdaptor.OnItemSelected{
             override fun handleOnBackPressed() {
                 binding.calenderCard.visibility = View.VISIBLE
                 binding.timeRc.visibility = View.GONE
+                binding.nextBtn.setImageResource(R.drawable.arrow)
                 cnt = 0
             }
         })
@@ -85,7 +88,7 @@ class BookAppointmentFragment : Fragment() , TimeAdaptor.OnItemSelected{
 
         binding.customToolbar.setOnMenuItemClickListener{
             when(it.itemId){
-                R.id.exit -> transferTo(SelectDoctorFragment())
+                R.id.exit -> {transferTo(SelectDoctorFragment())}
             }
             return@setOnMenuItemClickListener false
         }
@@ -98,7 +101,6 @@ class BookAppointmentFragment : Fragment() , TimeAdaptor.OnItemSelected{
 
     private fun transferTo(fragment: Fragment){
         requireActivity().supportFragmentManager.commit {
-            addToBackStack(this.toString())
             replace(R.id.nav_container, fragment)
         }
 

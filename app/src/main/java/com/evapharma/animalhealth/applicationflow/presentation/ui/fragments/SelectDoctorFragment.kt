@@ -7,6 +7,7 @@ import androidx.fragment.app.commit
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.applicationflow.domain.model.DoctorModel
 import com.evapharma.animalhealth.applicationflow.presentation.adapters.DoctorListAdapter
+import com.evapharma.animalhealth.applicationflow.presentation.ui.ApplicationActivity
 import com.evapharma.animalhealth.databinding.FragmentSelectDoctorBinding
 import com.google.gson.Gson
 
@@ -32,7 +33,12 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
         binding.doctorsList.adapter = adapter
 
         binding.backBtn.setOnClickListener{
-            activity?.supportFragmentManager?.popBackStackImmediate()
+            activity?.supportFragmentManager?.backStackEntryCount?.let { it1 ->
+                repeat(it1) {
+                    activity?.supportFragmentManager?.popBackStack()
+                }
+            }
+            transferTo(FeedsFragment())
         }
 
         return binding.root
@@ -49,6 +55,13 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
         }
     }
 
+    private fun transferTo(fragment: Fragment){
+        requireActivity().supportFragmentManager.commit {
+            replace(R.id.nav_container, fragment)
+        }
+
+        (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
+    }
 
 
 
