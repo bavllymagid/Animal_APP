@@ -164,6 +164,19 @@
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <ImageView
+            android:id="@+id/register_back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rotationY="180"
+            android:src="@drawable/arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/create_account_tv"
+            app:layout_constraintHorizontal_bias="0.644"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.115" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
