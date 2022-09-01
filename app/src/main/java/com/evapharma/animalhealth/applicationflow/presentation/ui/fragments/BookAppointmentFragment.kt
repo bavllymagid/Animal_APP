@@ -1,9 +1,12 @@
 package com.evapharma.animalhealth.applicationflow.presentation.ui.fragments
 
+import android.graphics.Color
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.*
 import android.widget.Adapter
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -13,6 +16,7 @@ import com.evapharma.animalhealth.applicationflow.domain.model.DoctorModel
 import com.evapharma.animalhealth.applicationflow.presentation.adapters.TimeAdaptor
 import com.evapharma.animalhealth.applicationflow.presentation.ui.ApplicationActivity
 import com.evapharma.animalhealth.databinding.FragmentBookAppointementBinding
+import java.text.DateFormat
 import java.text.FieldPosition
 import java.util.*
 import kotlin.collections.ArrayList
@@ -45,8 +49,24 @@ class BookAppointmentFragment : Fragment() , TimeAdaptor.OnItemSelected{
                 transferTo(FeedsFragment())
             }
         }
+        val calendar = Calendar.getInstance()
         binding.calendarView.apply {
+            calendar.set(Calendar.DATE,4)
             minDate = System.currentTimeMillis()
+            maxDate = calendar.timeInMillis
+        }
+
+        binding.calendarView.setOnDateChangeListener{
+                _, year, month, dayOfMonth ->
+            // set the calendar date as calendar view selected date
+            calendar.set(year,month,dayOfMonth)
+
+            // set this date as calendar view selected date
+            binding.calendarView.date = calendar.timeInMillis
+
+            // format the calendar view selected date
+            val dateFormatter = DateFormat.getDateInstance(DateFormat.MEDIUM)
+            Toast.makeText(context, dateFormatter.format(calendar.time), Toast.LENGTH_SHORT).show()
         }
 
         binding.timeRc.adapter = adapter
