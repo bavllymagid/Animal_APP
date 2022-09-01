@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.commit
+import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.applicationflow.domain.model.DoctorModel
 import com.evapharma.animalhealth.applicationflow.presentation.adapters.DoctorListAdapter
 import com.evapharma.animalhealth.databinding.FragmentSelectDoctorBinding
@@ -38,7 +40,11 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
     }
 
     override fun onBookAppointmentClicked(doctor: DoctorModel) {
-
+        val bookAppointmentFragment = BookAppointmentFragment()
+        requireActivity().supportFragmentManager.commit {
+            addToBackStack(this.toString())
+            replace(R.id.nav_container, bookAppointmentFragment)
+        }
     }
 
 }

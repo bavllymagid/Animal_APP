@@ -11,4 +11,5 @@
     <string name="doctors">Doctors</string>
     <string name="book_an_appointment">Book An Appointment</string>
     <string name="available">available</string>
+    <string name="next_button">next button</string>
 </resources>
