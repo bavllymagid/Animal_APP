@@ -38,6 +38,7 @@ class FeedsFragment : Fragment() {
 
         binding.bookBtn.setOnClickListener{
             transferTo()
+            (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
         }
 
         return binding.root
@@ -49,8 +50,6 @@ class FeedsFragment : Fragment() {
             addToBackStack(this.toString())
             replace(R.id.nav_container, selectDoctorFragment)
         }
-
-        (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
     }
 
 
