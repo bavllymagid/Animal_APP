@@ -1,5 +1,4 @@
 package com.evapharma.animalhealth.applicationflow.presentation.ui
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,12 +12,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class ApplicationActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityApplicationBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityApplicationBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
+        binding = ActivityApplicationBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
         val feedFragment = FeedsFragment()
         val bookingsFragment = BookingsFragment()
 
