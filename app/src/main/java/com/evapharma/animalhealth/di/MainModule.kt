@@ -1,8 +1,7 @@
-package com.evapharma.animalhealth.applicationflow.di
+package com.evapharma.animalhealth.di
 
 import android.content.Context
 import androidx.room.RoomDatabase
-import com.evapharma.animalhealth.applicationflow.data.remote.DoctorsInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,9 +13,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AppModule {
+class MainModule {
+
     @Singleton
     @Provides
-    fun getDoctorInterface(retrofit: Retrofit) : DoctorsInterface = retrofit.create(DoctorsInterface::class.java)
+    fun getRetrofit(): Retrofit = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl("http://davidsamy-001-site1.dtempurl.com/api")
+        .build()
 
 }
