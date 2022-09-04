@@ -18,7 +18,7 @@
         <activity android:name=".authflow.presentation.ui.AuthActivity"
             android:exported="false"/>
         <activity
-            android:name=".applicationflow.presentation.ui.ApplicationActivity"
+            android:name="com.evapharma.animalhealth.mainflow.booking.presentation.ui.ApplicationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -141,7 +141,6 @@
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:background="@drawable/text_field_shape"
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
