@@ -150,6 +150,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/text_field_shape"
                         android:inputType="textPassword"
+                        android:background="@drawable/text_field_shape"
 
                         />
                 </com.google.android.material.textfield.TextInputLayout>
