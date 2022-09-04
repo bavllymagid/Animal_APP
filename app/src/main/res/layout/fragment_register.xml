@@ -123,30 +123,37 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/PassWordInpute"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:endIconMode="password_toggle"
-                    android:layout_marginTop="230dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/text_field_shape"
+                    app:boxCornerRadiusBottomEnd="0dp"
+                    app:boxCornerRadiusBottomStart="0dp"
+                    app:boxCornerRadiusTopEnd="0dp"
+                    app:boxCornerRadiusTopStart="0dp"
+                    app:boxStrokeWidth="0dp"
                     android:layout_marginLeft="16dp"
-                    app:boxCornerRadiusBottomEnd="20dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusTopStart="10dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="32dp"
+                    app:endIconMode="password_toggle"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@drawable/text_field_shape"
+                    >
 
                     <com.google.android.material.textfield.TextInputEditText
+                        style="?colorOnPrimary"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/light_grey"
+                        android:background="@drawable/text_field_shape"
                         android:inputType="textPassword"
 
                         />
-
                 </com.google.android.material.textfield.TextInputLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.evapharma.animalhealth">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".application.AnimalHealthApp"
         android:allowBackup="true"
