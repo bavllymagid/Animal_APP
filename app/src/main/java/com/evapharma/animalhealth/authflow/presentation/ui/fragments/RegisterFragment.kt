@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.authflow.domain.model.CustomerModel
 import com.evapharma.animalhealth.authflow.presentation.viewmodel.ViewModel
+import com.evapharma.animalhealth.authflow.presentation.viewmodel.registerViewModel
 import com.evapharma.animalhealth.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,11 +23,11 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRegisterBinding.inflate(layoutInflater)
-        val viewModel: ViewModel = ViewModelProvider(this).get(ViewModel::class.java)
+//        val viewModel = ViewModelProvider(this).get(registerViewModel::class.java)
 
         binding.RegisterBtn.setOnClickListener {
             val customer = CustomerModel(binding.nameInput.toString(), binding.mobileInput.toString(), binding.PasswordInput.toString())
-            viewModel.registerCustomer(customer)
+//            viewModel.registerCustomer(customer)
             findNavController().navigate(R.id.action_registerFragment_to_otpFragment)
         }
         return binding.root
