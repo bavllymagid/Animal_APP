@@ -8,8 +8,9 @@ import android.view.animation.AlphaAnimation
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
-import com.evapharma.animalhealth.mainflow.feed.presentation.utils.FeedDiffUtils
+import com.evapharma.animalhealth.mainflow.feed.utils.FeedDiffUtils
 import com.evapharma.animalhealth.databinding.FeedItemBinding
+import com.evapharma.animalhealth.mainflow.feed.utils.DateConverter
 
 class FeedAdapter(private val onItemSelected: OnItemSelected) : ListAdapter<Feed, FeedAdapter.FeedViewHolder>(FeedDiffUtils()) {
 
@@ -30,7 +31,7 @@ class FeedAdapter(private val onItemSelected: OnItemSelected) : ListAdapter<Feed
         holder.binding.apply {
             titleOrText.text = post.text
 //            postImg.setImageBitmap(BitmapFactory.decodeResource(.getResources(),R.drawable.home))
-            date.text = post.publishDate
+            date.text = DateConverter.covertTimeToText(post.publishDate)
         }
         holder.itemView.setOnClickListener{
             if(post.category == "Article"){

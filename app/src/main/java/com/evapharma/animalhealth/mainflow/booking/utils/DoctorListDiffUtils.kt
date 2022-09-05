@@ -1,4 +1,4 @@
-package com.evapharma.animalhealth.mainflow.utils
+package com.evapharma.animalhealth.mainflow.booking.utils
 
 import androidx.recyclerview.widget.DiffUtil
 

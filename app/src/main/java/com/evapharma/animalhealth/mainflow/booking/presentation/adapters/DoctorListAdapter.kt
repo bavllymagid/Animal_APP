@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
-import com.evapharma.animalhealth.mainflow.utils.DoctorListDiffUtils
+import com.evapharma.animalhealth.mainflow.booking.utils.DoctorListDiffUtils
 import com.evapharma.animalhealth.databinding.DoctorCardItemBinding
 
 class DoctorListAdapter(val onDoctorSelected: OnDoctorSelected) :

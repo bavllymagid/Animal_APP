@@ -1,4 +1,4 @@
-package com.evapharma.animalhealth.mainflow.feed.presentation.utils
+package com.evapharma.animalhealth.mainflow.feed.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
