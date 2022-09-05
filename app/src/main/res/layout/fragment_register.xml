@@ -121,7 +121,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/PassWordInpute"
+                    android:id="@+id/PasswordInput"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="16dp"
