@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.evapharma.animalhealth.R
-import com.evapharma.animalhealth.applicationflow.presentation.ui.ApplicationActivity
 import com.evapharma.animalhealth.databinding.FragmentLoginBinding
+import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
