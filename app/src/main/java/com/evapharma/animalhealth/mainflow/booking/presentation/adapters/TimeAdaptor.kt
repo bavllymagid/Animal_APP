@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.evapharma.animalhealth.databinding.TimeItemBinding
 
-class TimeAdaptor(private val timeList:ArrayList<String>, private val onItemSelected: OnItemSelected) : RecyclerView.Adapter<TimeAdaptor.TimeViewHolder>(){
+class TimeAdaptor(private val timeList: ArrayList<String>, private val onItemSelected: OnItemSelected) : RecyclerView.Adapter<TimeAdaptor.TimeViewHolder>(){
 
     class TimeViewHolder(val binding: TimeItemBinding) : RecyclerView.ViewHolder(binding.root)
 

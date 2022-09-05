@@ -15,7 +15,7 @@ class FeedRemoteDataSourceImpl @Inject constructor(private val api: FeedApi) :
     override suspend fun getPosts(postsRequest: PostsRequest): List<Feed> {
         val list = ArrayList<Feed>()
         try {
-            val response = api.getPosts(1)
+            val response = api.getPosts(postsRequest.page)
 
             if(response.isSuccessful){
                 for(item in response.body()?.articlesPosts?:ArrayList()){
