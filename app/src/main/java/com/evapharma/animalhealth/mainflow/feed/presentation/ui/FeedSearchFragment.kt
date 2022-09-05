@@ -20,6 +20,7 @@ class FeedSearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFeedSearchBinding.inflate(layoutInflater)
+        (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
 
         binding.backBtn.setOnClickListener{
             transferTo(FeedsFragment())

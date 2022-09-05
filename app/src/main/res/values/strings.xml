@@ -29,4 +29,6 @@
     <string name="create_an_account">Create an account</string>
     <string name="passwordTV">Password</string>
     <string name="search">search</string>
+    <string name="back">Back</string>
+    <string name="references">References</string>
 </resources>

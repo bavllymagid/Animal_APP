@@ -21,6 +21,7 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSelectDoctorBinding.inflate(layoutInflater)
+        (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
 
         adapter = DoctorListAdapter(this)
 

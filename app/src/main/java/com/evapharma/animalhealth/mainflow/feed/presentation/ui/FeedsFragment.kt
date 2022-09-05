@@ -78,17 +78,18 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
         return binding.root
     }
 
-    private fun transferTo(fragment: Fragment){
+    private fun transferTo(fragment: Fragment, item:Feed? = null){
+        val bundle = Bundle()
+        bundle.putParcelable("arc", item)
+        fragment.arguments = bundle
         requireActivity().supportFragmentManager.commit {
             addToBackStack(this.toString())
             replace(R.id.nav_container, fragment)
         }
-
-        (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
     }
 
     override fun onItemClicked(feedObject: Feed) {
-
+        transferTo(FeedDetailsFragment(), feedObject)
     }
 
 
