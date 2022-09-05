@@ -6,12 +6,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Feed(
-    val category: String,
-    val doctorId: String,
-    val editDate: String,
-    val image: Bitmap?,
-    val isPublished: Boolean,
-    val postId: Int,
-    val publishDate: String,
-    val text: String
+    val category: String?,
+    val postId: Int?,
+    val doctorId: String?,
+    val publishDate: String?,
+    val editDate: String?,
+    val isPublished: Boolean?,
+    val text: String?,
+    val image: ArrayList<Int>?
 ):Parcelable

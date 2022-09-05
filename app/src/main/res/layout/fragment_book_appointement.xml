@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mainflow.booking.presentation.ui.fragments.BookAppointmentFragment">
+    tools:context=".mainflow.booking.presentation.ui.ui.BookAppointmentFragment">
 
 
     <com.google.android.material.appbar.MaterialToolbar

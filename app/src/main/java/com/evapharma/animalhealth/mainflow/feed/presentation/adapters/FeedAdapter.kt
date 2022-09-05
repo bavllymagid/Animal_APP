@@ -8,7 +8,7 @@ import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.presentation.utils.FeedDiffUtils
 import com.evapharma.animalhealth.databinding.FeedItemBinding
 
-class FeedAdapter() : ListAdapter<Feed, FeedAdapter.FeedViewHolder>(FeedDiffUtils()) {
+class FeedAdapter : ListAdapter<Feed, FeedAdapter.FeedViewHolder>(FeedDiffUtils()) {
 
     class FeedViewHolder(val binding: FeedItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -26,7 +26,7 @@ class FeedAdapter() : ListAdapter<Feed, FeedAdapter.FeedViewHolder>(FeedDiffUtil
         val post = getItem(position)
         holder.binding.apply {
             titleOrText.text = post.text
-            postImg.setImageBitmap(post.image)
+//            postImg.setImageBitmap(post.image)
             date.text = post.publishDate
         }
     }

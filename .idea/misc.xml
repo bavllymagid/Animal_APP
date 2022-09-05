@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-
         <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1435" />
         <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable/buttons_shape.xml" value="0.1" />
         <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable/custom_background.xml" value="0.1435" />
@@ -15,7 +14,6 @@
         <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_login.xml" value="0.2" />
         <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_register.xml" value="0.2" />
         <entry key="..\:/Mine/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/home_action_bar.xml" value="0.23854166666666668" />
-
         <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1025" />
         <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/drawable/buttons_shape.xml" value="0.136" />
         <entry key="..\:/Users/Eng.AbaNouB/Desktop/EvaPharmaHakthon/Eva-Animal-Health/Animal-Health-Android/app/src/main/res/drawable/custom_background.xml" value="0.1425" />
@@ -44,6 +42,7 @@
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/feed_item.xml" value="0.24094202898550723" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_book_appointement.xml" value="0.264" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_bookings.xml" value="0.24094202898550723" />
+        <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_feed_search.xml" value="0.11778115501519756" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_feeds.xml" value="0.264" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_login.xml" value="0.228125" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_otp.xml" value="0.23052536231884058" />

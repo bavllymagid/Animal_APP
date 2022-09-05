@@ -1,4 +1,4 @@
-package com.evapharma.animalhealth.mainflow.booking.presentation.ui.fragments
+package com.evapharma.animalhealth.mainflow.booking.presentation.ui.ui
 
 import android.icu.util.Calendar
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.fragment.app.commit
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
 import com.evapharma.animalhealth.mainflow.booking.presentation.adapters.TimeAdaptor
-import com.evapharma.animalhealth.mainflow.booking.presentation.ui.ApplicationActivity
+import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import com.evapharma.animalhealth.databinding.FragmentBookAppointementBinding
 import com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedsFragment
 import java.text.DateFormat

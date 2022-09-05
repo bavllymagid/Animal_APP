@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.FeedAdapter
-import com.evapharma.animalhealth.mainflow.booking.presentation.ui.ApplicationActivity
+import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import com.evapharma.animalhealth.databinding.FragmentFeedsBinding
-import com.evapharma.animalhealth.mainflow.booking.presentation.ui.fragments.SelectDoctorFragment
+import com.evapharma.animalhealth.mainflow.booking.presentation.ui.ui.SelectDoctorFragment
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 import com.evapharma.animalhealth.mainflow.feed.presentation.viewmodel.FeedViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,20 +41,24 @@ class FeedsFragment : Fragment() {
         binding.feedList.adapter = adapter
 
         binding.bookBtn.setOnClickListener{
-            transferTo()
+            transferTo(SelectDoctorFragment())
             (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
+        }
+
+        binding.searchView.setOnClickListener {
+            transferTo(FeedSearchFragment())
         }
 
         return binding.root
     }
 
-    private fun transferTo(){
-        val selectDoctorFragment = SelectDoctorFragment()
+    private fun transferTo(fragment: Fragment){
         requireActivity().supportFragmentManager.commit {
             addToBackStack(this.toString())
-            replace(R.id.nav_container, selectDoctorFragment)
+            replace(R.id.nav_container, fragment)
         }
-    }
 
+        (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
+    }
 
 }

@@ -1,12 +1,13 @@
-package com.evapharma.animalhealth.mainflow.booking.presentation.ui
+package com.evapharma.animalhealth.mainflow
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.evapharma.animalhealth.R
-import com.evapharma.animalhealth.mainflow.booking.presentation.ui.fragments.BookingsFragment
-import com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedsFragment
 import com.evapharma.animalhealth.databinding.ActivityApplicationBinding
+
+import com.evapharma.animalhealth.mainflow.booking.presentation.ui.ui.BookingsFragment
+import com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedsFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
