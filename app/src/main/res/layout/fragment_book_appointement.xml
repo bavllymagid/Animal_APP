@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".applicationflow.presentation.ui.fragments.BookAppointmentFragment">
+    tools:context=".mainflow.booking.presentation.ui.ui.BookAppointmentFragment">
 
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -109,6 +109,10 @@
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+<!--        <DatePicker-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
 
     </androidx.cardview.widget.CardView>
 
