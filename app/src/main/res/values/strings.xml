@@ -28,4 +28,5 @@
     <string name="skip">Skip</string>
     <string name="create_an_account">Create an account</string>
     <string name="passwordTV">Password</string>
+    <string name="search">search</string>
 </resources>
