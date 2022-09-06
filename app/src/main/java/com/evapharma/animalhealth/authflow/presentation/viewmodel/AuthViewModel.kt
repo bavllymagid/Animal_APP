@@ -13,9 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(private val register: Register): ViewModel() {
-    fun registerCustomer(customer: CustomerModel): LiveData<RegResponseModel> {
-            return liveData {
-                emit(register.execute(customer))
-            }
+    suspend fun registerCustomer(customer: CustomerModel): RegResponseModel {
+            return register.execute(customer)
+
     }
 }
