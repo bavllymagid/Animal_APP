@@ -49,7 +49,6 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
 
         binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                binding.scrollScreen.visibility = View.VISIBLE
                 binding.searchData.visibility = View.GONE
                 post.keyword = binding.searchBar.query.toString()
                 feedViewModel.getSearchResult(post).observe(viewLifecycleOwner) {
@@ -77,8 +76,8 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
         binding.feedList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                binding.progressBar.visibility = View.VISIBLE
-                if (!binding.scrollScreen.canScrollVertically(1) && !binding.feedList.canScrollVertically(1)) {
+                if (!binding.feedList.canScrollVertically(1)) {
+                    binding.progressBar.visibility = View.VISIBLE
                     post.page = post.page + 1
                     if (post.page <= post.maxPage) {
                         feedViewModel.getSearchResult(post).observe(viewLifecycleOwner) {

@@ -51,6 +51,7 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
             if (it != null) {
                 post.maxPage = it.totalPages
             }
+            binding.initBar.visibility = View.GONE
         })
 
         binding = FragmentFeedsBinding.inflate(layoutInflater)
@@ -71,8 +72,8 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
         binding.feedList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                binding.progressBar.visibility = View.VISIBLE
-                if (!binding.scrollScreen.canScrollVertically(1) && !binding.feedList.canScrollVertically(1)) {
+                if (!binding.feedList.canScrollVertically(1)) {
+                    binding.progressBar.visibility = View.VISIBLE
                     post.page = post.page + 1
                     if (post.page <= post.maxPage) {
                         feedViewModel.getPosts(post).observe(viewLifecycleOwner) {
