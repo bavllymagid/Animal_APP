@@ -125,7 +125,9 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="11dp"
+
+                    android:layout_marginTop="8dp"
+
                     android:layout_marginRight="16dp"
                     android:background="@drawable/text_field_shape"
                     app:boxCornerRadiusBottomEnd="0dp"
@@ -133,6 +135,8 @@
                     app:boxCornerRadiusTopEnd="0dp"
                     app:boxCornerRadiusTopStart="0dp"
                     app:boxStrokeWidth="0dp"
+
+
                     app:endIconMode="password_toggle"
 
                     app:layout_constraintEnd_toEndOf="parent"
