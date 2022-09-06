@@ -11,7 +11,7 @@ class FeedRepositoryImpl(private val feedRemoteDataSource: FeedRemoteDataSource)
         return feedRemoteDataSource.getPosts(postsRequest)
     }
 
-    override suspend fun getPostsByKeyword(postsRequest: PostsRequest): List<Feed> {
+    override suspend fun getPostsByKeyword(postsRequest: PostsRequest): FeedX? {
         return feedRemoteDataSource.getPostsByKeyword(postsRequest)
     }
 }

@@ -40,9 +40,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:text="title"
+                android:text="@string/title"
                 android:textColor="@color/black"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/date"
                 app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/post_img"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
                 android:contentDescription="@string/post_image"

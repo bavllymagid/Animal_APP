@@ -29,9 +29,6 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
     lateinit var adapter: FeedAdapter
     lateinit var feedViewModel: FeedViewModel
 
-    var maxPages = 0
-
-
     lateinit var post: PostsRequest
 
     override fun onCreateView(
@@ -42,12 +39,18 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
         adapter = FeedAdapter(this)
         feedViewModel = ViewModelProvider(this)[FeedViewModel::class.java]
 
-        post = PostsRequest(1, "")
+        post = PostsRequest(1, "",0)
 
         feedViewModel.getPosts(post).observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it.articlesPosts)
-            post.page = it.currentPage
-            maxPages = it.totalPages
+            if (it != null) {
+                adapter.submitList(it.articlesPosts)
+            }
+            if (it != null) {
+                post.page = it.currentPage
+            }
+            if (it != null) {
+                post.maxPage = it.totalPages
+            }
         })
 
         binding = FragmentFeedsBinding.inflate(layoutInflater)
@@ -71,13 +74,17 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
                 binding.progressBar.visibility = View.VISIBLE
                 if (!binding.scrollScreen.canScrollVertically(1) && !binding.feedList.canScrollVertically(1)) {
                     post.page = post.page + 1
-                    if (post.page <= maxPages) {
+                    if (post.page <= post.maxPage) {
                         feedViewModel.getPosts(post).observe(viewLifecycleOwner) {
                             val list = ArrayList<Feed>()
                             list.addAll(adapter.currentList)
-                            list.addAll(it.articlesPosts)
+                            if (it != null) {
+                                list.addAll(it.articlesPosts)
+                            }
                             adapter.submitList(list)
-                            post.page = it.currentPage
+                            if (it != null) {
+                                post.page = it.currentPage
+                            }
                             binding.progressBar.visibility = View.GONE
                         }
                     }else{
@@ -90,7 +97,9 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
         binding.refresh.setOnRefreshListener {
             post.page = 1
             feedViewModel.getPosts(post).observe(viewLifecycleOwner, Observer {
-                adapter.submitList(it.articlesPosts)
+                if (it != null) {
+                    adapter.submitList(it.articlesPosts)
+                }
                 binding.refresh.isRefreshing = false
             })
         }

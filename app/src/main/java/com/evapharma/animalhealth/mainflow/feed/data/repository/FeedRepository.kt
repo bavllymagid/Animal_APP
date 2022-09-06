@@ -6,5 +6,5 @@ import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 
 interface FeedRepository {
     suspend fun getPosts(postsRequest: PostsRequest) : FeedX?
-    suspend fun getPostsByKeyword(postsRequest: PostsRequest) : List<Feed>
+    suspend fun getPostsByKeyword(postsRequest: PostsRequest) : FeedX?
 }

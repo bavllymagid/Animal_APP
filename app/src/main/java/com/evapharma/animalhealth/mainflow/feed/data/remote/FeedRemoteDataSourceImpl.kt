@@ -28,16 +28,17 @@ class FeedRemoteDataSourceImpl @Inject constructor(private val api: FeedApi) :
         return null
     }
 
-    override suspend fun getPostsByKeyword(postsRequest: PostsRequest): List<Feed> {
+    override suspend fun getPostsByKeyword(postsRequest: PostsRequest): FeedX? {
 
-        val response = api.getPostsByKeyWord(postsRequest.keyword)
-        val list = ArrayList<Feed>()
 
-        if(response.isSuccessful){
-            for (item in response.body()?:ArrayList()){
-                list.add(item)
+            val response = api.getPostsByKeyWord(postsRequest.keyword,postsRequest.page)
+
+            if(response.isSuccessful){
+                return response.body()
+            }else{
+                Log.d("MyApp", response.code().toString()+ " " + response.message())
             }
-        }
-        return list
+
+        return null
     }
 }
