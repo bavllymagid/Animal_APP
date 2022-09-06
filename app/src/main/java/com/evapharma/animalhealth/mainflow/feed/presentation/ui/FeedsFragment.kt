@@ -74,6 +74,14 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
             }
         })
 
+        binding.refresh.setOnRefreshListener {
+            post.page = 1
+            feedViewModel.getPosts(post).observe(viewLifecycleOwner, Observer {
+                adapter.submitList(it)
+                binding.refresh.isRefreshing = false
+            })
+        }
+
 
         return binding.root
     }
