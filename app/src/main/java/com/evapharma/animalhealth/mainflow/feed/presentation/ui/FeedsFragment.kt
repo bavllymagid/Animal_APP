@@ -1,7 +1,7 @@
 package com.evapharma.animalhealth.mainflow.feed.presentation.ui
 
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,8 +29,10 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
     lateinit var adapter: FeedAdapter
     lateinit var feedViewModel: FeedViewModel
 
+    var maxPages = 0
 
-    lateinit var post:PostsRequest
+
+    lateinit var post: PostsRequest
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,44 +42,55 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
         adapter = FeedAdapter(this)
         feedViewModel = ViewModelProvider(this)[FeedViewModel::class.java]
 
-
-        post = PostsRequest(1,"")
+        post = PostsRequest(1, "")
 
         feedViewModel.getPosts(post).observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
+            adapter.submitList(it.articlesPosts)
+            post.page = it.currentPage
+            maxPages = it.totalPages
         })
 
         binding = FragmentFeedsBinding.inflate(layoutInflater)
         binding.feedList.adapter = adapter
 
-        binding.bookBtn.setOnClickListener{
+        binding.bookBtn.setOnClickListener {
             transferTo(SelectDoctorFragment())
-            (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
+            (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility =
+                View.GONE
         }
 
         binding.searchView.setOnClickListener {
             transferTo(FeedSearchFragment())
         }
 
+
         //Pagination
         binding.feedList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                binding.progressBar.visibility = View.VISIBLE
+                if (!binding.scrollScreen.canScrollVertically(1) && !binding.feedList.canScrollVertically(1)) {
                     post.page = post.page + 1
-                    binding.progressBar.visibility = View.VISIBLE
-                    feedViewModel.getPosts(post).observe(viewLifecycleOwner, Observer {
+                    if (post.page <= maxPages) {
+                        feedViewModel.getPosts(post).observe(viewLifecycleOwner) {
+                            val list = ArrayList<Feed>()
+                            list.addAll(adapter.currentList)
+                            list.addAll(it.articlesPosts)
+                            adapter.submitList(list)
+                            post.page = it.currentPage
+                            binding.progressBar.visibility = View.GONE
+                        }
+                    }else{
                         binding.progressBar.visibility = View.GONE
-                        adapter.submitList(adapter.currentList + it)
-                    })
+                    }
                 }
             }
-        })
+            })
 
         binding.refresh.setOnRefreshListener {
             post.page = 1
             feedViewModel.getPosts(post).observe(viewLifecycleOwner, Observer {
-                adapter.submitList(it)
+                adapter.submitList(it.articlesPosts)
                 binding.refresh.isRefreshing = false
             })
         }
@@ -86,7 +99,7 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
         return binding.root
     }
 
-    private fun transferTo(fragment: Fragment, item:Feed? = null){
+    private fun transferTo(fragment: Fragment, item: Feed? = null) {
         val bundle = Bundle()
         bundle.putParcelable("arc", item)
         fragment.arguments = bundle
