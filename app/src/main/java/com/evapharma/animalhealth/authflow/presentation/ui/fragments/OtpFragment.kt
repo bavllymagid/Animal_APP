@@ -13,8 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.work.impl.Schedulers.schedule
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.authflow.domain.model.RegResponseModel
+import com.evapharma.animalhealth.databinding.CustomRegDialogBinding
 import com.evapharma.animalhealth.databinding.FragmentOtpBinding
-import com.evapharma.animalhealth.databinding.RegistrationCustomDialogBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -28,40 +28,35 @@ class OtpFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentOtpBinding.inflate(layoutInflater)
+
         val response = arguments?.getParcelable<RegResponseModel>("response")
         Log.d("MyApp", "flag : ${response?.isSuccess} , body: ${response?.message}")
 //        val successFlag:Boolean = (response!!).isSuccess
         binding.VerifyBTN.setOnClickListener {
 //            Log.d("first", binding.OTPfield1.editText.toString())
-            val customDialog = RegistrationCustomDialogBinding.inflate(layoutInflater)
+            val customDialog = CustomRegDialogBinding.inflate(layoutInflater)
             val customAlertDialog = AlertDialog.Builder(this.context).setView(customDialog.root).create()
+            customAlertDialog.show()
             if(response?.isSuccess == true){
                 Log.d("here", "henaa")
-                customDialog.registrationMsg.setText("Registration Successful!")
+                customDialog.registrationMsg.text = "Registration completed successfully!!"
                 customAlertDialog.show()
-//                lifecycleScope.launch {
-//                    delay(2000)
-//                    findNavController().navigate(R.id.action_otpFragment_to_loginFragment)
-//                    customAlertDialog.dismiss()
-//                }
-                Timer().schedule(2000) {
-//                    println("1 second elapsed")
+                lifecycleScope.launch {
+                    delay(3000)
                     findNavController().navigate(R.id.action_otpFragment_to_loginFragment)
                     customAlertDialog.dismiss()
                 }
+
             }
             else{
-                customDialog.registrationMsg.setText("Something went wrong. Please register again")
+                customDialog.registrationMsg.text = "Something went wrong. Please register again"
                 customAlertDialog.show()
-//                lifecycleScope.launch {
-//                    delay(2000)
-//                    findNavController().navigate(R.id.action_otpFragment_to_loginFragment)
-//                    customAlertDialog.dismiss()
-//                }
-                Timer().schedule(2000) {
-                    findNavController().navigate(R.id.action_otpFragment_to_loginFragment)
+                lifecycleScope.launch {
+                    delay(3000)
+                    findNavController().navigate(R.id.action_otpFragment_to_registerFragment)
                     customAlertDialog.dismiss()
                 }
+
 
                 }
 
@@ -69,7 +64,7 @@ class OtpFragment : Fragment() {
 
 
 
-        return inflater.inflate(R.layout.fragment_otp, container, false)
+        return binding.root
     }
 
 }
