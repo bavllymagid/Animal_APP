@@ -1,6 +1,7 @@
 package com.evapharma.animalhealth.mainflow.feed.presentation.ui
 
 import android.os.Bundle
+import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,24 +10,32 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.databinding.FragmentFeedSearchBinding
 import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
+import com.evapharma.animalhealth.mainflow.feed.domain.model.FeedX
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.FeedAdapter
 import com.evapharma.animalhealth.mainflow.feed.presentation.viewmodel.FeedViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
 class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
 
-    lateinit var binding:FragmentFeedSearchBinding
-    lateinit var adapter:FeedAdapter
+    lateinit var binding: FragmentFeedSearchBinding
+    lateinit var adapter: FeedAdapter
     lateinit var feedViewModel: FeedViewModel
     lateinit var post: PostsRequest
+
+    var IS_INTERNET_FOUND = false
 
 
     override fun onCreateView(
@@ -40,9 +49,9 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
 
         (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
         adapter = FeedAdapter(this)
+        IS_INTERNET_FOUND = false
 
-
-        binding.backBtn.setOnClickListener{
+        binding.backBtn.setOnClickListener {
             transferTo(FeedsFragment())
         }
 
@@ -51,16 +60,27 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 binding.searchData.visibility = View.GONE
                 post.keyword = binding.searchBar.query.toString()
-                feedViewModel.getSearchResult(post).observe(viewLifecycleOwner) {
-                    if (it != null) {
-                        adapter.submitList(it.articlesPosts)
-                        post.page = it.currentPage
-                        post.maxPage = it.totalPages
-                    }else{
-                        Toast.makeText(context, "No Data To Be Displayed", Toast.LENGTH_SHORT).show()
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    var response: FeedX? = null
+                    try {
+                        response = feedViewModel.getSearchResult(post)
+                        if (response != null) {
+                            post.page = response.currentPage
+                            post.maxPage = response.totalPages
+                            withContext(Dispatchers.Main) {
+                                binding.searchBar.clearFocus()
+                                adapter.submitList(response.articlesPosts)
+                            }
+                        } else {
+                            Toast.makeText(context, "No Data To Be Displayed", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    } catch (e: Exception) {
+                        println(e.message.toString())
+                        transferTo(FeedsFragment())
                     }
                 }
-                binding.searchBar.clearFocus()
                 return true
             }
 
@@ -73,31 +93,29 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
         binding.feedList.adapter = adapter
 
         //Pagination
-        binding.feedList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!binding.feedList.canScrollVertically(1)) {
-                    binding.progressBar.visibility = View.VISIBLE
-                    post.page = post.page + 1
-                    if (post.page <= post.maxPage) {
-                        feedViewModel.getSearchResult(post).observe(viewLifecycleOwner) {
-                            val list = ArrayList<Feed>()
-                            list.addAll(adapter.currentList)
-                            if (it != null) {
-                                list.addAll(it.articlesPosts)
-                            }
-                            adapter.submitList(list)
-                            if (it != null) {
-                                post.page = it.currentPage
-                            }
-                            binding.progressBar.visibility = View.GONE
-                        }
-                    }else{
-                        binding.progressBar.visibility = View.GONE
-                    }
-                }
-            }
-        })
+//        binding.feedList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                super.onScrollStateChanged(recyclerView, newState)
+//                if (!binding.feedList.canScrollVertically(1)) {
+//                    binding.progressBar.visibility = View.VISIBLE
+//                    post.page = post.page + 1
+//                    if (post.page <= post.maxPage) {
+//                        feedViewModel.getSearchResult(post).observe(viewLifecycleOwner) {
+//                            val list = ArrayList<Feed>()
+//                            list.addAll(adapter.currentList)
+//                            if (it != null) {
+//                                list.addAll(it.articlesPosts)
+//                                post.page = it.currentPage
+//                                adapter.submitList(list)
+//                            }
+//                            binding.progressBar.visibility = View.GONE
+//                        }
+//                    }else{
+//                        binding.progressBar.visibility = View.GONE
+//                    }
+//                }
+//            }
+//        })
 
         return binding.root
     }
@@ -107,7 +125,6 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
         bundle.putParcelable("arc", item)
         fragment.arguments = bundle
         requireActivity().supportFragmentManager.commit {
-            addToBackStack(this.toString())
             replace(R.id.nav_container, fragment)
         }
     }
@@ -115,5 +132,6 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
     override fun onItemClicked(feedObject: Feed) {
         transferTo(FeedDetailsFragment(), feedObject)
     }
+
 
 }

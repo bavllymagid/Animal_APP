@@ -19,10 +19,9 @@ class FeedViewModel @Inject constructor(private val getPostsUseCase: GetPosts, p
         }
     }
 
-    fun getSearchResult(postsRequest: PostsRequest):LiveData<FeedX?>{
-        return liveData {
-            emit(searchByKeywordUseCase.execute(postsRequest))
-        }
+    suspend fun getSearchResult(postsRequest: PostsRequest):FeedX?{
+        return searchByKeywordUseCase.execute(postsRequest)
+
     }
 
 }
