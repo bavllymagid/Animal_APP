@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -20,6 +21,7 @@ import com.evapharma.animalhealth.mainflow.feed.domain.model.FeedX
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.FeedAdapter
 import com.evapharma.animalhealth.mainflow.feed.presentation.viewmodel.FeedViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -58,27 +60,19 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
 
         binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                binding.searchData.visibility = View.GONE
+                binding.searchData.visibility = View.INVISIBLE
                 post.keyword = binding.searchBar.query.toString()
 
                 CoroutineScope(Dispatchers.IO).launch {
-                    var response: FeedX? = null
-                    try {
-                        response = feedViewModel.getSearchResult(post)
-                        if (response != null) {
-                            post.page = response.currentPage
-                            post.maxPage = response.totalPages
-                            withContext(Dispatchers.Main) {
-                                binding.searchBar.clearFocus()
-                                adapter.submitList(response.articlesPosts)
-                            }
-                        } else {
-                            Toast.makeText(context, "No Data To Be Displayed", Toast.LENGTH_SHORT)
-                                .show()
+                    val list = paginate()
+                    withContext(Dispatchers.Main) {
+                        binding.searchBar.clearFocus()
+                        if(list.isNotEmpty()){
+                            adapter.submitList(list)
+                        }else{
+                            binding.searchData.visibility = View.VISIBLE
+                            binding.searchData.text = "No Data To Be Displayed"
                         }
-                    } catch (e: Exception) {
-                        println(e.message.toString())
-                        transferTo(FeedsFragment())
                     }
                 }
                 return true
@@ -93,29 +87,28 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
         binding.feedList.adapter = adapter
 
         //Pagination
-//        binding.feedList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                super.onScrollStateChanged(recyclerView, newState)
-//                if (!binding.feedList.canScrollVertically(1)) {
-//                    binding.progressBar.visibility = View.VISIBLE
-//                    post.page = post.page + 1
-//                    if (post.page <= post.maxPage) {
-//                        feedViewModel.getSearchResult(post).observe(viewLifecycleOwner) {
-//                            val list = ArrayList<Feed>()
-//                            list.addAll(adapter.currentList)
-//                            if (it != null) {
-//                                list.addAll(it.articlesPosts)
-//                                post.page = it.currentPage
-//                                adapter.submitList(list)
-//                            }
-//                            binding.progressBar.visibility = View.GONE
-//                        }
-//                    }else{
-//                        binding.progressBar.visibility = View.GONE
-//                    }
-//                }
-//            }
-//        })
+        binding.feedList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!binding.feedList.canScrollVertically(1)) {
+                    post.page = post.page + 1
+                    binding.progressBar.visibility = View.VISIBLE
+                    if (post.page <= post.maxPage) {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            val list = paginate()
+                            withContext(Dispatchers.Main) {
+                                if(list.isNotEmpty()){
+                                    adapter.submitList(list)
+                                }
+                                binding.progressBar.visibility = View.GONE
+                            }
+                        }
+                    } else {
+                        binding.progressBar.visibility = View.GONE
+                    }
+                }
+            }
+        })
 
         return binding.root
     }
@@ -133,5 +126,21 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
         transferTo(FeedDetailsFragment(), feedObject)
     }
 
+
+    suspend fun paginate(): ArrayList<Feed> {
+        val list = ArrayList<Feed>()
+        try {
+            val response = feedViewModel.getSearchResult(post)
+            list.addAll(adapter.currentList)
+            if (response != null) {
+                list.addAll(response.articlesPosts)
+                post.page = response.currentPage
+                post.maxPage = response.totalPages
+            }
+        }catch (e: Exception) {
+            println(e.message.toString())
+        }
+        return list
+    }
 
 }
