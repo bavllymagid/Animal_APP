@@ -1,13 +1,11 @@
 package com.evapharma.animalhealth.mainflow.feed.presentation.ui
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.evapharma.animalhealth.R
@@ -18,6 +16,7 @@ import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.FeedAdapter
 import com.evapharma.animalhealth.mainflow.feed.presentation.viewmodel.FeedViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -41,18 +40,24 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
 
         post = PostsRequest(1, "",0)
 
-        feedViewModel.getPosts(post).observe(viewLifecycleOwner, Observer {
+        feedViewModel.getPosts(post).observe(viewLifecycleOwner) {
             if (it != null) {
                 adapter.submitList(it.articlesPosts)
-            }
-            if (it != null) {
                 post.page = it.currentPage
-            }
-            if (it != null) {
                 post.maxPage = it.totalPages
+            } else {
+                view?.let { it1 ->
+                    Snackbar.make(
+                        it1,
+                        "Check Your Internet Connectivity",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    binding.searchView.isEnabled = false
+                    binding.bookBtn.isEnabled = false
+                }
             }
             binding.initBar.visibility = View.GONE
-        })
+        }
 
         binding = FragmentFeedsBinding.inflate(layoutInflater)
         binding.feedList.adapter = adapter
@@ -81,10 +86,10 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
                             list.addAll(adapter.currentList)
                             if (it != null) {
                                 list.addAll(it.articlesPosts)
-                            }
-                            adapter.submitList(list)
-                            if (it != null) {
                                 post.page = it.currentPage
+                                adapter.submitList(list)
+                            }else{
+                                view?.let { it1 -> Snackbar.make(it1, "Check Your Internet Connectivity",Snackbar.LENGTH_SHORT).show() }
                             }
                             binding.progressBar.visibility = View.GONE
                         }
@@ -97,12 +102,16 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
 
         binding.refresh.setOnRefreshListener {
             post.page = 1
-            feedViewModel.getPosts(post).observe(viewLifecycleOwner, Observer {
+            feedViewModel.getPosts(post).observe(viewLifecycleOwner) {
                 if (it != null) {
                     adapter.submitList(it.articlesPosts)
+                    binding.searchView.isEnabled = true
+                    binding.bookBtn.isEnabled = true
+                }else{
+                    view?.let { it1 -> Snackbar.make(it1, "Check Your Internet Connectivity",Snackbar.LENGTH_SHORT).show() }
                 }
                 binding.refresh.isRefreshing = false
-            })
+            }
         }
 
 
