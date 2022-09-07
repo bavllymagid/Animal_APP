@@ -11,4 +11,24 @@
     <string name="doctors">Doctors</string>
     <string name="book_an_appointment">Book An Appointment</string>
     <string name="available">available</string>
+    <string name="next_button">next button</string>
+    <string name="exit">exit</string>
+    <string name="book_an_appointment_v2">Book An Appointment</string>
+    <string name="new_to_animal_health">New to Animal Health?</string>
+    <string name="verify_mobile_number">Verify Mobile Number</string>
+    <string name="timer">1:30</string>
+    <string name="send_code">Send Code</string>
+    <string name="enter_the_4_digit_code_below">Enter the 4 digit code below</string>
+    <string name="code_sent_to">Code Sent to:</string>
+    <string name="PhoneTv">+20106 846 2870</string>
+    <string name="the_code_will_be_expired_in">The code will be expired in:</string>
+    <string name="or">OR</string>
+    <string name="phone_number_TV">Phone number</string>
+    <string name="login">Login</string>
+    <string name="skip">Skip</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="passwordTV">Password</string>
+    <string name="search">search</string>
+    <string name="back">Back</string>
+    <string name="references">References</string>
 </resources>

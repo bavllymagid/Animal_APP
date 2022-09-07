@@ -7,21 +7,50 @@
 
     <fragment
         android:id="@+id/bookingsFragment"
-        android:name="com.evapharma.animalhealth.applicationflow.presentation.ui.fragments.BookingsFragment"
+        android:name="com.evapharma.animalhealth.mainflow.booking.presentation.ui.ui.BookingsFragment"
         android:label="fragment_bookings"
         tools:layout="@layout/fragment_bookings" />
     <fragment
         android:id="@+id/feedsFragment"
-        android:name="com.evapharma.animalhealth.applicationflow.presentation.ui.fragments.FeedsFragment"
+        android:name="com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedsFragment"
         android:label="fragment_feeds"
         tools:layout="@layout/fragment_feeds" >
         <action
             android:id="@+id/action_feedsFragment_to_bookAppointmentFragment"
             app:destination="@id/bookAppointmentFragment" />
+        <action
+            android:id="@+id/action_feedsFragment_to_feedSearchFragment"
+            app:destination="@id/feedSearchFragment" />
+        <action
+            android:id="@+id/action_feedsFragment_to_feedDetailsFragment"
+            app:destination="@id/feedDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookAppointmentFragment"
-        android:name="com.evapharma.animalhealth.applicationflow.presentation.ui.fragments.SelectDoctorFragment"
+        android:name="com.evapharma.animalhealth.mainflow.booking.presentation.ui.ui.SelectDoctorFragment"
         android:label="fragment_book_appointement"
-        tools:layout="@layout/fragment_select_doctor" />
+        tools:layout="@layout/fragment_select_doctor" >
+        <action
+            android:id="@+id/action_bookAppointmentFragment_to_bookAppointmentFragment2"
+            app:destination="@id/bookAppointmentFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookAppointmentFragment2"
+        android:name="com.evapharma.animalhealth.mainflow.booking.presentation.ui.ui.BookAppointmentFragment"
+        android:label="fragment_book_appointement"
+        tools:layout="@layout/fragment_book_appointement" />
+    <fragment
+        android:id="@+id/feedDetailsFragment"
+        android:name="com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedDetailsFragment"
+        android:label="fragment_feed_details"
+        tools:layout="@layout/fragment_feed_details" />
+    <fragment
+        android:id="@+id/feedSearchFragment"
+        android:name="com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedSearchFragment"
+        android:label="fragment_feed_search"
+        tools:layout="@layout/fragment_feed_search" >
+        <action
+            android:id="@+id/action_feedSearchFragment_to_feedsFragment"
+            app:destination="@id/feedsFragment" />
+    </fragment>
 </navigation>

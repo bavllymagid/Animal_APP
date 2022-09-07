@@ -12,17 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/view5"
-            android:layout_width="337dp"
-            android:layout_height="290dp"
-            android:layout_marginTop="185dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40sp"
+            android:layout_marginRight="40sp"
+            android:layout_marginBottom="220sp"
+            android:layout_marginTop="181sp"
             android:background="@drawable/custom_shape"
             android:clipChildren="false"
             android:scaleType="center"
             app:cardCornerRadius="30dp"
             app:cardElevation="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -39,9 +42,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:elevation="200dp"
-                    android:text="Phone number"
+                    android:text="@string/phone_number_TV"
                     android:textColor="@color/black"
-                    android:textSize="15dp"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.075"
                     app:layout_constraintStart_toStartOf="parent"
@@ -67,45 +70,43 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/text_field_shape"
-
-
-                        />
+                        android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/PassWordInpute"
                     android:layout_width="307dp"
                     android:layout_height="50dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView11"
-                    app:endIconMode="password_toggle"
                     android:background="@drawable/text_field_shape"
                     app:boxCornerRadiusBottomEnd="0dp"
                     app:boxCornerRadiusBottomStart="0dp"
                     app:boxCornerRadiusTopEnd="0dp"
                     app:boxCornerRadiusTopStart="0dp"
                     app:boxStrokeWidth="0dp"
-                    >
+                    app:endIconMode="password_toggle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView11">
+
                     <com.google.android.material.textfield.TextInputEditText
                         style="?colorOnPrimary"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/text_field_shape"
                         android:inputType="textPassword"
-
-                        />
+                        android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="1sp"
+                    android:layout_marginTop="8sp"
                     android:elevation="200dp"
-                    android:text="Password"
+                    android:text="@string/passwordTV"
                     android:textColor="@color/black"
-                    android:textSize="15dp"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.059"
                     app:layout_constraintStart_toStartOf="parent"
@@ -114,13 +115,14 @@
                 <com.google.android.material.button.MaterialButton
 
                     android:id="@+id/SignInBTN"
-                    android:layout_width="304dp"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+                    android:layout_margin="20sp"
                     android:background="@drawable/buttons_shape"
                     android:elevation="200dp"
-                    android:text="Login"
-                    android:textSize="15dp"
+                    android:text="@string/login"
+                    android:textSize="16sp"
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -150,10 +152,11 @@
                 android:layout_gravity="center"
                 android:background="@drawable/custom_shape"
                 android:padding="8dp"
-                android:text="OR" />
+                android:text="@string/or" />
         </FrameLayout>
 
         <ImageView
+            android:contentDescription="@string/app_name"
             android:id="@+id/imageView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -164,8 +167,8 @@
             tools:src="@tools:sample/avatars" />
 
         <TableRow
-            android:layout_width="276dp"
-            android:layout_height="32dp"
+            android:layout_width="295dp"
+            android:layout_height="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -173,33 +176,37 @@
             app:layout_constraintVertical_bias="0.287">
 
             <TextView
-                android:textColor="@color/black"
                 android:id="@+id/textView16"
                 android:layout_width="159dp"
                 android:layout_height="wrap_content"
-                android:text="New to Animal Health?" />
+                android:text="@string/new_to_animal_health"
+                android:textColor="@color/black" />
 
             <TextView
-                android:textColor="@color/blue"
                 android:id="@+id/RegisterBtn"
                 android:layout_width="229dp"
                 android:layout_height="wrap_content"
-                android:text="Create an account" />
+                android:text="@string/create_an_account"
+                android:textColor="@color/blue"
+                android:textSize="16sp" />
         </TableRow>
 
         <TextView
-            android:textSize="15dp"
+            android:shadowColor="@color/black"
+            android:clickable="true"
+            android:textSize="16sp"
             android:textColor="@color/blue"
             android:id="@+id/SkipBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Skip"
+            android:text="@string/skip"
             app:layout_constraintBottom_toTopOf="@+id/view5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.807"
             app:layout_constraintStart_toEndOf="@+id/imageView6"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.174" />
+            app:layout_constraintVertical_bias="0.174"
+            android:focusable="true" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -77,9 +77,11 @@
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/name_input"
-                    android:layout_width="273dp"
+                    android:layout_width="0dp"
                     android:layout_height="42dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@drawable/text_field_shape"
                     android:elevation="200dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -89,17 +91,19 @@
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/mobile_input"
-                    android:layout_width="273dp"
+                    android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:layout_marginBottom="132dp"
-                    android:hint=" 01xxxxxxxxx"
-                    android:inputType="phone"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@drawable/text_field_shape"
                     android:elevation="200dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:hint=" 01xxxxxxxxx"
+                    android:inputType="phone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.25"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -117,24 +121,38 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="273dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/PasswordInput"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="16dp"
+
+                    android:layout_marginTop="8dp"
+
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/text_field_shape"
+                    app:boxCornerRadiusBottomEnd="0dp"
+                    app:boxCornerRadiusBottomStart="0dp"
+                    app:boxCornerRadiusTopEnd="0dp"
+                    app:boxCornerRadiusTopStart="0dp"
+                    app:boxStrokeWidth="0dp"
+
+
                     app:endIconMode="password_toggle"
-                    android:layout_marginTop="230dp"
-                    android:layout_marginRight="30dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@+id/textView5">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        style="?colorOnPrimary"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/text_field_shape"
                         android:inputType="textPassword"
 
                         />
-
                 </com.google.android.material.textfield.TextInputLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -151,6 +169,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/register_back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rotationY="180"
+            android:src="@drawable/arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/create_account_tv"
+            app:layout_constraintHorizontal_bias="0.644"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.115" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
