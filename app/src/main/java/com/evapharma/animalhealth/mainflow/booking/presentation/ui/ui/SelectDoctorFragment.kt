@@ -5,17 +5,17 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.evapharma.animalhealth.R
-import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
 import com.evapharma.animalhealth.mainflow.booking.presentation.adapters.DoctorListAdapter
 import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import com.evapharma.animalhealth.databinding.FragmentSelectDoctorBinding
+import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
 import com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedsFragment
 
 
 class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
 
     lateinit var binding: FragmentSelectDoctorBinding
-    lateinit var adapter: DoctorListAdapter
+    private lateinit var adapter: DoctorListAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,12 +25,13 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
 
         adapter = DoctorListAdapter(this)
 
-        val list = listOf(DoctorModel("1", "Dr.fahmy mohamed", null, "tomorrow"),
-            DoctorModel("2", "Dr.fahmy mohamed", null, "tomorrow"),
-            DoctorModel("3", "Dr.fahmy mohamed", null, "tomorrow"),
-            DoctorModel("4", "Dr.fahmy mohamed", null, "tomorrow"))
+//        val list = listOf(
+//            DoctorModel("1", "Dr.fahmy mohamed", null, "tomorrow"),
+//            DoctorModel("2", "Dr.fahmy mohamed", null, "tomorrow"),
+//            DoctorModel("3", "Dr.fahmy mohamed", null, "tomorrow"),
+//            DoctorModel("4", "Dr.fahmy mohamed", null, "tomorrow"))
 
-        adapter.submitList(list)
+//        adapter.submitList(list)
         binding.doctorsList.adapter = adapter
 
         binding.backBtn.setOnClickListener{

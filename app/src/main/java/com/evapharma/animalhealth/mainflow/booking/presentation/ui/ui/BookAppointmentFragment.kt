@@ -8,10 +8,10 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.evapharma.animalhealth.R
-import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
 import com.evapharma.animalhealth.mainflow.booking.presentation.adapters.TimeAdaptor
 import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import com.evapharma.animalhealth.databinding.FragmentBookAppointementBinding
+import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
 import com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedsFragment
 import java.text.DateFormat
 import kotlin.collections.ArrayList
@@ -78,7 +78,7 @@ class BookAppointmentFragment : Fragment() , TimeAdaptor.OnItemSelected{
         })
 
         binding.apply {
-            doctorNameTv.text = doctor?.name
+            doctorNameTv.text = doctor?.userName
         }
 
         binding.customToolbar.setOnMenuItemClickListener{

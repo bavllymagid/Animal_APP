@@ -1,8 +1,7 @@
-package com.evapharma.animalhealth.mainflow.feed.domain.repository
+package com.evapharma.animalhealth.mainflow.feed.data.repository
 
 import com.evapharma.animalhealth.mainflow.feed.data.remote.FeedRemoteDataSource
-import com.evapharma.animalhealth.mainflow.feed.data.repository.FeedRepository
-import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
+import com.evapharma.animalhealth.mainflow.feed.domain.repository.FeedRepository
 import com.evapharma.animalhealth.mainflow.feed.domain.model.FeedX
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 

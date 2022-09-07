@@ -1,4 +1,4 @@
-package com.evapharma.animalhealth.mainflow.feed.data.repository
+package com.evapharma.animalhealth.mainflow.feed.domain.repository
 
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.domain.model.FeedX
