@@ -35,8 +35,13 @@ class FeedAdapter(private val onItemSelected: OnItemSelected) : ListAdapter<Feed
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
         val post = getItem(position)
         holder.binding.apply {
-            titleTv.text = post.authorName
-            body.text = post.text
+            if(post.category == "Article"){
+                titleTv.text = post.text
+                body.visibility = View.GONE
+            }else{
+                titleTv.text = post.authorName
+                body.text = post.text
+            }
             postImg.setImageBitmap(BitmapFactory.decodeResource(AnimalHealthApp.appContext.resources, R.drawable.doctor))
             date.text = DateConverter.covertTimeToText(post.publishDate)
         }
