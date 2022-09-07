@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_otpFragment_to_main_app_nav_graph"
             app:destination="@id/main_app_nav_graph" />
+        <action
+            android:id="@+id/action_otpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <include app:graph="@navigation/main_app_nav_graph" />
 </navigation>
