@@ -36,11 +36,12 @@ class FeedAdapter(private val onItemSelected: OnItemSelected) : ListAdapter<Feed
         val post = getItem(position)
         holder.binding.apply {
             if(post.category == "Article"){
-                titleTv.text = post.text
+                titleTv.text = post.authorName
                 body.visibility = View.GONE
             }else{
                 titleTv.text = post.authorName
                 body.text = post.text
+                body.visibility = View.VISIBLE
             }
             postImg.setImageBitmap(BitmapFactory.decodeResource(AnimalHealthApp.appContext.resources, R.drawable.doctor))
             date.text = DateConverter.covertTimeToText(post.publishDate)

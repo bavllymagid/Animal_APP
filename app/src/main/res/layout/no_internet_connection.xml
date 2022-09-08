@@ -22,7 +22,7 @@
         android:layout_marginTop="16dp"
         android:textSize="20sp"
         android:textAlignment="center"
-        android:text="Looks Like There's No Internet Connection"
+        android:text="Something Went Wrong"
         app:layout_constraintEnd_toEndOf="@+id/img"
         app:layout_constraintStart_toStartOf="@+id/img"
         app:layout_constraintTop_toBottomOf="@+id/img"

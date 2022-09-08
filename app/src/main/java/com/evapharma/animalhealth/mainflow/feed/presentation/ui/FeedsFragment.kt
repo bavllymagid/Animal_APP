@@ -18,7 +18,6 @@ import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.FeedAdapter
 import com.evapharma.animalhealth.mainflow.feed.presentation.viewmodel.FeedViewModel
-import com.evapharma.animalhealth.util.NetworkChangeListener
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,7 +29,6 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
     private lateinit var binding: FragmentFeedsBinding
     lateinit var adapter: FeedAdapter
     lateinit var feedViewModel: FeedViewModel
-    var networkChangeListener = NetworkChangeListener()
 
     lateinit var post: PostsRequest
 
@@ -114,12 +112,6 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
 
 
         return binding.root
-    }
-
-    override fun onStart() {
-        val intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        requireActivity().registerReceiver(networkChangeListener, intentFilter)
-        super.onStart()
     }
 
     private fun transferTo(fragment: Fragment, item: Feed? = null) {
