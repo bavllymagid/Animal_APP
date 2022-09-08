@@ -1,16 +1,13 @@
 package com.evapharma.animalhealth.mainflow.booking.data.remote
 
-import com.evapharma.animalhealth.mainflow.booking.domain.model.AppointmentModel
-import com.evapharma.animalhealth.mainflow.booking.domain.model.BookingModel
-import com.evapharma.animalhealth.mainflow.booking.domain.model.DateTimeSlot
-import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
+import com.evapharma.animalhealth.mainflow.booking.domain.model.*
 import retrofit2.Response
 import retrofit2.http.*
 
 interface BookingApi {
 
     @GET("/Doctor/GetAllDoctors")
-    suspend fun getDoctorsList(@Query("counter") pageNum:Int) : Response<List<DoctorModel>>
+    suspend fun getDoctorsList(@Query("counter") pageNum:Int) : Response<DoctorModelX>
 
     @GET("ScheduleSlot/GetAllSlots")
     suspend fun getDoctorDays(@Query("doctorId") doctorId:String) : Response<List<DateTimeSlot>>

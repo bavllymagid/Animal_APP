@@ -7,20 +7,26 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.mainflow.booking.presentation.adapters.TimeAdaptor
 import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import com.evapharma.animalhealth.databinding.FragmentBookAppointementBinding
 import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
+import com.evapharma.animalhealth.mainflow.booking.domain.usecases.BookAnAppointment
+import com.evapharma.animalhealth.mainflow.booking.presentation.viewmodel.BookingViewModel
 import com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedsFragment
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.DateFormat
 import kotlin.collections.ArrayList
 
-
+@AndroidEntryPoint
 class BookAppointmentFragment : Fragment() , TimeAdaptor.OnItemSelected{
 
     lateinit var binding: FragmentBookAppointementBinding
     lateinit var adapter: TimeAdaptor
+    lateinit var appointmentViewModel: BookingViewModel
     var cnt = 0
 
     override fun onCreateView(
@@ -28,6 +34,7 @@ class BookAppointmentFragment : Fragment() , TimeAdaptor.OnItemSelected{
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBookAppointementBinding.inflate(layoutInflater)
+        appointmentViewModel = ViewModelProvider(this)[BookingViewModel::class.java]
         binding.timeRc.visibility = View.GONE
         val doctor = arguments?.getParcelable<DoctorModel>("doctor")
 
@@ -48,7 +55,7 @@ class BookAppointmentFragment : Fragment() , TimeAdaptor.OnItemSelected{
 
         val calendar = Calendar.getInstance()
         binding.calendarView.apply {
-            calendar.set(Calendar.DATE,4)
+            calendar.set(Calendar.DATE,30)
             minDate = System.currentTimeMillis()
             maxDate = calendar.timeInMillis
         }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.evapharma.animalhealth.databinding.TimeItemBinding
+import com.evapharma.animalhealth.mainflow.utils.DateConverter
 
 class TimeAdaptor(private val timeList: ArrayList<String>, private val onItemSelected: OnItemSelected) : RecyclerView.Adapter<TimeAdaptor.TimeViewHolder>(){
 
@@ -23,7 +24,7 @@ class TimeAdaptor(private val timeList: ArrayList<String>, private val onItemSel
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: TimeViewHolder, position: Int) {
-        holder.binding.timeTv.text = timeList[holder.adapterPosition]
+        holder.binding.timeTv.text = DateConverter.stringToTime(timeList[holder.adapterPosition])
         holder.itemView.setOnClickListener{
             onItemSelected.onTimeSlotSelected(holder.adapterPosition)
         }

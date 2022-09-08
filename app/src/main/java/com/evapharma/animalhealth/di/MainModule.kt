@@ -29,7 +29,7 @@ class MainModule {
     fun getDB(@ApplicationContext context: Context): DB = Room.databaseBuilder(
         context.applicationContext,
         DB::class.java,
-        "tasksDB"
+        "AnimalHealthDB"
     ).fallbackToDestructiveMigration()
         .build()
 }

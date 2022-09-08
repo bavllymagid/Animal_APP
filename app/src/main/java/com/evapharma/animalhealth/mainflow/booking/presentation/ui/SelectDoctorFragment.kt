@@ -11,6 +11,7 @@ import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import com.evapharma.animalhealth.databinding.FragmentSelectDoctorBinding
 import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
 import com.evapharma.animalhealth.mainflow.booking.presentation.viewmodel.BookingViewModel
+import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 import com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedsFragment
 import com.evapharma.animalhealth.mainflow.utils.DateConverter
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +22,8 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
     lateinit var binding: FragmentSelectDoctorBinding
     private lateinit var adapter: DoctorListAdapter
     lateinit var doctorViewModel:BookingViewModel
+    lateinit var postsRequest: PostsRequest
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,11 +31,14 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
         binding = FragmentSelectDoctorBinding.inflate(layoutInflater)
         (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
         doctorViewModel = ViewModelProvider(this)[BookingViewModel::class.java]
+        postsRequest = PostsRequest(1,"")
 
         adapter = DoctorListAdapter(this)
         println("Date ${DateConverter.stringToTime("2012-04-23T18:25:43.511Z")}")
-        doctorViewModel.getDoctorsList(1).observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        doctorViewModel.getDoctorsList(postsRequest.page).observe(viewLifecycleOwner) {
+            adapter.submitList(it.doctors)
+            postsRequest.page = it.pageNumber
+            postsRequest.maxPage = it.maxPage
         }
         //pagination remaining
         binding.doctorsList.adapter = adapter

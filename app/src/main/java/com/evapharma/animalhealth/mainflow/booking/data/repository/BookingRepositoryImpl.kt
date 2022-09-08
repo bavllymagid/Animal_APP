@@ -3,16 +3,13 @@ package com.evapharma.animalhealth.mainflow.booking.data.repository
 import com.evapharma.animalhealth.mainflow.booking.data.local.BookingLocalDataSource
 import com.evapharma.animalhealth.mainflow.booking.data.remote.BookingApi
 import com.evapharma.animalhealth.mainflow.booking.data.remote.BookingRemoteDataSource
-import com.evapharma.animalhealth.mainflow.booking.domain.model.AppointmentModel
-import com.evapharma.animalhealth.mainflow.booking.domain.model.BookingModel
-import com.evapharma.animalhealth.mainflow.booking.domain.model.DateTimeSlot
-import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
+import com.evapharma.animalhealth.mainflow.booking.domain.model.*
 import com.evapharma.animalhealth.mainflow.booking.domain.repository.BookingRepository
 import javax.inject.Inject
 
 class BookingRepositoryImpl @Inject constructor(val remoteDataSource: BookingRemoteDataSource,
                                                 val localDataSource: BookingLocalDataSource) : BookingRepository {
-    override suspend fun getDoctorList(pageNum: Int): List<DoctorModel> {
+    override suspend fun getDoctorList(pageNum: Int): DoctorModelX {
         return remoteDataSource.getDoctorList(pageNum)
     }
 

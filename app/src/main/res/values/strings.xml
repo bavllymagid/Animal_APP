@@ -10,7 +10,7 @@
     <string name="post_image">postImage</string>
     <string name="doctors">Doctors</string>
     <string name="book_an_appointment">Book An Appointment</string>
-    <string name="available">available</string>
+    <string name="available">Available From</string>
     <string name="next_button">next button</string>
     <string name="exit">exit</string>
     <string name="book_an_appointment_v2">Book An Appointment</string>
@@ -34,4 +34,5 @@
     <string name="register">Register</string>
     <string name="title">title</string>
     <string name="search_data">Search Data</string>
+    <string name="fees">fees</string>
 </resources>
