@@ -1,4 +1,4 @@
-package com.evapharma.animalhealth.mainflow.feed.utils
+package com.evapharma.animalhealth.mainflow.utils
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -42,5 +42,35 @@ object DateConverter {
             Log.e("ConvTimeE", e.message.toString())
         }
         return convTime
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun stringToDate(date:String): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+            .parse(date)
+        val localDate = dateFormat?.let { SimpleDateFormat("yyyy-MM-dd").format(it) }
+        return localDate.toString()
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun stringToTime(date: String):String{
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+            .parse(date)
+        println("Date$dateFormat")
+        val tk = StringTokenizer(dateFormat.toString())
+        val day = tk.nextToken()
+        val dayCal = tk.nextToken()
+        val dayCalNum = tk.nextToken()
+        val time = tk.nextToken()
+
+        val rawTime = SimpleDateFormat("hh:mm:ss")
+        val timeFormat = SimpleDateFormat("hh:mm a")
+
+        return try {
+            val dt = rawTime.parse(time)
+            return "Time Display: " + dt?.let { timeFormat.format(it) }
+        } catch (e: ParseException) {
+            ""
+        }
     }
 }

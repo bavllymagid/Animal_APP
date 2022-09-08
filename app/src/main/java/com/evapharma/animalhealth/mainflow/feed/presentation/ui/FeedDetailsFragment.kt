@@ -9,10 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.databinding.FragmentFeedDetailsBinding
-import com.evapharma.animalhealth.mainflow.booking.presentation.adapters.TimeAdaptor
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.ReferencesAdapter
-import com.evapharma.animalhealth.mainflow.feed.utils.DateConverter
+import com.evapharma.animalhealth.mainflow.utils.DateConverter
 
 class FeedDetailsFragment : Fragment() {
 

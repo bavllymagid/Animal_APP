@@ -11,8 +11,8 @@ import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import com.evapharma.animalhealth.databinding.FragmentSelectDoctorBinding
 import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
 import com.evapharma.animalhealth.mainflow.booking.presentation.viewmodel.BookingViewModel
-import com.evapharma.animalhealth.mainflow.booking.utils.StringToDateAndTime
 import com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedsFragment
+import com.evapharma.animalhealth.mainflow.utils.DateConverter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,7 +30,7 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
         doctorViewModel = ViewModelProvider(this)[BookingViewModel::class.java]
 
         adapter = DoctorListAdapter(this)
-        println("Date ${StringToDateAndTime.stringToDate("2012-04-23T18:25:43.511Z").toString()}")
+        println("Date ${DateConverter.stringToTime("2012-04-23T18:25:43.511Z")}")
         doctorViewModel.getDoctorsList(1).observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }

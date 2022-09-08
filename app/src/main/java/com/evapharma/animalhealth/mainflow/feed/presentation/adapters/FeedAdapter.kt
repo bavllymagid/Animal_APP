@@ -1,7 +1,6 @@
 package com.evapharma.animalhealth.mainflow.feed.presentation.adapters
 
 
-import android.content.Context
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +10,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.application.AnimalHealthApp
-import com.evapharma.animalhealth.application.AnimalHealthApp_GeneratedInjector
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.utils.FeedDiffUtils
 import com.evapharma.animalhealth.databinding.FeedItemBinding
-import com.evapharma.animalhealth.mainflow.feed.utils.DateConverter
-import dagger.hilt.android.qualifiers.ApplicationContext
+import com.evapharma.animalhealth.mainflow.utils.DateConverter
 
 class FeedAdapter(private val onItemSelected: OnItemSelected) : ListAdapter<Feed, FeedAdapter.FeedViewHolder>(FeedDiffUtils()) {
 
