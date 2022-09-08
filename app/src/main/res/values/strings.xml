@@ -31,6 +31,7 @@
     <string name="search">search</string>
     <string name="back">Back</string>
     <string name="references">References</string>
+    <string name="register">Register</string>
     <string name="title">title</string>
     <string name="search_data">Search Data</string>
 </resources>

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/custom_background"
     tools:context=".authflow.presentation.ui.fragments.OtpFragment">
 
 
@@ -121,7 +120,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
 
-                        android:id="@+id/element1"
+                        android:id="@+id/OTPfield4"
                         android:layout_width="40dp"
                         android:layout_height="47dp"
                         android:background="@drawable/text_field_shape"
@@ -129,45 +128,45 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/element4"
-                        app:layout_constraintTop_toTopOf="@+id/element4" />
+                        app:layout_constraintStart_toEndOf="@+id/OTPfield3"
+                        app:layout_constraintTop_toTopOf="@+id/OTPfield3" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/element2"
+                        android:id="@+id/OTPfield2"
                         android:layout_width="40dp"
                         android:layout_height="47dp"
                         android:background="@drawable/text_field_shape"
                         android:singleLine="true"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/element4"
+                        app:layout_constraintEnd_toStartOf="@+id/OTPfield3"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/element3"
-                        app:layout_constraintTop_toTopOf="@+id/element3" />
+                        app:layout_constraintStart_toEndOf="@+id/OTPfield1"
+                        app:layout_constraintTop_toTopOf="@+id/OTPfield1" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/element3"
+                        android:id="@+id/OTPfield1"
                         android:layout_width="40dp"
                         android:layout_height="47dp"
                         android:background="@drawable/text_field_shape"
                         android:singleLine="true"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/element2"
+                        app:layout_constraintEnd_toStartOf="@+id/OTPfield2"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="1.0" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/element4"
+                        android:id="@+id/OTPfield3"
                         android:layout_width="40dp"
                         android:layout_height="47dp"
                         android:background="@drawable/text_field_shape"
                         android:singleLine="true"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/element1"
+                        app:layout_constraintEnd_toStartOf="@+id/OTPfield4"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/element2"
-                        app:layout_constraintTop_toTopOf="@+id/element2" />
+                        app:layout_constraintStart_toEndOf="@+id/OTPfield2"
+                        app:layout_constraintTop_toTopOf="@+id/OTPfield2" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -211,9 +210,9 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView7"
                     app:layout_constraintVertical_bias="0.55" />
 
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -62,16 +62,14 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 binding.searchData.visibility = View.INVISIBLE
                 post.keyword = binding.searchBar.query.toString()
-
                 CoroutineScope(Dispatchers.IO).launch {
-                    val list = paginate()
+                    val list = getResponse()
                     withContext(Dispatchers.Main) {
                         binding.searchBar.clearFocus()
-                        if(list.isNotEmpty()){
-                            adapter.submitList(list)
-                        }else{
-                            binding.searchData.visibility = View.VISIBLE
+                        adapter.submitList(list)
+                        if(list.isEmpty()){
                             binding.searchData.text = "No Data To Be Displayed"
+                            binding.searchData.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -134,6 +132,21 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
             list.addAll(adapter.currentList)
             if (response != null) {
                 list.addAll(response.articlesPosts)
+                post.page = response.currentPage
+                post.maxPage = response.totalPages
+            }
+        }catch (e: Exception) {
+            println(e.message.toString())
+        }
+        return list
+    }
+
+    suspend fun getResponse(): ArrayList<Feed>{
+        var list = ArrayList<Feed>()
+        try {
+            val response = feedViewModel.getSearchResult(post)
+            if (response != null) {
+                list = response.articlesPosts as ArrayList<Feed>
                 post.page = response.currentPage
                 post.maxPage = response.totalPages
             }
