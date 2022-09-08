@@ -2,6 +2,7 @@ package com.evapharma.animalhealth.mainflow.booking.presentation.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -35,8 +36,16 @@ class DoctorListAdapter(val onDoctorSelected: OnDoctorSelected) :
         holder.binding.apply {
             doctorNameTv.text = doctor.userName
 //            profileImage.setImageBitmap(doctor.photo)
-            timeTv.text = "${DateConverter.stringToDate(doctor.nearestSlot.startAt)} \n ${DateConverter.stringToTime(doctor.nearestSlot.startAt)}"
-            feesTv.text = "${doctor.fees}$"
+            try{
+                timeTv.text = "${DateConverter.stringToMonth(doctor.nearestSlot.startAt)} ${
+                    DateConverter.stringToTime(doctor.nearestSlot.startAt)
+                }"
+            }catch (e:Exception){
+                e.toString()
+                timeTv.text = "UNKNOWN"
+            }
+            specializationTv.text = doctor.specialization
+            feesTv.text = "${doctor.fees} EGP"
             bookAppointmentBtn.setOnClickListener{
                 onDoctorSelected.onBookAppointmentClicked(doctor)
             }

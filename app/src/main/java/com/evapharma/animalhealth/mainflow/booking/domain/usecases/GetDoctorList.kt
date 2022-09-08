@@ -6,7 +6,7 @@ import com.evapharma.animalhealth.mainflow.booking.domain.repository.BookingRepo
 import javax.inject.Inject
 
 class GetDoctorList @Inject constructor(val repository: BookingRepository) {
-    suspend fun execute(pageNum:Int) : DoctorModelX{
-        return repository.getDoctorList(pageNum)
+    suspend fun execute(keyword:String, pageNum:Int) : DoctorModelX?{
+        return repository.getDoctorList(keyword,pageNum)
     }
 }

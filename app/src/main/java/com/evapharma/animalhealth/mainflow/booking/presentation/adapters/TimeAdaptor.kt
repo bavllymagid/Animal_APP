@@ -24,7 +24,7 @@ class TimeAdaptor(private val timeList: ArrayList<String>, private val onItemSel
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: TimeViewHolder, position: Int) {
-        holder.binding.timeTv.text = DateConverter.stringToTime(timeList[holder.adapterPosition])
+        holder.binding.timeTv.text = timeList[holder.adapterPosition]
         holder.itemView.setOnClickListener{
             onItemSelected.onTimeSlotSelected(holder.adapterPosition)
         }

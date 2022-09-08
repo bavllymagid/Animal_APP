@@ -1,5 +1,6 @@
 package com.evapharma.animalhealth.mainflow.booking.data.repository
 
+import android.graphics.Bitmap
 import com.evapharma.animalhealth.mainflow.booking.data.local.BookingLocalDataSource
 import com.evapharma.animalhealth.mainflow.booking.data.local.model.LocalBooking
 import com.evapharma.animalhealth.mainflow.booking.data.remote.BookingRemoteDataSource
@@ -9,8 +10,8 @@ import javax.inject.Inject
 
 class BookingRepositoryImpl @Inject constructor(val remoteDataSource: BookingRemoteDataSource,
                                                 private val localDataSource: BookingLocalDataSource) : BookingRepository {
-    override suspend fun getDoctorList(pageNum: Int): DoctorModelX {
-        return remoteDataSource.getDoctorList(pageNum)
+    override suspend fun getDoctorList(keyword:String, pageNum: Int): DoctorModelX? {
+        return remoteDataSource.getDoctorList(keyword,pageNum)
     }
 
     override suspend fun getDoctorDays(id: String): List<DateTimeSlot> {
@@ -27,6 +28,10 @@ class BookingRepositoryImpl @Inject constructor(val remoteDataSource: BookingRem
 
     override suspend fun getBookingsRemote(id: String, pageNum: Int): List<BookingModel> {
         return remoteDataSource.getBookings(id, pageNum)
+    }
+
+    override suspend fun getImage(url: String): Bitmap? {
+        return remoteDataSource.getImage(url)
     }
 
     override suspend fun cacheBookings(bookingList: List<LocalBooking>) {

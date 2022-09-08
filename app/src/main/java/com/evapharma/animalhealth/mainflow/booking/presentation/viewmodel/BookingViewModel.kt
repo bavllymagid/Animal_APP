@@ -45,9 +45,7 @@ class BookingViewModel @Inject constructor(
         }
     }
 
-    fun getDoctorsList(pageNum: Int):LiveData<DoctorModelX>{
-        return liveData {
-            emit(getDoctorList.execute(pageNum))
-        }
+   suspend fun getDoctorsList(keyword:String, pageNum: Int):DoctorModelX?{
+        return getDoctorList.execute(keyword,pageNum)
     }
 }

@@ -2,19 +2,25 @@ package com.evapharma.animalhealth.mainflow.booking.presentation.ui
 
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.mainflow.booking.presentation.adapters.DoctorListAdapter
 import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import com.evapharma.animalhealth.databinding.FragmentSelectDoctorBinding
 import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
+import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModelX
 import com.evapharma.animalhealth.mainflow.booking.presentation.viewmodel.BookingViewModel
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 import com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedsFragment
-import com.evapharma.animalhealth.mainflow.utils.DateConverter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
@@ -34,14 +40,43 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
         postsRequest = PostsRequest(1,"")
 
         adapter = DoctorListAdapter(this)
-        println("Date ${DateConverter.stringToTime("2012-04-23T18:25:43.511Z")}")
-        doctorViewModel.getDoctorsList(postsRequest.page).observe(viewLifecycleOwner) {
-            adapter.submitList(it.doctors)
-            postsRequest.page = it.pageNumber
-            postsRequest.maxPage = it.maxPage
-        }
+
+        getDoctors(false,"")
         //pagination remaining
         binding.doctorsList.adapter = adapter
+
+        binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                postsRequest.page = 1
+                postsRequest.keyword = binding.searchBar.query.toString()
+                getDoctors(false,postsRequest.keyword)
+                binding.searchBar.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if(binding.searchBar.query.toString().isEmpty()){
+                    postsRequest.keyword = ""
+                    getDoctors(false,postsRequest.keyword)
+                }
+                return true
+            }
+        })
+
+        binding.doctorsList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if(!binding.doctorsList.canScrollVertically(1)){
+                    if(postsRequest.page < postsRequest.maxPage){
+                        binding.docProgress.visibility = View.VISIBLE
+                        postsRequest.page += 1
+                        getDoctors(true,postsRequest.keyword)
+                    }else{
+                        binding.docProgress.visibility = View.GONE
+                    }
+                }
+            }
+        })
 
         binding.backBtn.setOnClickListener{
             activity?.supportFragmentManager?.backStackEntryCount?.let { it1 ->
@@ -72,6 +107,35 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
         }
 
         (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
+    }
+
+
+    private fun getDoctors(pagFlag:Boolean, keyword: String){
+        CoroutineScope(Dispatchers.IO).launch {
+            var doctor : DoctorModelX? = null
+            try{
+                doctor = doctorViewModel.getDoctorsList(keyword,postsRequest.page)
+                binding.mainView.visibility = View.VISIBLE
+                binding.noInternet.noInternet.visibility = View.GONE
+            }catch (e:Exception){
+                binding.mainView.visibility = View.GONE
+                binding.noInternet.noInternet.visibility = View.VISIBLE
+                e.message.toString()
+            }
+            withContext(Dispatchers.Main){
+                if(doctor != null){
+                    if(!pagFlag){
+                        adapter.submitList(doctor.doctors)
+                    }else{
+                        adapter.submitList(adapter.currentList + doctor.doctors)
+                    }
+                    postsRequest.page = doctor.pageNumber
+                    postsRequest.maxPage = doctor.maxPage
+                    binding.docProgress.visibility = View.GONE
+                    binding.docProgressInit.visibility = View.GONE
+                }
+            }
+        }
     }
 
 
