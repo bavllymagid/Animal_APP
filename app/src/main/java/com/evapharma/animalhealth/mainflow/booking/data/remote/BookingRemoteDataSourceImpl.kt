@@ -1,25 +1,31 @@
 package com.evapharma.animalhealth.mainflow.booking.data.remote
 
+import com.evapharma.animalhealth.mainflow.booking.domain.model.AppointmentModel
+import com.evapharma.animalhealth.mainflow.booking.domain.model.BookingModel
+import com.evapharma.animalhealth.mainflow.booking.domain.model.DateTimeSlot
 import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
-import java.sql.Time
-import java.util.*
 import javax.inject.Inject
 
-class BookingRemoteDataSourceImpl @Inject constructor(val api : BookingRemoteInterface,) : BookingRemoteDataSource {
-    override suspend fun getDoctorList(): List<DoctorModel> {
-        return api.getDoctorsList("")
+class BookingRemoteDataSourceImpl @Inject constructor(private val api : BookingApi) : BookingRemoteDataSource {
+    override suspend fun getDoctorList(pageNum:Int): List<DoctorModel> {
+        return api.getDoctorsList(1).body() ?: ArrayList()
     }
 
-    override suspend fun getDoctorDays(id: String): List<Date> {
-        return api.getDoctorDays("",id)
+    override suspend fun getDoctorDays(id: String): List<DateTimeSlot> {
+        return api.getDoctorDays(id).body() ?: ArrayList()
     }
 
-    override suspend fun getDoctorsTime(id: String, day: String): List<Time> {
-        return api.getDoctorsTime("",id,day)
+    override suspend fun getDoctorsTime(id: String, day: String): List<DateTimeSlot> {
+        return api.getDoctorsTime(id,day).body() ?: ArrayList()
     }
 
-    override suspend fun sendDoctorAppointment(id: String, day: String, time: String) {
-        api.sendDoctorAppointment("", id, day, time)
+    override suspend fun sendDoctorAppointment(appointment: AppointmentModel): Boolean {
+        return api.sendDoctorAppointment(appointment).body() ?: false
     }
+
+    override suspend fun getBookings(id: String, pageNum: Int): List<BookingModel> {
+        return api.getMyBookings(id,pageNum).body() ?: ArrayList()
+    }
+
 
 }
