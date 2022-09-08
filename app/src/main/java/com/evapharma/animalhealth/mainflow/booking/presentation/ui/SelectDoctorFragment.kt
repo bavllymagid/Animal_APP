@@ -115,11 +115,7 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
             var doctor : DoctorModelX? = null
             try{
                 doctor = doctorViewModel.getDoctorsList(keyword,postsRequest.page)
-                binding.mainView.visibility = View.VISIBLE
-                binding.noInternet.noInternet.visibility = View.GONE
             }catch (e:Exception){
-                binding.mainView.visibility = View.GONE
-                binding.noInternet.noInternet.visibility = View.VISIBLE
                 e.message.toString()
             }
             withContext(Dispatchers.Main){
@@ -133,6 +129,12 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
                     postsRequest.maxPage = doctor.maxPage
                     binding.docProgress.visibility = View.GONE
                     binding.docProgressInit.visibility = View.GONE
+                    binding.mainView.visibility = View.VISIBLE
+                    binding.noInternet.noInternet.visibility = View.GONE
+                }else{
+                    binding.mainView.visibility = View.GONE
+                    binding.noInternet.noInternet.visibility = View.VISIBLE
+                    binding.noInternet.swipeTv.text = "Try Again Later"
                 }
             }
         }
