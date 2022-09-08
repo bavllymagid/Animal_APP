@@ -1,5 +1,7 @@
 package com.evapharma.animalhealth.mainflow.feed.presentation.ui
 
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,7 @@ import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.FeedAdapter
 import com.evapharma.animalhealth.mainflow.feed.presentation.viewmodel.FeedViewModel
+import com.evapharma.animalhealth.util.NetworkChangeListener
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,6 +30,7 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
     private lateinit var binding: FragmentFeedsBinding
     lateinit var adapter: FeedAdapter
     lateinit var feedViewModel: FeedViewModel
+    var networkChangeListener = NetworkChangeListener()
 
     lateinit var post: PostsRequest
 
@@ -46,15 +50,8 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
                 post.page = it.currentPage
                 post.maxPage = it.totalPages
             } else {
-                view?.let { it1 ->
-                    Snackbar.make(
-                        it1,
-                        "Check Your Internet Connectivity",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                    binding.searchView.isEnabled = false
-                    binding.bookBtn.isEnabled = false
-                }
+                binding.noInternet.noInternet.visibility= View.VISIBLE
+                binding.data.visibility = View.GONE
             }
             binding.initBar.visibility = View.GONE
         }
@@ -105,10 +102,11 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
             feedViewModel.getPosts(post).observe(viewLifecycleOwner) {
                 if (it != null) {
                     adapter.submitList(it.articlesPosts)
-                    binding.searchView.isEnabled = true
-                    binding.bookBtn.isEnabled = true
+                    binding.noInternet.noInternet.visibility= View.GONE
+                    binding.data.visibility = View.VISIBLE
                 }else{
-                    view?.let { it1 -> Snackbar.make(it1, "Check Your Internet Connectivity",Snackbar.LENGTH_SHORT).show() }
+                    binding.noInternet.noInternet.visibility= View.VISIBLE
+                    binding.data.visibility = View.GONE
                 }
                 binding.refresh.isRefreshing = false
             }
@@ -116,6 +114,12 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
 
 
         return binding.root
+    }
+
+    override fun onStart() {
+        val intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        requireActivity().registerReceiver(networkChangeListener, intentFilter)
+        super.onStart()
     }
 
     private fun transferTo(fragment: Fragment, item: Feed? = null) {
