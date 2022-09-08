@@ -23,17 +23,17 @@ object DateConverter {
             val day: Long = TimeUnit.MILLISECONDS.toDays(dateDiff)
 
             when{
-                second < 60 -> convTime = "$second Seconds $suffix"
-                minute < 60 ->  convTime = "$minute Minutes $suffix"
-                hour < 24 ->    convTime = "$hour Hours $suffix"
-                day < 7 ->   convTime = "$day Days $suffix"
+                second < 60 -> convTime = "${second}Sec $suffix"
+                minute < 60 ->  convTime = "${minute}min $suffix"
+                hour < 24 ->    convTime = "${hour}h $suffix"
+                day < 7 ->   convTime = "${day}Days $suffix"
                 day >= 7 ->{
                     convTime = if (day > 360) {
-                        (day / 360).toString() + " Years " + suffix
+                        (day / 360).toString() + "Years " + suffix
                     } else if (day > 30) {
-                        (day / 30).toString() + " Months " + suffix
+                        (day / 30).toString() + "Months " + suffix
                     } else {
-                        (day / 7).toString() + " Week " + suffix
+                        (day / 7).toString() + "Week " + suffix
                     }
                 }
             }

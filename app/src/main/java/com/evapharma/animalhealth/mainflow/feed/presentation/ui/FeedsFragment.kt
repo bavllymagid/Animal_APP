@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.databinding.FragmentFeedsBinding
 import com.evapharma.animalhealth.mainflow.ApplicationActivity
-import com.evapharma.animalhealth.mainflow.booking.presentation.ui.ui.SelectDoctorFragment
+import com.evapharma.animalhealth.mainflow.booking.presentation.ui.SelectDoctorFragment
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.FeedAdapter

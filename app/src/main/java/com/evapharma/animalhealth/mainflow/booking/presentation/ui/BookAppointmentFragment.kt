@@ -1,4 +1,4 @@
-package com.evapharma.animalhealth.mainflow.booking.presentation.ui.ui
+package com.evapharma.animalhealth.mainflow.booking.presentation.ui
 
 import android.icu.util.Calendar
 import android.os.Bundle
