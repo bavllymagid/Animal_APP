@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mainflow.booking.presentation.ui.ui.BookingsFragment">
+    tools:context=".mainflow.booking.presentation.ui.BookingsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="@color/dark_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,16 +30,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image1"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="16dp"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/previous_btn"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/doctor"
-            app:civ_border_color="@color/dark_blue"
-            app:civ_border_width="1dp"
+            android:text="@string/previous"
+            android:backgroundTint="@color/white"
+            app:cornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="10dp"
                     android:layout_marginStart="16dp"
-                    android:text="Starting_soon"
+                    android:text="@string/starting_soon"
                     android:textColor="@color/dark_blue"
                     android:textSize="20sp"
                     android:textStyle="normal"
@@ -112,7 +112,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
-                            android:text="qedwdw"
+                            android:text="Dr.Ibrahim"
                             android:textColor="@color/black"
                             app:layout_constraintStart_toEndOf="@+id/profile_image2"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -124,8 +124,7 @@
                             android:layout_below="@+id/Name_textview1"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
-                            android:hint="asdasdsad"
-                            android:textColor="@color/black"
+                            android:text="@string/pets"
                             app:layout_constraintStart_toEndOf="@+id/profile_image2"
                             app:layout_constraintTop_toBottomOf="@+id/Name_textview1" />
 
@@ -136,7 +135,6 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="16dp"
-                            app:dividerColor="@color/grey"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/hint_textview2" />
@@ -146,10 +144,10 @@
                             style="?attr/materialButtonOutlinedStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="8dp"
-                            android:text="asdasasdasd"
+                            android:text="@string/join_the_call"
                             app:cornerRadius="20dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -161,7 +159,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
-                            android:text="asdasdasdas"
+                            android:text="@string/booking_date"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/divider" />
 
@@ -171,7 +169,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="16dp"
-                            android:text="adasdasdas"
+                            android:text="@string/march_22nd_8_30_pm"
                             android:textColor="@color/black"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -188,9 +186,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="10dp"
                     android:layout_marginStart="16dp"
-                    android:text="UpComing"
+                    android:text="@string/upcoming"
                     android:textColor="@color/dark_blue"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardView" />
