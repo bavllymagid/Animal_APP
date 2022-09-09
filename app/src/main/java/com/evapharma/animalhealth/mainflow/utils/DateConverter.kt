@@ -23,9 +23,9 @@ object DateConverter {
             val day: Long = TimeUnit.MILLISECONDS.toDays(dateDiff)
 
             when{
-                second < 60 -> convTime = "${second}Sec $suffix"
-                minute < 60 ->  convTime = "${minute}min $suffix"
-                hour < 24 ->    convTime = "${hour}h $suffix"
+                second < 60 -> convTime = "${second}Sec"
+                minute < 60 ->  convTime = "${minute}min"
+                hour < 24 ->    convTime = "${hour}h"
                 day < 7 ->   convTime = "${day}Days $suffix"
                 day >= 7 ->{
                     convTime = if (day > 360) {

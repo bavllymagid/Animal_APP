@@ -1,13 +1,11 @@
 package com.evapharma.animalhealth.mainflow.feed.presentation.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.evapharma.animalhealth.databinding.ActivityApplicationBinding
 import com.evapharma.animalhealth.databinding.RefItemBinding
 
-class ReferencesAdapter(val list: ArrayList<String>) : RecyclerView.Adapter<ReferencesAdapter.RefViewHolder>() {
+class ReferencesAdapter(val list: ArrayList<String>?) : RecyclerView.Adapter<ReferencesAdapter.RefViewHolder>() {
 
     class RefViewHolder(val binding: RefItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -16,10 +14,10 @@ class ReferencesAdapter(val list: ArrayList<String>) : RecyclerView.Adapter<Refe
     }
 
     override fun onBindViewHolder(holder: RefViewHolder, position: Int) {
-        holder.binding.refTv.text = list[holder.adapterPosition]
+        holder.binding.refTv.text = list?.get(holder.adapterPosition) ?: ""
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return list?.size ?: 0
     }
 }

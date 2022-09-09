@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class Feed(
     val category: String?,
     val authorName: String?,
-    val postId: Int?,
+    val postId: Int,
     val doctorId: String?,
     val publishDate: String?,
     val editDate: String?,

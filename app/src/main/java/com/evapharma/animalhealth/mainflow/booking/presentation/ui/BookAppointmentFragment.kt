@@ -65,6 +65,7 @@ class BookAppointmentFragment : Fragment(){
 
         binding.timeRc.adapter = adapter
 
+
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 binding.calenderCard.visibility = View.VISIBLE
