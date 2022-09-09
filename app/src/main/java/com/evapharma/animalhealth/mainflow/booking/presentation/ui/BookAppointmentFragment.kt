@@ -3,6 +3,9 @@ package com.evapharma.animalhealth.mainflow.booking.presentation.ui
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.*
+import android.widget.AdapterView
+import android.widget.DatePicker
+import android.widget.ListAdapter
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
@@ -22,7 +25,7 @@ import java.text.DateFormat
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
-class BookAppointmentFragment : Fragment() , TimeAdaptor.OnItemSelected{
+class BookAppointmentFragment : Fragment(){
 
     lateinit var binding: FragmentBookAppointementBinding
     lateinit var adapter: TimeAdaptor
@@ -38,9 +41,14 @@ class BookAppointmentFragment : Fragment() , TimeAdaptor.OnItemSelected{
         binding.timeRc.visibility = View.GONE
         val doctor = arguments?.getParcelable<DoctorModel>("doctor")
 
+        val datePicker = binding.calendarView.getChildAt(0).
+                resources.getIdentifier("date_picker_header", "id", "android")
+        binding.calendarView.findViewById<View>(datePicker).visibility = View.GONE
+
         val items = listOf("10:30 AM", "11:00 PM", "12:00 AM", "1:00 PM", "5:00 AM")
 
-        adapter = TimeAdaptor(ArrayList(items) , this)
+
+        adapter = TimeAdaptor(ArrayList(items) , context?.applicationContext!!)
 
         binding.nextBtn.setOnClickListener{
             if(cnt == 0) {
@@ -60,20 +68,33 @@ class BookAppointmentFragment : Fragment() , TimeAdaptor.OnItemSelected{
             maxDate = calendar.timeInMillis
         }
 
-        binding.calendarView.setOnDateChangeListener{
-                _, year, month, dayOfMonth ->
-            // set the calendar date as calendar view selected date
-            calendar.set(year,month,dayOfMonth)
+        binding.calendarView.setOnDateChangedListener(object : DatePicker.OnDateChangedListener {
+            override fun onDateChanged(
+                view: DatePicker?,
+                year: Int,
+                monthOfYear: Int,
+                dayOfMonth: Int
+            ) {
+                calendar.set(year,monthOfYear,dayOfMonth)
 
-            // set this date as calendar view selected date
-            binding.calendarView.date = calendar.timeInMillis
-
-            // format the calendar view selected date
-            val dateFormatter = DateFormat.getDateInstance(DateFormat.MEDIUM)
-            Toast.makeText(context, dateFormatter.format(calendar.time), Toast.LENGTH_SHORT).show()
-        }
+                val dateFormatter = DateFormat.getDateInstance(DateFormat.MEDIUM)
+                Toast.makeText(context, dateFormatter.format(calendar.time), Toast.LENGTH_SHORT).show()
+            }
+        })
 
         binding.timeRc.adapter = adapter
+
+        binding.timeRc.setOnItemClickListener(object : AdapterView.OnItemClickListener {
+            override fun onItemClick(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                adapter.setSelectedPosition(position)
+                adapter.notifyDataSetChanged()
+            }
+        })
 
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -97,9 +118,6 @@ class BookAppointmentFragment : Fragment() , TimeAdaptor.OnItemSelected{
         return binding.root
     }
 
-    override fun onTimeSlotSelected(position: Int) {
-
-    }
 
     private fun transferTo(fragment: Fragment){
         requireActivity().supportFragmentManager.commit {

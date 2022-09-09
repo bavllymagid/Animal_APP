@@ -20,7 +20,7 @@ class DoctorListAdapter(val onDoctorSelected: OnDoctorSelected) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): DoctorListAdapter.DoctorsViewHolder {
+    ): DoctorsViewHolder {
         return DoctorsViewHolder(
             DoctorCardItemBinding.inflate(
                 LayoutInflater.from(parent.context),
