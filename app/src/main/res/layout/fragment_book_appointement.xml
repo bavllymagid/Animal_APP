@@ -104,7 +104,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/time_card">
 
-        <DatePicker
+        <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -122,9 +122,9 @@
         app:layout_constraintEnd_toEndOf="@+id/calender_card"
         app:layout_constraintStart_toStartOf="@+id/calender_card"
         app:layout_constraintTop_toTopOf="@+id/calender_card"
-        tools:listitem="@layout/time_item"
         android:numColumns="3"
         android:listSelector="@color/dark_blue"
+        tools:listitem="@layout/time_item"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

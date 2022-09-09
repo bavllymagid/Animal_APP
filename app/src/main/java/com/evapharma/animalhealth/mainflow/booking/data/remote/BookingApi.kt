@@ -10,8 +10,8 @@ interface BookingApi {
     @GET("Doctor/SearchDoctor")
     suspend fun getDoctorsList(@Query("Text") keyword:String, @Query("counter") pageNum:Int) : Response<DoctorModelX>
 
-    @GET("ScheduleSlot/GetAllSlots")
-    suspend fun getDoctorDays(@Query("doctorId") doctorId:String) : Response<List<DateTimeSlot>>
+    @GET("ScheduleSlot/GetallDays")
+    suspend fun getDoctorDays(@Query("doctorId") doctorId:String) : Response<List<String>>
 
     @GET("ScheduleSlot/GetAllSlots")
     suspend fun getDoctorsTime(@Query("doctorId") doctorId:String , @Query("day") date:String) : Response<List<DateTimeSlot>>
@@ -21,8 +21,4 @@ interface BookingApi {
 
     @GET("Appointment/BookingHistory")
     suspend fun getMyBookings(@Query("CustomerId") customerId:String, @Query("counter") pageNum: Int):Response<List<BookingModel>>
-
-    @GET("{url}")
-    suspend fun getImage(url: String):Response<ResponseBody>
-
 }

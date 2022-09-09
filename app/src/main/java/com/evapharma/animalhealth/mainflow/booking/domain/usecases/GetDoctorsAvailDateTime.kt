@@ -5,7 +5,7 @@ import com.evapharma.animalhealth.mainflow.booking.domain.repository.BookingRepo
 import javax.inject.Inject
 
 class GetDoctorsAvailDateTime @Inject constructor(val repository: BookingRepository){
-    suspend fun executeDays(id:String) : List<DateTimeSlot>{
+    suspend fun executeDays(id:String) : List<String>{
         return repository.getDoctorDays(id)
     }
 

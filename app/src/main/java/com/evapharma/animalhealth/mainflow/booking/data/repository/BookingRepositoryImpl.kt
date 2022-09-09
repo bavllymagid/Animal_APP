@@ -14,7 +14,7 @@ class BookingRepositoryImpl @Inject constructor(val remoteDataSource: BookingRem
         return remoteDataSource.getDoctorList(keyword,pageNum)
     }
 
-    override suspend fun getDoctorDays(id: String): List<DateTimeSlot> {
+    override suspend fun getDoctorDays(id: String): List<String> {
         return remoteDataSource.getDoctorDays(id)
     }
 
@@ -30,9 +30,6 @@ class BookingRepositoryImpl @Inject constructor(val remoteDataSource: BookingRem
         return remoteDataSource.getBookings(id, pageNum)
     }
 
-    override suspend fun getImage(url: String): Bitmap? {
-        return remoteDataSource.getImage(url)
-    }
 
     override suspend fun cacheBookings(bookingList: List<LocalBooking>) {
         localDataSource.cacheBookings(bookingList)

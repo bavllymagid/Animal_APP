@@ -11,7 +11,7 @@ class BookingRemoteDataSourceImpl @Inject constructor(private val api : BookingA
         return api.getDoctorsList(keyword,pageNum).body()
     }
 
-    override suspend fun getDoctorDays(id: String): List<DateTimeSlot> {
+    override suspend fun getDoctorDays(id: String): List<String> {
         return api.getDoctorDays(id).body() ?: ArrayList()
     }
 
@@ -27,13 +27,6 @@ class BookingRemoteDataSourceImpl @Inject constructor(private val api : BookingA
         return api.getMyBookings(id,pageNum).body() ?: ArrayList()
     }
 
-    override suspend fun getImage(url: String): Bitmap? {
-        return try {
-            BitmapFactory.decodeStream(api.getImage(url).body()?.byteStream())
-        } catch (e:Exception){
-            null
-        }
-    }
 
 
 }
