@@ -1,5 +1,6 @@
 package com.evapharma.animalhealth.mainflow.feed.data.remote
 
+import com.evapharma.animalhealth.mainflow.feed.domain.model.Article
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.domain.model.FeedX
 import retrofit2.Call
@@ -14,4 +15,7 @@ interface FeedApi {
 
     @GET("Search/Search")
     suspend fun getPostsByKeyWord(@Query("KeyWord") keyWord:String, @Query("xPage") pageNum: Int): Response<FeedX>
+
+    @GET("HomePage/DisplayArticleDetails")
+    suspend fun getArticleById(@Query("Id") id:Int) : Response<Article>
 }

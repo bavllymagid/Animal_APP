@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.databinding.FragmentFeedDetailsBinding
+import com.evapharma.animalhealth.mainflow.feed.domain.model.Article
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.ReferencesAdapter
 import com.evapharma.animalhealth.mainflow.utils.DateConverter
@@ -24,13 +25,13 @@ class FeedDetailsFragment : Fragment() {
 
         binding = FragmentFeedDetailsBinding.inflate(layoutInflater)
 
-        val post = arguments?.getParcelable<Feed>("arc")
+        val post = arguments?.getParcelable<Article>("arc")
 
 
-        binding.title.text = post?.text
+        binding.title.text = post?.title
         binding.date.text = DateConverter.covertTimeToText(post?.publishDate)
 
-        binding.articleBody.text = post?.category
+        binding.articleBody.text = post?.body
 
         binding.backBtn.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
@@ -42,7 +43,7 @@ class FeedDetailsFragment : Fragment() {
         val hiddenGroup = binding.cardGroup
 
         val items = mutableListOf<String>("500g", "1kg", "2kg")
-        adaptor = ReferencesAdapter(items as ArrayList<String>)
+        adaptor = post?.let { ReferencesAdapter(it.reference) }!!
 
         arrow.setOnClickListener {
             if (hiddenGroup.visibility == View.VISIBLE) {

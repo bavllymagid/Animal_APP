@@ -3,6 +3,7 @@ package com.evapharma.animalhealth.mainflow.feed.presentation.ui
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,10 @@ import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.FeedAdapte
 import com.evapharma.animalhealth.mainflow.feed.presentation.viewmodel.FeedViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
@@ -114,9 +119,9 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
         return binding.root
     }
 
-    private fun transferTo(fragment: Fragment, item: Feed? = null) {
+    private fun transferTo(fragment: Fragment, item: Any? = null) {
         val bundle = Bundle()
-        bundle.putParcelable("arc", item)
+        bundle.putParcelable("arc", item as Parcelable?)
         fragment.arguments = bundle
         requireActivity().supportFragmentManager.commit {
             addToBackStack(this.toString())
@@ -125,7 +130,22 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
     }
 
     override fun onItemClicked(feedObject: Feed) {
-        transferTo(FeedDetailsFragment(), feedObject)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val article = feedObject.postId?.let { feedViewModel.getArticleBody(it) }
+                withContext(Dispatchers.Main){
+                    if(article != null) {
+                        transferTo(FeedDetailsFragment(), article)
+                    }else{
+                        Snackbar.make(view!!, "Something Went Wrong", Snackbar.LENGTH_SHORT).show()
+                        binding.refresh.refreshDrawableState()
+                    }
+                }
+            }catch (e:Exception){
+                Snackbar.make(view!!, "Something Went Wrong", Snackbar.LENGTH_SHORT).show()
+                binding.refresh.refreshDrawableState()
+            }
+        }
     }
 
 
