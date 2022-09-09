@@ -10,5 +10,5 @@ import retrofit2.http.Query
 interface FeedRemoteDataSource {
     suspend fun getPosts(postsRequest: PostsRequest): FeedX?
     suspend fun getPostsByKeyword(postsRequest: PostsRequest): FeedX?
-    suspend fun getArticleById(@Query("Id") id:Int) : Article?
+    suspend fun getArticleById(id:Int) : Article?
 }

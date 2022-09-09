@@ -132,18 +132,19 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
     override fun onItemClicked(feedObject: Feed) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val article = feedObject.postId?.let { feedViewModel.getArticleBody(it) }
+                val article = feedViewModel.getArticleBody(feedObject.postId)
                 withContext(Dispatchers.Main){
+                    binding.initBar.visibility = View.VISIBLE
                     if(article != null) {
                         transferTo(FeedDetailsFragment(), article)
                     }else{
+                        binding.initBar.visibility = View.GONE
                         Snackbar.make(view!!, "Something Went Wrong", Snackbar.LENGTH_SHORT).show()
-                        binding.refresh.refreshDrawableState()
+                        binding.refresh.isRefreshing = true
                     }
                 }
             }catch (e:Exception){
                 Snackbar.make(view!!, "Something Went Wrong", Snackbar.LENGTH_SHORT).show()
-                binding.refresh.refreshDrawableState()
             }
         }
     }

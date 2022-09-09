@@ -84,17 +84,6 @@ class BookAppointmentFragment : Fragment(){
 
         binding.timeRc.adapter = adapter
 
-        binding.timeRc.setOnItemClickListener(object : AdapterView.OnItemClickListener {
-            override fun onItemClick(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                adapter.setSelectedPosition(position)
-                adapter.notifyDataSetChanged()
-            }
-        })
 
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
