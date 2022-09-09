@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mainflow.booking.presentation.ui.ui.BookAppointmentFragment">
+    tools:context=".mainflow.booking.presentation.ui.BookAppointmentFragment">
 
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -96,7 +96,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:elevation="200dp"
         app:cardCornerRadius="20dp"
@@ -105,15 +104,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/time_card">
 
-        <CalendarView
+        <DatePicker
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"/>
+            android:backgroundTint="@color/white"
+            android:datePickerMode="calendar"
+            android:spinnersShown="false"/>
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <GridView
         android:id="@+id/time_rc"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -121,19 +122,23 @@
         app:layout_constraintEnd_toEndOf="@+id/calender_card"
         app:layout_constraintStart_toStartOf="@+id/calender_card"
         app:layout_constraintTop_toTopOf="@+id/calender_card"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="3"/>
+        tools:listitem="@layout/time_item"
+        android:numColumns="3"
+        android:listSelector="@color/dark_blue"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/next_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/next_button"
         app:fabCustomSize="62dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calender_card"
         app:srcCompat="@drawable/arrow"
         app:tint="@color/white" />
 

@@ -38,42 +38,76 @@
 
             <TextView
                 android:id="@+id/doctor_name_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/doctors"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/fees_tv"
                 app:layout_constraintStart_toEndOf="@+id/profile_image"
                 app:layout_constraintTop_toTopOf="@+id/profile_image" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/bookAppointment_btn"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="221dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/book_an_appointment"
+                app:cornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/avail"
+                app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+
+            <TextView
+                android:id="@+id/avail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/book_an_appointment"
-                style="?attr/materialButtonOutlinedStyle"
-                app:cornerRadius="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_image"
-
-                />
+                android:layout_marginStart="16dp"
+                android:textSize="12sp"
+                android:text="@string/available"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/bookAppointment_btn" />
 
             <TextView
                 android:id="@+id/time_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/timer"
+                android:textColor="@color/lighter_black"
+                android:textSize="9sp"
+                app:layout_constraintBottom_toBottomOf="@+id/bookAppointment_btn"
+                app:layout_constraintEnd_toStartOf="@+id/bookAppointment_btn"
+                app:layout_constraintStart_toStartOf="@+id/avail"
+                app:layout_constraintTop_toBottomOf="@+id/avail" />
+
+            <TextView
+                android:id="@+id/fees_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:text="@string/available"
+                android:text="@string/fees"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/doctor_name_tv" />
+
+            <TextView
+                android:id="@+id/specialization_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+                app:layout_constraintEnd_toEndOf="@+id/doctor_name_tv"
+                app:layout_constraintStart_toStartOf="@+id/doctor_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/doctor_name_tv" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

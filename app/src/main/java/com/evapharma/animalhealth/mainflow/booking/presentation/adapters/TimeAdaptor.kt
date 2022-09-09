@@ -1,39 +1,45 @@
 package com.evapharma.animalhealth.mainflow.booking.presentation.adapters
 
-import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.BaseAdapter
+import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.databinding.TimeItemBinding
 
-class TimeAdaptor(private val timeList: ArrayList<String>, private val onItemSelected: OnItemSelected) : RecyclerView.Adapter<TimeAdaptor.TimeViewHolder>(){
+class TimeAdaptor(private val timeList: ArrayList<String>, val context: Context) :
+    BaseAdapter() {
 
-    class TimeViewHolder(val binding: TimeItemBinding) : RecyclerView.ViewHolder(binding.root)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeViewHolder {
-        return TimeViewHolder(
-            TimeItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
-    }
+    private var layoutInflater: LayoutInflater? = null
+    private var selectedPosition = -14245
+    lateinit var binding: TimeItemBinding
 
 
-    @SuppressLint("ResourceAsColor")
-    override fun onBindViewHolder(holder: TimeViewHolder, position: Int) {
-        holder.binding.timeTv.text = timeList[holder.adapterPosition]
-        holder.itemView.setOnClickListener{
-            onItemSelected.onTimeSlotSelected(holder.adapterPosition)
-        }
-    }
-
-    override fun getItemCount(): Int {
+    override fun getCount(): Int {
         return timeList.size
     }
 
-    interface OnItemSelected{
-        fun onTimeSlotSelected(position: Int)
+    override fun getItem(position: Int): Any {
+        return timeList[position]
+    }
+
+    override fun getItemId(position: Int): Long {
+        return 0
+    }
+
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+
+        if (layoutInflater == null) {
+            layoutInflater =
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        }
+        binding = TimeItemBinding.inflate(layoutInflater!!)
+
+        binding.timeTv.text = timeList[position]
+
+
+        return binding.root
     }
 }

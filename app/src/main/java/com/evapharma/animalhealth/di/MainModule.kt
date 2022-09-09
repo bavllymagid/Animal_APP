@@ -21,7 +21,7 @@ class MainModule {
     @Provides
     fun getRetrofit(): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl("http://davidsamy-001-site1.dtempurl.com/api/")
+        .baseUrl("http://andrew100-001-site1.etempurl.com/api/")
         .build()
 
     @Singleton
@@ -29,7 +29,7 @@ class MainModule {
     fun getDB(@ApplicationContext context: Context): DB = Room.databaseBuilder(
         context.applicationContext,
         DB::class.java,
-        "tasksDB"
+        "AnimalHealthDB"
     ).fallbackToDestructiveMigration()
         .build()
 }

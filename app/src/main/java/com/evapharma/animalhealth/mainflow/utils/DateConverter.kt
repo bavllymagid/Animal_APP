@@ -53,6 +53,25 @@ object DateConverter {
     }
 
     @SuppressLint("SimpleDateFormat")
+    fun stringToMonth(date: String):String{
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+            .parse(date)
+        println("Date$dateFormat")
+        val tk = StringTokenizer(dateFormat?.toString() ?: "a b c d")
+        val day = tk.nextToken()
+        val month = tk.nextToken()
+        val dayCalNum = tk.nextToken()
+        val time = tk.nextToken()
+
+
+        return try {
+            return "$dayCalNum $month"
+        } catch (e: ParseException) {
+            ""
+        }
+    }
+
+    @SuppressLint("SimpleDateFormat")
     fun stringToTime(date: String):String{
         val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
             .parse(date)
@@ -68,7 +87,7 @@ object DateConverter {
 
         return try {
             val dt = rawTime.parse(time)
-            return "Time Display: " + dt?.let { timeFormat.format(it) }
+            return dt?.let { timeFormat.format(it) }.toString()
         } catch (e: ParseException) {
             ""
         }

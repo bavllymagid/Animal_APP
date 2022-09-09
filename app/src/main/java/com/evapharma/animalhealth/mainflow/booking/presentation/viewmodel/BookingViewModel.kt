@@ -4,10 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import com.evapharma.animalhealth.mainflow.booking.domain.model.AppointmentModel
-import com.evapharma.animalhealth.mainflow.booking.domain.model.BookingModel
-import com.evapharma.animalhealth.mainflow.booking.domain.model.DateTimeSlot
-import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
+import com.evapharma.animalhealth.mainflow.booking.domain.model.*
 import com.evapharma.animalhealth.mainflow.booking.domain.usecases.BookAnAppointment
 import com.evapharma.animalhealth.mainflow.booking.domain.usecases.GetDoctorList
 import com.evapharma.animalhealth.mainflow.booking.domain.usecases.GetDoctorsAvailDateTime
@@ -48,9 +45,7 @@ class BookingViewModel @Inject constructor(
         }
     }
 
-    fun getDoctorsList(pageNum: Int):LiveData<List<DoctorModel>>{
-        return liveData {
-            emit(getDoctorList.execute(pageNum))
-        }
+   suspend fun getDoctorsList(keyword:String, pageNum: Int):DoctorModelX?{
+        return getDoctorList.execute(keyword,pageNum)
     }
 }
