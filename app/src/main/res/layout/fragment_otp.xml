@@ -15,30 +15,28 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@string/verify_mobile_number"
             android:textAlignment="center"
             android:textColor="@color/dark_blue"
             android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="@+id/back_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.295"
             app:layout_constraintStart_toEndOf="@+id/back_btn"
-            app:layout_constraintTop_toTopOf="@+id/back_btn"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/back_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="40dp"
             android:clickable="true"
             android:contentDescription="@string/app_name"
             android:focusable="true"
             android:src="@drawable/left_arrow"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.067"
+            app:layout_constraintTop_toTopOf="@+id/textView"
             tools:targetApi="m" />
 
         <androidx.cardview.widget.CardView
@@ -111,34 +109,31 @@
                     android:layout_height="52dp"
                     android:layout_marginHorizontal="20sp"
                     android:layout_marginTop="12dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/textView5"
                     app:layout_constraintHorizontal_bias="0.524"
                     app:layout_constraintStart_toStartOf="@+id/textView5"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4"
-                    app:layout_constraintVertical_bias="0.013">
+                    app:layout_constraintTop_toBottomOf="@+id/textView4">
 
                     <com.google.android.material.textfield.TextInputLayout
-
-                        android:id="@+id/OTPfield4"
+                        android:id="@+id/OTPfield1"
                         android:layout_width="40dp"
                         android:layout_height="47dp"
                         android:background="@drawable/text_field_shape"
                         android:singleLine="true"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/OTPfield3"
-                        app:layout_constraintTop_toTopOf="@+id/OTPfield3" >
+                        app:layout_constraintEnd_toStartOf="@+id/OTPfield2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/OTPfield4Text"
+                            android:id="@+id/OTPfield1Text"
                             android:layout_width="match_parent"
-                            android:background="@drawable/text_field_shape"
                             android:layout_height="60dp"
+                            android:background="@drawable/text_field_shape"
+                            android:maxLength="1"
                             android:paddingBottom="20dp"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            />
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -151,38 +146,16 @@
                         app:layout_constraintEnd_toStartOf="@+id/OTPfield3"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/OTPfield1"
-                        app:layout_constraintTop_toTopOf="@+id/OTPfield1" >
+                        app:layout_constraintTop_toTopOf="parent">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/OTPfield2Text"
                             android:layout_width="match_parent"
-                            android:background="@drawable/text_field_shape"
                             android:layout_height="60dp"
-                            android:paddingBottom="20dp"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/OTPfield1"
-                        android:layout_width="40dp"
-                        android:layout_height="47dp"
-                        android:background="@drawable/text_field_shape"
-                        android:singleLine="true"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/OTPfield2"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="1.0" >
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/OTPfield1Text"
-                            android:layout_width="match_parent"
                             android:background="@drawable/text_field_shape"
-                            android:layout_height="60dp"
+                            android:maxLength="1"
                             android:paddingBottom="20dp"
-                            android:textSize="15dp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -194,20 +167,89 @@
                         android:singleLine="true"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/OTPfield4"
-                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/OTPfield2"
-                        app:layout_constraintTop_toTopOf="@+id/OTPfield2" >
+                        app:layout_constraintTop_toTopOf="parent">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/OTPfield3Text"
                             android:layout_width="match_parent"
-                            android:background="@drawable/text_field_shape"
                             android:layout_height="60dp"
+                            android:background="@drawable/text_field_shape"
+                            android:maxLength="1"
                             android:paddingBottom="20dp"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            />
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+
+                    <com.google.android.material.textfield.TextInputLayout
+
+                        android:id="@+id/OTPfield4"
+                        android:layout_width="40dp"
+                        android:layout_height="47dp"
+                        android:background="@drawable/text_field_shape"
+                        android:singleLine="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/OTPfield5"
+                        app:layout_constraintStart_toEndOf="@+id/OTPfield3"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/OTPfield4Text"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:background="@drawable/text_field_shape"
+                            android:maxLength="1"
+                            android:paddingBottom="20dp"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/OTPfield5"
+                        android:layout_width="40dp"
+                        android:layout_height="47dp"
+                        android:background="@drawable/text_field_shape"
+                        android:singleLine="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/OTPfield6"
+                        app:layout_constraintStart_toEndOf="@+id/OTPfield4"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/OTPfield5Text"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:background="@drawable/text_field_shape"
+                            android:maxLength="1"
+                            android:paddingBottom="20dp"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/OTPfield6"
+                        android:layout_width="40dp"
+                        android:layout_height="47dp"
+                        android:background="@drawable/text_field_shape"
+                        android:singleLine="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/OTPfield5"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/OTPfield6Text"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:background="@drawable/text_field_shape"
+                            android:maxLength="1"
+                            android:paddingBottom="20dp"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </com.google.android.material.textfield.TextInputLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
@@ -218,20 +260,20 @@
                     android:text="@string/the_code_will_be_expired_in"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textView7"
+                    app:layout_constraintEnd_toEndOf="@+id/timer"
                     app:layout_constraintHorizontal_bias="0.467"
-                    app:layout_constraintStart_toStartOf="@+id/textView7"
+                    app:layout_constraintStart_toStartOf="@+id/timer"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
                     app:layout_constraintVertical_bias="0.0" />
 
-                <TextView
-                    android:id="@+id/textView7"
+                <Chronometer
+                    android:id="@+id/timer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/timer"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="30sp"
+                    android:visibility="visible"
                     android:textColor="@color/black"
-                    android:textSize="40sp"
                     app:layout_constraintEnd_toEndOf="@+id/VerifyBTN"
                     app:layout_constraintStart_toStartOf="@+id/VerifyBTN"
                     app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -247,7 +289,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView7"
+                    app:layout_constraintTop_toBottomOf="@+id/timer"
                     app:layout_constraintVertical_bias="0.55" />
 
 

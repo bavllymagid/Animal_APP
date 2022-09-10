@@ -46,12 +46,14 @@
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable/selector.xml" value="0.1765" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable/selector_shape.xml" value="0.1765" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable/shadow.xml" value="0.1545" />
+        <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/drawable/text_field_shape.xml" value="0.1765" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/font/font.xml" value="0.2713541666666667" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/font/runda_light.xml" value="0.2713541666666667" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout-v23/fragment_otp.xml" value="0.23052536231884058" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/activity_application.xml" value="0.2421875" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/activity_auth.xml" value="0.2421875" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/activity_main.xml" value="0.2421875" />
+        <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/book_doctor_item.xml" value="0.2296195652173913" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/book_item.xml" value="0.2296195652173913" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/doctor_card_item.xml" value="0.536" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/feed_item.xml" value="0.24094202898550723" />
@@ -61,7 +63,7 @@
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_feed_search.xml" value="0.11778115501519756" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_feeds.xml" value="0.264" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_login.xml" value="0.228125" />
-        <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_otp.xml" value="0.23052536231884058" />
+        <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_otp.xml" value="0.4" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_register.xml" value="0.2" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/fragment_select_doctor.xml" value="0.264" />
         <entry key="..\:/Users/me/AndroidStudioProjects/Animal-Health-Android/app/src/main/res/layout/home_action_bar.xml" value="0.11778115501519756" />

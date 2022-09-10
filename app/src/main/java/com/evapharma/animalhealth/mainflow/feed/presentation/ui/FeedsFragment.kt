@@ -62,12 +62,6 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
         binding = FragmentFeedsBinding.inflate(layoutInflater)
         binding.feedList.adapter = adapter
 
-        binding.bookBtn.setOnClickListener {
-            transferTo(SelectDoctorFragment())
-            (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility =
-                View.GONE
-        }
-
         binding.searchView.setOnClickListener {
             transferTo(FeedSearchFragment())
         }
@@ -149,6 +143,11 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
         }
     }
 
+    override fun onFirstClicked() {
+        transferTo(SelectDoctorFragment())
+        (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility =
+            View.GONE
+    }
 
 
 }

@@ -71,7 +71,7 @@ class BookAppointmentFragment : Fragment() {
         binding.timeRc.adapter = adapter
 
         binding.calendarView.setOnDateChangeListener { _: CalendarView, year: Int, month: Int, dayOfMonth: Int ->
-            currentDay = "$year-${month+1}-$dayOfMonth"
+            currentDay = "$year-${month + 1}-$dayOfMonth"
             if (doctor != null) {
                 getDoctorTimes(doctor)
             }
@@ -91,7 +91,7 @@ class BookAppointmentFragment : Fragment() {
                         binding.nextBtn.setImageResource(R.drawable.arrow)
                         binding.nextBtn.isEnabled = true
                         cnt = 0
-                    }else{
+                    } else {
                         transferTo(SelectDoctorFragment())
                     }
                 }
@@ -99,7 +99,7 @@ class BookAppointmentFragment : Fragment() {
 
         binding.apply {
             doctorNameTv.text = doctor?.userName
-            timeTv.text = DateConverter.stringToDate(doctor?.nearestSlot?.startAt?:"")
+            timeTv.text = DateConverter.stringToDate(doctor?.nearestSlot?.startAt ?: "")
         }
 
         binding.customToolbar.setOnMenuItemClickListener {
@@ -128,7 +128,9 @@ class BookAppointmentFragment : Fragment() {
             try {
                 var list: ArrayList<String>
                 withContext(Dispatchers.IO) {
-                    list = appointmentViewModel.getDoctorDays(doctor.doctorId) as ArrayList<String>
+                    list =
+                        DateConverter
+                            .listToStringDate(appointmentViewModel.getDoctorDays(doctor.doctorId) as ArrayList<String>)
                 }
                 if (list.isNotEmpty()) {
                     currentDay = list.max()
@@ -156,20 +158,23 @@ class BookAppointmentFragment : Fragment() {
         }
     }
 
-    private fun getDoctorTimes(doctor: DoctorModel){
+    private fun getDoctorTimes(doctor: DoctorModel) {
         CoroutineScope(Dispatchers.Main).launch {
-            try{
+            try {
                 var list: ArrayList<DateTimeSlot>
-                withContext(Dispatchers.IO){
-                    list = appointmentViewModel.getDoctorScheduleForADay(doctor.doctorId, currentDay) as ArrayList<DateTimeSlot>
+                withContext(Dispatchers.IO) {
+                    list = appointmentViewModel.getDoctorScheduleForADay(
+                        doctor.doctorId,
+                        currentDay
+                    ) as ArrayList<DateTimeSlot>
                 }
-                if(list.isNotEmpty()){
+                if (list.isNotEmpty()) {
                     adapter.setTimeList(list)
                     binding.nextBtn.isEnabled = true
-                }else{
+                } else {
                     binding.nextBtn.isEnabled = false
                 }
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 binding.nextBtn.isEnabled = false
                 Snackbar.make(view!!, "No Reservations Available", Snackbar.LENGTH_SHORT).show()
             }

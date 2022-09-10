@@ -24,6 +24,7 @@ import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
+
 class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
 
     lateinit var binding: FragmentFeedSearchBinding
@@ -115,6 +116,10 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
 
     override fun onItemClicked(feedObject: Feed) {
         transferTo(FeedDetailsFragment(), feedObject)
+    }
+
+    override fun onFirstClicked() {
+        TODO("Not yet implemented")
     }
 
 
