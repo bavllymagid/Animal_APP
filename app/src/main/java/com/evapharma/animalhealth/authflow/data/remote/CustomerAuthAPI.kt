@@ -1,6 +1,6 @@
 package com.evapharma.animalhealth.authflow.data.remote
 
-import com.evapharma.animalhealth.authflow.data.local.LoginModel
+import com.evapharma.animalhealth.authflow.domain.model.LoginModel
 import com.evapharma.animalhealth.authflow.domain.model.CustomerModel
 import com.evapharma.animalhealth.authflow.domain.model.LoginResponseModel
 import com.evapharma.animalhealth.authflow.domain.model.RegResponseModel

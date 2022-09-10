@@ -46,10 +46,6 @@ class RegisterFragment : Fragment() {
 
                 withContext(Dispatchers.Main){
 
-//                    val otpFragment = OtpFragment()
-//                    otpFragment.arguments = bundle
-//                    transferTo(otpFragment)
-
                     if(binding.nameInput.text.toString().isBlank() || binding.nameInput.text.toString().isEmpty()){
                         binding.nameInput.setError("Please enter a valid username")
                     }
