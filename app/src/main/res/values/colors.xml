@@ -12,6 +12,9 @@
     <color name="light_grey">#F0EEEE</color>
     <color name="lighter_black">#232323</color>
     <color name="red">#FFFF0000</color>
+    <color name="green">#3AC591</color>
+    <color name="red2">#D82424</color>
+    <color name="transparent">#00D82424</color>
 
 
 </resources>

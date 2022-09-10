@@ -1,27 +1,21 @@
 package com.evapharma.animalhealth.mainflow.feed.presentation.ui
 
 import android.os.Bundle
-import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
-import android.widget.Toast.makeText
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.databinding.FragmentFeedSearchBinding
 import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
-import com.evapharma.animalhealth.mainflow.feed.domain.model.FeedX
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.FeedAdapter
 import com.evapharma.animalhealth.mainflow.feed.presentation.viewmodel.FeedViewModel
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,14 +24,15 @@ import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
+
 class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
 
     lateinit var binding: FragmentFeedSearchBinding
     lateinit var adapter: FeedAdapter
-    lateinit var feedViewModel: FeedViewModel
+    private lateinit var feedViewModel: FeedViewModel
     lateinit var post: PostsRequest
 
-    var IS_INTERNET_FOUND = false
+
 
 
     override fun onCreateView(
@@ -51,7 +46,6 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
 
         (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
         adapter = FeedAdapter(this)
-        IS_INTERNET_FOUND = false
 
         binding.backBtn.setOnClickListener {
             transferTo(FeedsFragment())
@@ -122,6 +116,10 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
 
     override fun onItemClicked(feedObject: Feed) {
         transferTo(FeedDetailsFragment(), feedObject)
+    }
+
+    override fun onFirstClicked() {
+        TODO("Not yet implemented")
     }
 
 

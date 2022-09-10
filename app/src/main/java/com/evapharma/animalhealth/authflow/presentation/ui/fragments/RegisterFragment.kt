@@ -2,7 +2,6 @@ package com.evapharma.animalhealth.authflow.presentation.ui.fragments
 
 import android.os.Bundle
 
-import android.text.TextUtils.replace
 import android.util.Log
 import android.view.Gravity
 
