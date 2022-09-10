@@ -1,7 +1,6 @@
 package com.evapharma.animalhealth.mainflow.feed.presentation.adapters
 
 
-import android.content.Context
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +10,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.application.AnimalHealthApp
-import com.evapharma.animalhealth.application.AnimalHealthApp_GeneratedInjector
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.utils.FeedDiffUtils
 import com.evapharma.animalhealth.databinding.FeedItemBinding
-import com.evapharma.animalhealth.mainflow.feed.utils.DateConverter
-import dagger.hilt.android.qualifiers.ApplicationContext
+import com.evapharma.animalhealth.mainflow.utils.DateConverter
 
 class FeedAdapter(private val onItemSelected: OnItemSelected) : ListAdapter<Feed, FeedAdapter.FeedViewHolder>(FeedDiffUtils()) {
 
@@ -35,8 +32,14 @@ class FeedAdapter(private val onItemSelected: OnItemSelected) : ListAdapter<Feed
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
         val post = getItem(position)
         holder.binding.apply {
-            titleTv.text = post.authorName
-            body.text = post.text
+            if(post.category == "Article"){
+                titleTv.text = post.authorName
+                body.visibility = View.GONE
+            }else{
+                titleTv.text = post.authorName
+                body.text = post.text
+                body.visibility = View.VISIBLE
+            }
             postImg.setImageBitmap(BitmapFactory.decodeResource(AnimalHealthApp.appContext.resources, R.drawable.doctor))
             date.text = DateConverter.covertTimeToText(post.publishDate)
         }

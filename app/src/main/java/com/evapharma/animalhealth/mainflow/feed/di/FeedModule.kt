@@ -3,8 +3,8 @@ package com.evapharma.animalhealth.mainflow.feed.di
 import com.evapharma.animalhealth.mainflow.feed.data.remote.FeedApi
 import com.evapharma.animalhealth.mainflow.feed.data.remote.FeedRemoteDataSource
 import com.evapharma.animalhealth.mainflow.feed.data.remote.FeedRemoteDataSourceImpl
-import com.evapharma.animalhealth.mainflow.feed.data.repository.FeedRepository
-import com.evapharma.animalhealth.mainflow.feed.domain.repository.FeedRepositoryImpl
+import com.evapharma.animalhealth.mainflow.feed.domain.repository.FeedRepository
+import com.evapharma.animalhealth.mainflow.feed.data.repository.FeedRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

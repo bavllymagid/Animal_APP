@@ -1,7 +1,9 @@
 package com.evapharma.animalhealth.di
 
 import android.content.Context
+import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.evapharma.animalhealth.applicationflow.data.local.DB
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +21,15 @@ class MainModule {
     @Provides
     fun getRetrofit(): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl("http://davidsamy-001-site1.dtempurl.com/api/")
+        .baseUrl("http://andrew100-001-site1.etempurl.com/api/")
         .build()
 
+    @Singleton
+    @Provides
+    fun getDB(@ApplicationContext context: Context): DB = Room.databaseBuilder(
+        context.applicationContext,
+        DB::class.java,
+        "AnimalHealthDB"
+    ).fallbackToDestructiveMigration()
+        .build()
 }

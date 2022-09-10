@@ -1,4 +1,4 @@
-package com.evapharma.animalhealth.mainflow.booking.presentation.ui.ui
+package com.evapharma.animalhealth.mainflow.booking.presentation.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,6 +1,7 @@
 package com.evapharma.animalhealth.mainflow.feed.data.remote
 
 import android.util.Log
+import com.evapharma.animalhealth.mainflow.feed.domain.model.Article
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.domain.model.FeedX
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
@@ -40,5 +41,9 @@ class FeedRemoteDataSourceImpl @Inject constructor(private val api: FeedApi) :
             }
 
         return null
+    }
+
+    override suspend fun getArticleById(id: Int): Article? {
+        return api.getArticleById(id).body()
     }
 }

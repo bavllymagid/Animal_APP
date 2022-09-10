@@ -1,8 +1,8 @@
-package com.evapharma.animalhealth.mainflow.feed.domain.repository
+package com.evapharma.animalhealth.mainflow.feed.data.repository
 
 import com.evapharma.animalhealth.mainflow.feed.data.remote.FeedRemoteDataSource
-import com.evapharma.animalhealth.mainflow.feed.data.repository.FeedRepository
-import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
+import com.evapharma.animalhealth.mainflow.feed.domain.model.Article
+import com.evapharma.animalhealth.mainflow.feed.domain.repository.FeedRepository
 import com.evapharma.animalhealth.mainflow.feed.domain.model.FeedX
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 
@@ -13,5 +13,9 @@ class FeedRepositoryImpl(private val feedRemoteDataSource: FeedRemoteDataSource)
 
     override suspend fun getPostsByKeyword(postsRequest: PostsRequest): FeedX? {
         return feedRemoteDataSource.getPostsByKeyword(postsRequest)
+    }
+
+    override suspend fun getArticleById(id: Int): Article? {
+        return feedRemoteDataSource.getArticleById(id)
     }
 }
