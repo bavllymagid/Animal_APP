@@ -5,7 +5,7 @@ import com.evapharma.animalhealth.mainflow.booking.domain.repository.BookingRepo
 import javax.inject.Inject
 
 class BookAnAppointment @Inject constructor(val repository: BookingRepository) {
-    suspend fun execute(appointment: AppointmentModel) : Boolean{
-        return repository.sendDoctorAppointment(appointment)
+    suspend fun execute(token:String, appointment: AppointmentModel) : Boolean{
+        return repository.sendDoctorAppointment(token, appointment)
     }
 }

@@ -19,8 +19,8 @@ class BookingRemoteDataSourceImpl @Inject constructor(private val api : BookingA
         return api.getDoctorsTime(id,day).body() ?: ArrayList()
     }
 
-    override suspend fun sendDoctorAppointment(appointment: AppointmentModel): Boolean {
-        return api.sendDoctorAppointment(appointment).body() ?: false
+    override suspend fun sendDoctorAppointment(token:String, appointment: AppointmentModel): Boolean {
+        return api.sendDoctorAppointment(token,appointment).body() ?: false
     }
 
     override suspend fun getBookings(id: String, pageNum: Int): List<BookingModel> {

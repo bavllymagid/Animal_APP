@@ -22,8 +22,8 @@ class BookingRepositoryImpl @Inject constructor(val remoteDataSource: BookingRem
         return remoteDataSource.getDoctorsTime(id, day)
     }
 
-    override suspend fun sendDoctorAppointment(appointment: AppointmentModel): Boolean {
-        return remoteDataSource.sendDoctorAppointment(appointment)
+    override suspend fun sendDoctorAppointment(token:String, appointment: AppointmentModel): Boolean {
+        return remoteDataSource.sendDoctorAppointment(token,appointment)
     }
 
     override suspend fun getBookingsRemote(id: String, pageNum: Int): List<BookingModel> {

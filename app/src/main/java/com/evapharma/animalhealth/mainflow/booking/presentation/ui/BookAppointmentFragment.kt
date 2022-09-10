@@ -11,6 +11,7 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.evapharma.animalhealth.R
+import com.evapharma.animalhealth.authflow.presentation.viewmodel.AuthViewModel
 import com.evapharma.animalhealth.mainflow.booking.presentation.adapters.TimeAdaptor
 import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import com.evapharma.animalhealth.databinding.FragmentBookAppointementBinding
@@ -34,6 +35,7 @@ class BookAppointmentFragment : Fragment() {
     lateinit var binding: FragmentBookAppointementBinding
     lateinit var adapter: TimeAdaptor
     lateinit var appointmentViewModel: BookingViewModel
+    lateinit var userViewModel: AuthViewModel
     private lateinit var calendar: Calendar
 
 
@@ -46,6 +48,7 @@ class BookAppointmentFragment : Fragment() {
     ): View {
         binding = FragmentBookAppointementBinding.inflate(layoutInflater)
         appointmentViewModel = ViewModelProvider(this)[BookingViewModel::class.java]
+        userViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
         binding.timeRc.visibility = View.GONE
         val doctor = arguments?.getParcelable<DoctorModel>("doctor")
 

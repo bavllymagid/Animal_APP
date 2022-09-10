@@ -21,9 +21,9 @@ class BookingViewModel @Inject constructor(
     private val getDoctorList: GetDoctorList
 ) : ViewModel() {
 
-    fun bookAppointment(appointment: AppointmentModel){
+    fun bookAppointment(token:String, appointment: AppointmentModel){
         viewModelScope.launch {
-            bookAnAppointment.execute(appointment)
+            bookAnAppointment.execute(token ,appointment)
         }
     }
 
