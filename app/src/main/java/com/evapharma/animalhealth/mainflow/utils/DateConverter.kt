@@ -6,6 +6,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 object DateConverter {
     @SuppressLint("SimpleDateFormat")
@@ -47,7 +48,7 @@ object DateConverter {
     @SuppressLint("SimpleDateFormat")
     fun stringToDate(date:String): String {
         return try {
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .parse(date)
             val localDate = dateFormat?.let { SimpleDateFormat("yyyy-MM-dd").format(it) }
             localDate.toString()
@@ -56,9 +57,18 @@ object DateConverter {
         }
     }
 
+
+    fun listToStringDate(list : List<String>):ArrayList<String>{
+        val tempList = ArrayList<String>()
+        for(item in list){
+            tempList.add(stringToDate(item))
+        }
+        return tempList
+    }
+
     @SuppressLint("SimpleDateFormat")
     fun stringToMonth(date: String):String{
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
             .parse(date)
         println("Date$dateFormat")
         val tk = StringTokenizer(dateFormat?.toString() ?: "a b c d")
@@ -78,7 +88,7 @@ object DateConverter {
     @SuppressLint("SimpleDateFormat")
     fun stringToTime(date: String): String {
         return try {
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .parse(date)
             println("Date$dateFormat")
             val tk = StringTokenizer(dateFormat.toString())
