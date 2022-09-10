@@ -5,10 +5,11 @@ import androidx.room.PrimaryKey
 
 
 class BookingModel(
-    val IsCancelled: Boolean,
-    val IsFollowUp: Boolean,
-    val Price: Int,
-    val SlotId: Int,
+    val appointmentId: Int,
+    val date: String,
     val doctor: DoctorModel,
-    val appointment : DateTimeSlot
+    val isCancelled: Boolean,
+    val isFollowUp: Boolean,
+    val price: Int,
+    val slotId: Int
 )
