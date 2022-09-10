@@ -1,12 +1,11 @@
-package com.evapharma.animalhealth.authflow.data.remote
-
+package com.evapharma.animalhealth.authflow.domain.repository
 
 import com.evapharma.animalhealth.authflow.domain.model.CustomerModel
 import com.evapharma.animalhealth.authflow.domain.model.LoginModel
 import com.evapharma.animalhealth.authflow.domain.model.LoginResponseModel
 import com.evapharma.animalhealth.authflow.domain.model.RegResponseModel
 
-interface RemoteDataSource {
-    suspend fun getToken(user: LoginModel):LoginResponseModel?
+interface CustomerRepository {
     suspend fun registerCustomer(customer: CustomerModel):RegResponseModel?
+    suspend fun getToken(user: LoginModel): String
 }
