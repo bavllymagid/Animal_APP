@@ -37,7 +37,9 @@ class RegisterFragment : Fragment() {
 
         registerViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
 
-
+        binding.registerBackArrow.setOnClickListener{
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
 
         binding.RegisterBtn.setOnClickListener {
             val customer = CustomerModel(binding.nameInput.text.toString(), binding.mobileInput.text.toString(), binding.PasswordInputText.text.toString())

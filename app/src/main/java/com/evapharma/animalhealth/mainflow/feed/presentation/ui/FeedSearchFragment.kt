@@ -14,7 +14,7 @@ import com.evapharma.animalhealth.databinding.FragmentFeedSearchBinding
 import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
-import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.FeedAdapter
+import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.SearchFeedAdapter
 import com.evapharma.animalhealth.mainflow.feed.presentation.viewmodel.FeedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -25,10 +25,10 @@ import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 
-class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
+class FeedSearchFragment : Fragment(), SearchFeedAdapter.OnItemSelected {
 
     lateinit var binding: FragmentFeedSearchBinding
-    lateinit var adapter: FeedAdapter
+    lateinit var adapter: SearchFeedAdapter
     private lateinit var feedViewModel: FeedViewModel
     lateinit var post: PostsRequest
 
@@ -45,7 +45,7 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
         post = PostsRequest(1, "")
 
         (requireActivity() as ApplicationActivity).binding.bottomNavigator.visibility = View.GONE
-        adapter = FeedAdapter(this)
+        adapter = SearchFeedAdapter(this)
 
         binding.backBtn.setOnClickListener {
             transferTo(FeedsFragment())
@@ -117,11 +117,6 @@ class FeedSearchFragment : Fragment(), FeedAdapter.OnItemSelected {
     override fun onItemClicked(feedObject: Feed) {
         transferTo(FeedDetailsFragment(), feedObject)
     }
-
-    override fun onFirstClicked() {
-        TODO("Not yet implemented")
-    }
-
 
     suspend fun paginate(): ArrayList<Feed> {
         val list = ArrayList<Feed>()
