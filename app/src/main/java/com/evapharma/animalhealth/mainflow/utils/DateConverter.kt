@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 object DateConverter {
     @SuppressLint("SimpleDateFormat")
     fun covertTimeToText(dataDate: String?): String {
-        var convTime = ""
+        var convTime =  "Time Not Found"
         val suffix = "Ago"
         try {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
@@ -46,10 +46,14 @@ object DateConverter {
 
     @SuppressLint("SimpleDateFormat")
     fun stringToDate(date:String): String {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
-            .parse(date)
-        val localDate = dateFormat?.let { SimpleDateFormat("yyyy-MM-dd").format(it) }
-        return localDate.toString()
+        return try {
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+                .parse(date)
+            val localDate = dateFormat?.let { SimpleDateFormat("yyyy-MM-dd").format(it) }
+            localDate.toString()
+        }catch (e:Exception){
+            "Time Not Found"
+        }
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -67,29 +71,30 @@ object DateConverter {
         return try {
             return "$dayCalNum $month"
         } catch (e: ParseException) {
-            ""
+            "Time Not Found"
         }
     }
 
     @SuppressLint("SimpleDateFormat")
-    fun stringToTime(date: String):String{
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
-            .parse(date)
-        println("Date$dateFormat")
-        val tk = StringTokenizer(dateFormat.toString())
-        val day = tk.nextToken()
-        val dayCal = tk.nextToken()
-        val dayCalNum = tk.nextToken()
-        val time = tk.nextToken()
-
-        val rawTime = SimpleDateFormat("hh:mm:ss")
-        val timeFormat = SimpleDateFormat("hh:mm a")
-
+    fun stringToTime(date: String): String {
         return try {
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+                .parse(date)
+            println("Date$dateFormat")
+            val tk = StringTokenizer(dateFormat.toString())
+            val day = tk.nextToken()
+            val dayCal = tk.nextToken()
+            val dayCalNum = tk.nextToken()
+            val time = tk.nextToken()
+
+            val rawTime = SimpleDateFormat("hh:mm:ss")
+            val timeFormat = SimpleDateFormat("hh:mm a")
+
+
             val dt = rawTime.parse(time)
             return dt?.let { timeFormat.format(it) }.toString()
         } catch (e: ParseException) {
-            ""
+            "Time Not Found"
         }
     }
 }

@@ -37,10 +37,8 @@ class BookingViewModel @Inject constructor(
         return getDoctorsAvailDateTime.executeDays(id)
     }
 
-    fun getDoctorScheduleForADay(id:String, day:String):LiveData<List<DateTimeSlot>>{
-        return liveData {
-            emit(getDoctorsAvailDateTime.executeTimeSlots(id,day))
-        }
+    suspend fun getDoctorScheduleForADay(id:String, day:String):List<DateTimeSlot>{
+        return getDoctorsAvailDateTime.executeTimeSlots(id,day)
     }
 
    suspend fun getDoctorsList(keyword:String, pageNum: Int):DoctorModelX?{

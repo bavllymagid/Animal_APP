@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.databinding.TimeItemBinding
+import com.evapharma.animalhealth.mainflow.booking.domain.model.DateTimeSlot
+import com.evapharma.animalhealth.mainflow.utils.DateConverter
 
-class TimeAdaptor(private val timeList: ArrayList<String>, val context: Context) :
+class TimeAdaptor(private var timeList: ArrayList<DateTimeSlot>, val context: Context) :
     BaseAdapter() {
 
     private var layoutInflater: LayoutInflater? = null
-    private var selectedPosition = -14245
     lateinit var binding: TimeItemBinding
 
 
@@ -29,6 +30,10 @@ class TimeAdaptor(private val timeList: ArrayList<String>, val context: Context)
         return 0
     }
 
+    fun setTimeList(list: ArrayList<DateTimeSlot>){
+        timeList = list
+    }
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
         if (layoutInflater == null) {
@@ -37,7 +42,7 @@ class TimeAdaptor(private val timeList: ArrayList<String>, val context: Context)
         }
         binding = TimeItemBinding.inflate(layoutInflater!!)
 
-        binding.timeTv.text = timeList[position]
+        binding.timeTv.text = DateConverter.stringToTime(timeList[position].startAt)
 
 
         return binding.root
