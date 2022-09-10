@@ -1,5 +1,7 @@
 package com.evapharma.animalhealth.authflow.presentation.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.evapharma.animalhealth.databinding.ActivityApplicationBinding
@@ -14,7 +16,10 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)
 
+
+
         setContentView(binding.root)
+
 
     }
 }
