@@ -13,8 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
-
     private lateinit var binding: FragmentLoginBinding
+    var AuthToken = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +33,19 @@ class LoginFragment : Fragment() {
         binding.RegisterBtn.setOnClickListener()
         {
             Navigation.findNavController(view!!).navigate(R.id.registerFragment);
+        }
+        binding.SignInBTN.setOnClickListener()
+        {
+            if (AuthToken == ""|| AuthToken == null)
+            {
+                binding.messageTv.text="Error in Phone number or a password"
+            }
+            else
+            {
+                val intent = Intent(this.requireContext(), ApplicationActivity::class.java)
+                startActivity(intent)
+            }
+
         }
         return binding.root
     }
