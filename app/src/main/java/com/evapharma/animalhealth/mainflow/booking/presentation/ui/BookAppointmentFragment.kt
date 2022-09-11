@@ -2,7 +2,6 @@ package com.evapharma.animalhealth.mainflow.booking.presentation.ui
 
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.text.TextUtils.replace
 import android.view.*
 import android.widget.AdapterView
 import android.widget.CalendarView
@@ -128,7 +127,7 @@ class BookAppointmentFragment : Fragment() {
     private fun requestSent(doctor: DoctorModel): Boolean {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                var success:Boolean
+                var success = false
                 withContext(Dispatchers.IO){
                     success = appointmentViewModel.bookAppointment("Bearer ${userViewModel.getLocalToken()}", AppointmentModel(slotID,doctor.doctorId))
                 }
@@ -144,6 +143,7 @@ class BookAppointmentFragment : Fragment() {
                     transferTo(FeedsFragment())
                 }
             }catch (e:Exception){
+                print("MYAPP ${e.message.toString()}")
                 getDoctorDays(doctor)
                 binding.calenderCard.visibility = View.VISIBLE
                 binding.timeRc.visibility = View.GONE

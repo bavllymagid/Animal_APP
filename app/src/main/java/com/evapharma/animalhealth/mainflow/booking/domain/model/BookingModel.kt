@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-class BookingModel(
+data class BookingModel(
     val appointmentId: Int,
     val date: String,
     val doctor: DoctorModel,

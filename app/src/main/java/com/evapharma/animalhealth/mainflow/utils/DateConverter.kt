@@ -68,16 +68,15 @@ object DateConverter {
 
     @SuppressLint("SimpleDateFormat")
     fun stringToMonth(date: String):String{
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-            .parse(date)
-        println("Date$dateFormat")
-        val tk = StringTokenizer(dateFormat?.toString() ?: "a b c d")
-        val day = tk.nextToken()
-        val month = tk.nextToken()
-        val dayCalNum = tk.nextToken()
-        val time = tk.nextToken()
-
         return try {
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+                .parse(date)
+            println("Date$dateFormat")
+            val tk = StringTokenizer(dateFormat?.toString() ?: "a b c d")
+            val day = tk.nextToken()
+            val month = tk.nextToken()
+            val dayCalNum = tk.nextToken()
+            val time = tk.nextToken()
             return "$dayCalNum $month"
         } catch (e: ParseException) {
             "Time Not Found"

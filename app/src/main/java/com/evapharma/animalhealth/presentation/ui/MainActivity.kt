@@ -40,10 +40,12 @@ class MainActivity : AppCompatActivity() {
                 if(newToken != ""){
                     val mIntent = Intent(applicationContext, ApplicationActivity::class.java)
                     startActivity(mIntent)
+                    finishAffinity()
                 }else{
                     getSharedPreferences("User", MODE_PRIVATE).edit().clear().apply()
                     val mIntent = Intent(applicationContext, AuthActivity::class.java)
                     startActivity(mIntent)
+                    finishAffinity()
                 }
             }catch (e:Exception){
                 Snackbar.make(binding.root, "Something Went Wrong", Snackbar.LENGTH_LONG).show()

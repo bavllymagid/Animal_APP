@@ -28,9 +28,14 @@ interface BookingApi {
         @Body appointment: AppointmentModel
     ): Response<String>
 
+    @GET("Appointment/UpComingBooking")
+    suspend fun getUpComingBookings(
+        @Header("Authorization") authToken: String,
+    ): Response<List<BookingModel>>
+
     @GET("Appointment/BookingHistory")
-    suspend fun getMyBookings(
+    suspend fun getPreviousBookings(
         @Header("Authorization") authToken: String,
         @Query("counter") pageNum: Int
-    ): Response<List<BookingModel>>
+    ): Response<BookingList>
 }
