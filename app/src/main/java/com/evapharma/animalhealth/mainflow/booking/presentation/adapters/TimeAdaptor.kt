@@ -34,6 +34,10 @@ class TimeAdaptor(private var timeList: ArrayList<DateTimeSlot>, val context: Co
         timeList = list
     }
 
+    fun getTimeList():ArrayList<DateTimeSlot>{
+        return timeList
+    }
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
         if (layoutInflater == null) {

@@ -1,6 +1,7 @@
 package com.evapharma.animalhealth.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.evapharma.animalhealth.applicationflow.data.local.DB
@@ -32,4 +33,10 @@ class MainModule {
         "AnimalHealthDB"
     ).fallbackToDestructiveMigration()
         .build()
+
+    @Singleton
+    @Provides
+    fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences("User", Context.MODE_PRIVATE)
+    }
 }

@@ -47,9 +47,4 @@ class AuthModule {
         return CustomerCustomerRepositoryImpl(remoteDataSource,localDataSource)
     }
 
-    @Singleton
-    @Provides
-    fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences {
-        return context.getSharedPreferences("User", Context.MODE_PRIVATE)
-    }
 }

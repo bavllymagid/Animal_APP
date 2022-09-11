@@ -16,11 +16,15 @@ class CustomerCustomerRepositoryImpl @Inject constructor(private val remoteDataS
         return remoteDataSource.registerCustomer(customer)
     }
 
-    override suspend fun getToken(user: LoginModel): String {
-        localDataSource.saveCurrentToken(remoteDataSource.getToken(user)?.token?:"")
-        return localDataSource.getCurrentUserToken()
+    override suspend fun getTokenRemote(user: LoginModel): String {
+        val token = remoteDataSource.getToken(user)?.token?:""
+        localDataSource.saveCurrentToken(token)
+        return token
     }
 
+    override suspend fun getLocalToken(): String {
+        return localDataSource.getCurrentUserToken()
+    }
 
 
 }

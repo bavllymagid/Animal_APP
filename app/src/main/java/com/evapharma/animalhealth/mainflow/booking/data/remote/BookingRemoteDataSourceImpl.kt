@@ -1,7 +1,5 @@
 package com.evapharma.animalhealth.mainflow.booking.data.remote
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import com.evapharma.animalhealth.mainflow.booking.domain.model.*
 import javax.inject.Inject
 
@@ -20,7 +18,7 @@ class BookingRemoteDataSourceImpl @Inject constructor(private val api : BookingA
     }
 
     override suspend fun sendDoctorAppointment(token:String, appointment: AppointmentModel): Boolean {
-        return api.sendDoctorAppointment(token,appointment).body() ?: false
+        return api.sendDoctorAppointment(token,appointment).isSuccessful
     }
 
     override suspend fun getBookings(id: String, pageNum: Int): List<BookingModel> {

@@ -7,6 +7,6 @@ import javax.inject.Inject
 
 class Login@Inject constructor(private val customerRepository : CustomerRepository) {
     suspend fun execute(user:LoginModel) : String{
-        return customerRepository.getToken(user)
+        return customerRepository.getTokenRemote(user)
     }
 }
