@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.evapharma.animalhealth.applicationflow.data.local.DB
 import com.evapharma.animalhealth.authflow.data.local.LocalDataSource
 import com.evapharma.animalhealth.authflow.data.remote.CustomerAuthAPI
@@ -21,6 +23,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -31,7 +34,8 @@ class MainModule {
 
     @Singleton
     @Provides
-    fun getRetrofit(): Retrofit = Retrofit.Builder()
+    fun getRetrofit(@ApplicationContext context: Context): Retrofit = Retrofit.Builder()
+        .client(chuckProvider(context))
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl("http://andrew100-001-site1.etempurl.com/api/")
         .build()
@@ -44,6 +48,18 @@ class MainModule {
         "AnimalHealthDB"
     ).fallbackToDestructiveMigration()
         .build()
+
+    private fun chuckProvider(@ApplicationContext context: Context) : OkHttpClient =
+        OkHttpClient.Builder()
+            .addInterceptor(
+                ChuckerInterceptor.Builder(context)
+                    .collector(ChuckerCollector(context))
+                    .maxContentLength(250000L)
+                    .redactHeaders(emptySet())
+                    .alwaysReadResponseBody(false)
+                    .build()
+            )
+            .build()
 
     @Singleton
     @Provides

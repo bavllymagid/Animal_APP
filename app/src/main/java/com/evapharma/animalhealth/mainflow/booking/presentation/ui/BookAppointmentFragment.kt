@@ -2,6 +2,7 @@ package com.evapharma.animalhealth.mainflow.booking.presentation.ui
 
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.text.TextUtils.replace
 import android.view.*
 import android.widget.AdapterView
 import android.widget.CalendarView
@@ -66,7 +67,6 @@ class BookAppointmentFragment : Fragment() {
                 if (doctor != null) {
                     requestSent(doctor)
                 }
-                transferTo(FeedsFragment())
             }
         }
 
@@ -128,12 +128,20 @@ class BookAppointmentFragment : Fragment() {
     private fun requestSent(doctor: DoctorModel): Boolean {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                var success = false
+                var success:Boolean
                 withContext(Dispatchers.IO){
-                    success = appointmentViewModel.bookAppointment(userViewModel.getLocalToken(), AppointmentModel(slotID,doctor.doctorId))
+                    success = appointmentViewModel.bookAppointment("Bearer ${userViewModel.getLocalToken()}", AppointmentModel(slotID,doctor.doctorId))
                 }
                 if(!success){
+                    getDoctorDays(doctor)
+                    binding.calenderCard.visibility = View.VISIBLE
+                    binding.timeRc.visibility = View.GONE
+                    binding.nextBtn.setImageResource(R.drawable.arrow)
+                    binding.nextBtn.isEnabled = true
+                    cnt = 0
                     Snackbar.make(view!!,"Something went wrong Please try again later", Snackbar.LENGTH_LONG).show()
+                }else{
+                    transferTo(FeedsFragment())
                 }
             }catch (e:Exception){
                 getDoctorDays(doctor)

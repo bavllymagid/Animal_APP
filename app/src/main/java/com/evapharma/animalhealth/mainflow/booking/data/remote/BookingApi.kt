@@ -8,17 +8,29 @@ import retrofit2.http.*
 interface BookingApi {
 
     @GET("Doctor/SearchDoctor")
-    suspend fun getDoctorsList(@Query("Text") keyword:String, @Query("counter") pageNum:Int) : Response<DoctorModelX>
+    suspend fun getDoctorsList(
+        @Query("Text") keyword: String,
+        @Query("counter") pageNum: Int
+    ): Response<DoctorModelX>
 
     @GET("ScheduleSlot/GetallDays")
-    suspend fun getDoctorDays(@Query("doctorId") doctorId:String) : Response<List<String>>
+    suspend fun getDoctorDays(@Query("doctorId") doctorId: String): Response<List<String>>
 
     @GET("ScheduleSlot/GetAllSlots")
-    suspend fun getDoctorsTime(@Query("doctorId") doctorId:String , @Query("day") date:String) : Response<List<DateTimeSlot>>
+    suspend fun getDoctorsTime(
+        @Query("doctorId") doctorId: String,
+        @Query("day") date: String
+    ): Response<List<DateTimeSlot>>
 
     @POST("Appointment/addAppointment")
-    suspend fun sendDoctorAppointment(@Query("token") token:String , @Body appointment: AppointmentModel) : Response<String>
+    suspend fun sendDoctorAppointment(
+        @Header("Authorization") authToken: String,
+        @Body appointment: AppointmentModel
+    ): Response<String>
 
     @GET("Appointment/BookingHistory")
-    suspend fun getMyBookings(@Query("CustomerId") customerId:String, @Query("counter") pageNum: Int):Response<List<BookingModel>>
+    suspend fun getMyBookings(
+        @Header("Authorization") authToken: String,
+        @Query("counter") pageNum: Int
+    ): Response<List<BookingModel>>
 }

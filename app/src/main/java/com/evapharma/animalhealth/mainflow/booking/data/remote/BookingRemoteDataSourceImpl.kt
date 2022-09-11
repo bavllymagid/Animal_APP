@@ -18,7 +18,8 @@ class BookingRemoteDataSourceImpl @Inject constructor(private val api : BookingA
     }
 
     override suspend fun sendDoctorAppointment(token:String, appointment: AppointmentModel): Boolean {
-        return api.sendDoctorAppointment(token,appointment).isSuccessful
+        val code =  api.sendDoctorAppointment(token,appointment).message()
+        return code == "Added Successfully"
     }
 
     override suspend fun getBookings(id: String, pageNum: Int): List<BookingModel> {
