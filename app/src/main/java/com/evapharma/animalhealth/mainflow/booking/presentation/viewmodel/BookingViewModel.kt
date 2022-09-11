@@ -21,10 +21,8 @@ class BookingViewModel @Inject constructor(
     private val getDoctorList: GetDoctorList
 ) : ViewModel() {
 
-    fun bookAppointment(appointment: AppointmentModel){
-        viewModelScope.launch {
-            bookAnAppointment.execute(appointment)
-        }
+    suspend fun bookAppointment(token:String, appointment: AppointmentModel):Boolean{
+        return bookAnAppointment.execute(token ,appointment)
     }
 
     fun getBookings(id:String, pageNum:Int):LiveData<List<BookingModel>>{

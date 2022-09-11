@@ -1,6 +1,6 @@
 package com.evapharma.animalhealth.mainflow.booking.domain.model
 
 data class AppointmentModel(
-    val DoctorId: String,
-    val SlotId: Int
+    val SlotId: Int,
+    val doctorId: String
 )

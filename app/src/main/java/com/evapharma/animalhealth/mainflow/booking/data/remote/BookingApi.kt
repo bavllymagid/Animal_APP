@@ -17,7 +17,7 @@ interface BookingApi {
     suspend fun getDoctorsTime(@Query("doctorId") doctorId:String , @Query("day") date:String) : Response<List<DateTimeSlot>>
 
     @POST("Appointment/addAppointment")
-    suspend fun sendDoctorAppointment(@Body appointment: AppointmentModel) : Response<Boolean>
+    suspend fun sendDoctorAppointment(@Query("token") token:String , @Body appointment: AppointmentModel) : Response<String>
 
     @GET("Appointment/BookingHistory")
     suspend fun getMyBookings(@Query("CustomerId") customerId:String, @Query("counter") pageNum: Int):Response<List<BookingModel>>

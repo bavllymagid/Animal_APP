@@ -9,11 +9,12 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.evapharma.animalhealth.R
+import com.evapharma.animalhealth.authflow.presentation.viewmodel.AuthViewModel
 import com.evapharma.animalhealth.mainflow.booking.presentation.adapters.TimeAdaptor
 import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import com.evapharma.animalhealth.databinding.FragmentBookAppointementBinding
+import com.evapharma.animalhealth.mainflow.booking.domain.model.AppointmentModel
 import com.evapharma.animalhealth.mainflow.booking.domain.model.DateTimeSlot
 import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
 import com.evapharma.animalhealth.mainflow.booking.presentation.viewmodel.BookingViewModel
@@ -31,14 +32,16 @@ import kotlin.collections.ArrayList
 @AndroidEntryPoint
 class BookAppointmentFragment : Fragment() {
 
-    lateinit var binding: FragmentBookAppointementBinding
-    lateinit var adapter: TimeAdaptor
-    lateinit var appointmentViewModel: BookingViewModel
+    private lateinit var binding: FragmentBookAppointementBinding
+    private lateinit var adapter: TimeAdaptor
+    private lateinit var appointmentViewModel: BookingViewModel
+    private lateinit var userViewModel: AuthViewModel
     private lateinit var calendar: Calendar
 
 
-    var cnt = 0
-    var currentDay = ""
+    private var cnt = 0
+    private var currentDay = ""
+    private var slotID = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +49,7 @@ class BookAppointmentFragment : Fragment() {
     ): View {
         binding = FragmentBookAppointementBinding.inflate(layoutInflater)
         appointmentViewModel = ViewModelProvider(this)[BookingViewModel::class.java]
+        userViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
         binding.timeRc.visibility = View.GONE
         val doctor = arguments?.getParcelable<DoctorModel>("doctor")
 
@@ -59,6 +63,9 @@ class BookAppointmentFragment : Fragment() {
                 binding.nextBtn.isEnabled = false
                 cnt++
             } else {
+                if (doctor != null) {
+                    requestSent(doctor)
+                }
                 transferTo(FeedsFragment())
             }
         }
@@ -78,7 +85,11 @@ class BookAppointmentFragment : Fragment() {
         }
 
         binding.timeRc.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, _, _ -> binding.nextBtn.isEnabled = true }
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                binding.nextBtn.isEnabled = true
+                slotID = adapter.getTimeList()[position].slotId
+            }
+
 
 
         activity?.onBackPressedDispatcher?.addCallback(
@@ -97,6 +108,7 @@ class BookAppointmentFragment : Fragment() {
                 }
             })
 
+
         binding.apply {
             doctorNameTv.text = doctor?.userName
             timeTv.text = DateConverter.stringToDate(doctor?.nearestSlot?.startAt ?: "")
@@ -111,6 +123,29 @@ class BookAppointmentFragment : Fragment() {
             return@setOnMenuItemClickListener false
         }
         return binding.root
+    }
+
+    private fun requestSent(doctor: DoctorModel): Boolean {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                var success = false
+                withContext(Dispatchers.IO){
+                    success = appointmentViewModel.bookAppointment(userViewModel.getLocalToken(), AppointmentModel(slotID,doctor.doctorId))
+                }
+                if(!success){
+                    Snackbar.make(view!!,"Something went wrong Please try again later", Snackbar.LENGTH_LONG).show()
+                }
+            }catch (e:Exception){
+                getDoctorDays(doctor)
+                binding.calenderCard.visibility = View.VISIBLE
+                binding.timeRc.visibility = View.GONE
+                binding.nextBtn.setImageResource(R.drawable.arrow)
+                binding.nextBtn.isEnabled = true
+                cnt = 0
+            }
+        }
+
+        return true
     }
 
 

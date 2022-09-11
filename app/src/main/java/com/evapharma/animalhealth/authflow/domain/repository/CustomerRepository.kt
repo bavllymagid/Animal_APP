@@ -7,5 +7,6 @@ import com.evapharma.animalhealth.authflow.domain.model.RegResponseModel
 
 interface CustomerRepository {
     suspend fun registerCustomer(customer: CustomerModel):RegResponseModel?
-    suspend fun getToken(user: LoginModel): String
+    suspend fun getTokenRemote(user: LoginModel): String
+    suspend fun getLocalToken():String
 }

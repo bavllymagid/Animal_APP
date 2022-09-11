@@ -8,7 +8,7 @@ interface BookingRepository {
     suspend fun getDoctorList(keyword:String,pageNum:Int): DoctorModelX?
     suspend fun getDoctorDays(id:String): List<String>
     suspend fun getDoctorsTime(id:String, day:String): List<DateTimeSlot>
-    suspend fun sendDoctorAppointment(appointment: AppointmentModel) : Boolean
+    suspend fun sendDoctorAppointment(token:String, appointment: AppointmentModel) : Boolean
     suspend fun getBookingsRemote(id:String, pageNum:Int) : List<BookingModel>
     suspend fun cacheBookings(bookingList: List<LocalBooking>)
     suspend fun getMyBookings(): List<LocalBooking>
