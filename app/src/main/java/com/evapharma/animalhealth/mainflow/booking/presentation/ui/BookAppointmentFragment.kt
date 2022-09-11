@@ -133,7 +133,7 @@ class BookAppointmentFragment : Fragment() {
                     success = appointmentViewModel.bookAppointment(userViewModel.getLocalToken(), AppointmentModel(slotID,doctor.doctorId))
                 }
                 if(!success){
-                    Snackbar.make(view!!,"Something went wron Please try again later", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(view!!,"Something went wrong Please try again later", Snackbar.LENGTH_LONG).show()
                 }
             }catch (e:Exception){
                 getDoctorDays(doctor)

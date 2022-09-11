@@ -5,6 +5,17 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.evapharma.animalhealth.applicationflow.data.local.DB
+import com.evapharma.animalhealth.authflow.data.local.LocalDataSource
+import com.evapharma.animalhealth.authflow.data.remote.CustomerAuthAPI
+import com.evapharma.animalhealth.authflow.data.remote.RemoteDataSource
+import com.evapharma.animalhealth.authflow.data.remote.RemoteDataSourceImpl
+import com.evapharma.animalhealth.authflow.data.repository.CustomerCustomerRepositoryImpl
+import com.evapharma.animalhealth.authflow.domain.repository.CustomerRepository
+import com.evapharma.animalhealth.data.remote.ApiRefresh
+import com.evapharma.animalhealth.data.remote.RefreshRemoteDataSource
+import com.evapharma.animalhealth.data.remote.RefreshRemoteDataSourceImpl
+import com.evapharma.animalhealth.data.repository.RefreshRepositoryImpl
+import com.evapharma.animalhealth.domain.repository.RefreshRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,4 +50,23 @@ class MainModule {
     fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences {
         return context.getSharedPreferences("User", Context.MODE_PRIVATE)
     }
+
+    @Provides
+    @Singleton
+    fun getApi(retrofit: Retrofit): ApiRefresh {
+        return retrofit.create(ApiRefresh::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(refresh: ApiRefresh): RefreshRemoteDataSource {
+        return RefreshRemoteDataSourceImpl(refresh)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRepository(remoteDataSource: RefreshRemoteDataSource): RefreshRepository {
+        return RefreshRepositoryImpl(remoteDataSource)
+    }
+
 }

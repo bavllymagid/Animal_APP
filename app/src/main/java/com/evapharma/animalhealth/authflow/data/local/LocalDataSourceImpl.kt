@@ -11,7 +11,7 @@ class LocalDataSourceImpl @Inject constructor(private val sharedPreferences: Sha
     }
 
     override fun saveCurrentToken(token: String) {
-        val s = sharedPreferences.edit().putString("User",token).apply()
+        sharedPreferences.edit().putString("User",token).apply()
     }
 
     override fun clearSavedToken() {
