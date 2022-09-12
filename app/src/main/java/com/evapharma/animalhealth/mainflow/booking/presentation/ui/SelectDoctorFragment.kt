@@ -19,6 +19,7 @@ import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModelX
 import com.evapharma.animalhealth.mainflow.booking.presentation.viewmodel.BookingViewModel
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 import com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedsFragment
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -99,13 +100,17 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
 
     override fun onBookAppointmentClicked(doctor: DoctorModel) {
         if(sharedPreferences.contains("User")) {
-            val bookAppointmentFragment = BookAppointmentFragment()
-            val bundle = Bundle()
-            bundle.putParcelable("doctor", doctor)
-            bookAppointmentFragment.arguments = bundle
-            requireActivity().supportFragmentManager.commit {
-                addToBackStack(this.toString())
-                replace(R.id.nav_container, bookAppointmentFragment)
+            if(doctor.nearestSlot != null) {
+                val bookAppointmentFragment = BookAppointmentFragment()
+                val bundle = Bundle()
+                bundle.putParcelable("doctor", doctor)
+                bookAppointmentFragment.arguments = bundle
+                requireActivity().supportFragmentManager.commit {
+                    addToBackStack(this.toString())
+                    replace(R.id.nav_container, bookAppointmentFragment)
+                }
+            }else{
+                Snackbar.make(view!!, "Dr. ${doctor.userName} Has No Reservations", Snackbar.LENGTH_SHORT).show()
             }
         }else{
             val intent = Intent(requireActivity() , AuthActivity::class.java)

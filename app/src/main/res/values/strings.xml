@@ -45,4 +45,5 @@
     <string name="upcoming">UpComing</string>
     <string name="previous_bookings">Previous Bookings</string>
     <string name="no_data_found">No Data Found</string>
+    <string name="refresh">Refresh</string>
 </resources>

@@ -43,7 +43,7 @@ class DoctorListAdapter(val onDoctorSelected: OnDoctorSelected) :
                 }"
             }catch (e:Exception){
                 e.toString()
-                timeTv.text = "UNKNOWN"
+                timeTv.text = "No Reservations"
             }
             specializationTv.text = doctor.specialization
             feesTv.text = "${doctor.fees} EGP"

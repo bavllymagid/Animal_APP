@@ -2,14 +2,12 @@ package com.evapharma.animalhealth.mainflow.booking.presentation.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.authflow.presentation.ui.AuthActivity
 import com.evapharma.animalhealth.authflow.presentation.viewmodel.AuthViewModel
@@ -30,9 +28,9 @@ class BookingsFragment : Fragment() {
 
 
     lateinit var binding: FragmentBookingsBinding
-    lateinit var bookingViewModel: BookingViewModel
-    lateinit var adapter:MyBookingsAdapter
-    lateinit var userViewModel:AuthViewModel
+    private lateinit var bookingViewModel: BookingViewModel
+    private lateinit var adapter:MyBookingsAdapter
+    private lateinit var userViewModel:AuthViewModel
     var bookingList = ArrayList<BookingModel>()
 
     override fun onCreateView(
@@ -95,7 +93,7 @@ class BookingsFragment : Fragment() {
     private fun getStartingSoon(){
         for(item in bookingList){
             if(DateConverter.timeComparator(item.date)){
-                ImageLoader.loadImageIntoImageView(item.doctor.image?:"",binding.profileImage2)
+                ImageLoader.loadImageIntoImageView(item.doctor.image,binding.profileImage2)
                 binding.NameTextview1.text = item.doctor.userName
                 binding.hintTextview2.text = item.doctor.specialization
                 binding.date.text = "${DateConverter.stringToMonth(item.date)}|${DateConverter.stringToTime(item.date)}"
