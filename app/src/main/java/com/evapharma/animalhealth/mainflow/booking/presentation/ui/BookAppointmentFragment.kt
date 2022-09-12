@@ -20,6 +20,7 @@ import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
 import com.evapharma.animalhealth.mainflow.booking.presentation.viewmodel.BookingViewModel
 import com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedsFragment
 import com.evapharma.animalhealth.mainflow.utils.DateConverter
+import com.evapharma.animalhealth.utils.ImageLoader
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -68,6 +69,8 @@ class BookAppointmentFragment : Fragment() {
                 }
             }
         }
+
+        ImageLoader.loadImageIntoImageView(doctor?.image?:"", binding.profileImage)
 
         calendar = Calendar.getInstance()
         if (doctor != null) {

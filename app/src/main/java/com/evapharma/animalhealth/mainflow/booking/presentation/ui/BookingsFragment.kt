@@ -16,6 +16,7 @@ import com.evapharma.animalhealth.mainflow.booking.domain.model.BookingModel
 import com.evapharma.animalhealth.mainflow.booking.presentation.adapters.MyBookingsAdapter
 import com.evapharma.animalhealth.mainflow.booking.presentation.viewmodel.BookingViewModel
 import com.evapharma.animalhealth.mainflow.utils.DateConverter
+import com.evapharma.animalhealth.utils.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -86,6 +87,7 @@ class BookingsFragment : Fragment() {
     private fun getStartingSoon(){
         for(item in bookingList){
             if(DateConverter.timeComparator(item.date)){
+                ImageLoader.loadImageIntoImageView(item.doctor.image?:"",binding.profileImage2)
                 binding.NameTextview1.text = item.doctor.userName
                 binding.hintTextview2.text = item.doctor.specialization
                 binding.date.text = "${DateConverter.stringToMonth(item.date)}|${DateConverter.stringToTime(item.date)}"

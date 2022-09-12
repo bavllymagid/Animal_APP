@@ -10,6 +10,7 @@ import com.evapharma.animalhealth.mainflow.booking.utils.DoctorListDiffUtils
 import com.evapharma.animalhealth.databinding.DoctorCardItemBinding
 import com.evapharma.animalhealth.mainflow.booking.domain.model.DoctorModel
 import com.evapharma.animalhealth.mainflow.utils.DateConverter
+import com.evapharma.animalhealth.utils.ImageLoader
 
 class DoctorListAdapter(val onDoctorSelected: OnDoctorSelected) :
     ListAdapter<DoctorModel, DoctorListAdapter.DoctorsViewHolder>(DoctorListDiffUtils()) {
@@ -35,7 +36,7 @@ class DoctorListAdapter(val onDoctorSelected: OnDoctorSelected) :
         val doctor = getItem(position)
         holder.binding.apply {
             doctorNameTv.text = doctor.userName
-//            profileImage.setImageBitmap(doctor.photo)
+            ImageLoader.loadImageIntoImageView(doctor.image?:"",profileImage)
             try{
                 timeTv.text = "${DateConverter.stringToMonth(doctor.nearestSlot.startAt)} ${
                     DateConverter.stringToTime(doctor.nearestSlot.startAt)

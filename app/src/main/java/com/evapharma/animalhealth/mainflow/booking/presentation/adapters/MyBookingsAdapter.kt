@@ -12,6 +12,7 @@ import com.evapharma.animalhealth.databinding.BookItemBinding
 import com.evapharma.animalhealth.mainflow.booking.domain.model.BookingModel
 import com.evapharma.animalhealth.mainflow.booking.utils.BookingDiffUtils
 import com.evapharma.animalhealth.mainflow.utils.DateConverter
+import com.evapharma.animalhealth.utils.ImageLoader
 
 class MyBookingsAdapter():ListAdapter<BookingModel,MyBookingsAdapter.BookingViewHolder>(BookingDiffUtils()) {
 
@@ -29,6 +30,6 @@ class MyBookingsAdapter():ListAdapter<BookingModel,MyBookingsAdapter.BookingView
         holder.binding.specialization.text = booking.doctor.specialization
         holder.binding.priceTv.text = booking.price.toString() + " EGP"
         holder.binding.statusTv.visibility = View.GONE
-        holder.binding.profileImage
+        ImageLoader.loadImageIntoImageView(booking.doctor.image?:"",holder.binding.profileImage)
     }
 }
