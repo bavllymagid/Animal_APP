@@ -57,7 +57,7 @@ class OtpFragment : Fragment() {
             }
             else{
                 if(num1 == "1" && num2 == "2" && num3 == "3" && num4 == "4" && num5 == "5" && num6 == "6"){
-                    if(log?.isEmpty() == true){
+                    if(log != "log"){
                         customDialog.registrationMsg.text = "Registration completed successfully!!"
                         customAlertDialog.show()
                         lifecycleScope.launch {

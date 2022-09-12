@@ -74,10 +74,14 @@ class BookingsFragment : Fragment() {
                     binding.noDataUpcoming.visibility = View.VISIBLE
                     binding.progressBar.visibility = View.GONE
                     binding.nestedScrollView.visibility = View.VISIBLE
+                    binding.cardView.visibility = View.GONE
+                    binding.noDataStartingSoon.visibility = View.VISIBLE
                 }
             }catch (e:Exception){
                 binding.progressBar.visibility = View.GONE
                 binding.nestedScrollView.visibility = View.VISIBLE
+                binding.cardView.visibility = View.GONE
+                binding.noDataStartingSoon.visibility = View.VISIBLE
                 e.toString()
             }
         }

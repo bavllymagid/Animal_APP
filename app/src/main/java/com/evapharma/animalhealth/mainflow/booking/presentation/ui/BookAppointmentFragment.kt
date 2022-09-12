@@ -181,12 +181,10 @@ class BookAppointmentFragment : Fragment() {
                     currentDay = list.max()
                     val dateFormatterMin = SimpleDateFormat("yyyy-MM-dd").parse(list[0])
                     val dateFormatterMax = SimpleDateFormat("yyyy-MM-dd").parse(list.max())
-                    binding.calendarView.apply {
-                        calendar.time = dateFormatterMin
-                        minDate = calendar.timeInMillis
-                        calendar.time = dateFormatterMax
-                        maxDate = calendar.timeInMillis
-                    }
+                    calendar.time = dateFormatterMin
+                    binding.calendarView.maxDate = calendar.timeInMillis
+                    calendar.time = dateFormatterMax
+                    binding.calendarView.minDate = calendar.timeInMillis
                     getDoctorTimes(doctor)
                 } else {
                     binding.calendarView.maxDate = System.currentTimeMillis()
