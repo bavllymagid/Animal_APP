@@ -42,5 +42,9 @@ class BookingRepositoryImpl @Inject constructor(val remoteDataSource: BookingRem
         return remoteDataSource.getPreviousBookings(id,pageNum)
     }
 
+    override suspend fun deleteLocal() {
+        localDataSource.deleteData()
+    }
+
 
 }

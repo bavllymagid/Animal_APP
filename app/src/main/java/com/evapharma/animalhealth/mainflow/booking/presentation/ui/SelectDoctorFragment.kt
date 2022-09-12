@@ -141,6 +141,4 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
     }
 
 
-
-
 }

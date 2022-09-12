@@ -162,7 +162,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/_220" />
+            android:src="@drawable/logo" />
 
         <TableRow
             android:layout_width="295dp"

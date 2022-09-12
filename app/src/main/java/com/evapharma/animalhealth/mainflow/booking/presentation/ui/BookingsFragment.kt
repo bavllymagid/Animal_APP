@@ -15,6 +15,7 @@ import com.evapharma.animalhealth.databinding.FragmentBookingsBinding
 import com.evapharma.animalhealth.mainflow.booking.domain.model.BookingModel
 import com.evapharma.animalhealth.mainflow.booking.presentation.adapters.MyBookingsAdapter
 import com.evapharma.animalhealth.mainflow.booking.presentation.viewmodel.BookingViewModel
+import com.evapharma.animalhealth.mainflow.utils.DateConverter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,6 +30,7 @@ class BookingsFragment : Fragment() {
     lateinit var bookingViewModel: BookingViewModel
     lateinit var adapter:MyBookingsAdapter
     lateinit var userViewModel:AuthViewModel
+    var bookingList = ArrayList<BookingModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,15 +52,25 @@ class BookingsFragment : Fragment() {
         return binding.root
     }
 
-    fun getUpComing(){
+    private fun getUpComing(){
         CoroutineScope(Dispatchers.Main).launch {
             try{
-                val list:ArrayList<BookingModel>
                 withContext(Dispatchers.IO){
-                    list = bookingViewModel.getUpComingBookings("Bearer ${userViewModel.getLocalToken()}") as ArrayList<BookingModel>
+                    bookingList = bookingViewModel.getUpComingBookings("Bearer ${userViewModel.getLocalToken()}") as ArrayList<BookingModel>
                 }
-                adapter.submitList(list)
+                if(bookingList.isNotEmpty()){
+                    getStartingSoon()
+                    adapter.submitList(bookingList)
+                    binding.progressBar.visibility = View.GONE
+                    binding.nestedScrollView.visibility = View.VISIBLE
+                }else{
+                    binding.noDataUpcoming.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                    binding.nestedScrollView.visibility = View.VISIBLE
+                }
             }catch (e:Exception){
+                binding.progressBar.visibility = View.GONE
+                binding.nestedScrollView.visibility = View.VISIBLE
                 e.toString()
             }
         }
@@ -69,6 +81,19 @@ class BookingsFragment : Fragment() {
             addToBackStack(this.toString())
             replace(R.id.nav_container, fragment)
         }
+    }
+
+    private fun getStartingSoon(){
+        for(item in bookingList){
+            if(DateConverter.timeComparator(item.date)){
+                binding.NameTextview1.text = item.doctor.userName
+                binding.hintTextview2.text = item.doctor.specialization
+                binding.date.text = "${DateConverter.stringToMonth(item.date)}|${DateConverter.stringToTime(item.date)}"
+                return
+            }
+        }
+        binding.cardView.visibility = View.GONE
+        binding.noDataStartingSoon.visibility = View.VISIBLE
     }
 
 }

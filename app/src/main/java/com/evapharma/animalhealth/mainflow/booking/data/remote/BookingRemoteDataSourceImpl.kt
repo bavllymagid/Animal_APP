@@ -1,6 +1,8 @@
 package com.evapharma.animalhealth.mainflow.booking.data.remote
 
 import com.evapharma.animalhealth.mainflow.booking.domain.model.*
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -19,13 +21,12 @@ class BookingRemoteDataSourceImpl @Inject constructor(private val api : BookingA
     }
 
     override suspend fun sendDoctorAppointment(token:String, appointment: AppointmentModel): Boolean {
-        val code =  api.sendDoctorAppointment(token,appointment).message()
-        return code == "Added Successfully"
+        var b = api.sendDoctorAppointment(token,appointment).body()?.isSuccess
+        var c = b
+        return c ?: false
     }
 
     override suspend fun getBookings(id: String): List<BookingModel> {
-        val list = api.getUpComingBookings(id).body()
-
         return api.getUpComingBookings(id).body() ?: ArrayList()
     }
 

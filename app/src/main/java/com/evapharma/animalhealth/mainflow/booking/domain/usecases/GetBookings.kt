@@ -9,8 +9,16 @@ import javax.inject.Inject
 
 class GetBookings @Inject constructor(val repository: BookingRepository) {
     suspend fun execute(id:String) : List<BookingModel>{
-        repository.cacheBookings(BookingToLocal.bookingToLocal(repository.getBookingsRemote(id)))
-        return LocalToBooking.localToBooking(repository.getMyBookings())
+        return try{
+            val tryList = BookingToLocal.bookingToLocal(repository.getBookingsRemote(id))
+            repository.deleteLocal()
+            repository.cacheBookings(tryList)
+            val list = LocalToBooking.localToBooking(repository.getMyBookings())
+            list
+        }catch (e:Exception){
+            val list = LocalToBooking.localToBooking(repository.getMyBookings())
+            list
+        }
     }
 
     suspend fun executePrev(id: String, pageNum:Int):BookingList? {

@@ -8,4 +8,5 @@ import com.evapharma.animalhealth.mainflow.booking.domain.model.BookingModel
 interface BookingLocalDataSource {
     suspend fun cacheBookings(bookingList: List<LocalBooking>)
     suspend fun getBookings() : List<LocalBooking>
+    suspend fun deleteData()
 }

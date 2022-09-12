@@ -86,7 +86,8 @@ class BookAppointmentFragment : Fragment() {
         binding.timeRc.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 binding.nextBtn.isEnabled = true
-                slotID = adapter.getTimeList()[position].slotId
+                val item = adapter.getTimeList()[position]
+                slotID = item.slotId
             }
 
 
@@ -126,10 +127,13 @@ class BookAppointmentFragment : Fragment() {
 
     private fun requestSent(doctor: DoctorModel): Boolean {
         CoroutineScope(Dispatchers.Main).launch {
-            try {
                 var success = false
                 withContext(Dispatchers.IO){
+                    try {
                     success = appointmentViewModel.bookAppointment("Bearer ${userViewModel.getLocalToken()}", AppointmentModel(slotID,doctor.doctorId))
+                    }catch (e:Exception){
+                        print("MYAPP ${e.message.toString()}")
+                    }
                 }
                 if(!success){
                     getDoctorDays(doctor)
@@ -142,17 +146,7 @@ class BookAppointmentFragment : Fragment() {
                 }else{
                     transferTo(FeedsFragment())
                 }
-            }catch (e:Exception){
-                print("MYAPP ${e.message.toString()}")
-                getDoctorDays(doctor)
-                binding.calenderCard.visibility = View.VISIBLE
-                binding.timeRc.visibility = View.GONE
-                binding.nextBtn.setImageResource(R.drawable.arrow)
-                binding.nextBtn.isEnabled = true
-                cnt = 0
-            }
         }
-
         return true
     }
 
@@ -168,12 +162,16 @@ class BookAppointmentFragment : Fragment() {
 
     private fun getDoctorDays(doctor: DoctorModel) {
         CoroutineScope(Dispatchers.Main).launch {
-            try {
-                var list: ArrayList<String>
+
+                var list = ArrayList<String>()
                 withContext(Dispatchers.IO) {
-                    list =
-                        DateConverter
-                            .listToStringDate(appointmentViewModel.getDoctorDays(doctor.doctorId) as ArrayList<String>)
+                    try {
+                        list =
+                            DateConverter
+                                .listToStringDate(appointmentViewModel.getDoctorDays(doctor.doctorId) as ArrayList<String>)
+                    } catch (e: Exception) {
+                       print("MyApp" + e.message.toString())
+                    }
                 }
                 if (list.isNotEmpty()) {
                     currentDay = list.max()
@@ -185,21 +183,16 @@ class BookAppointmentFragment : Fragment() {
                         calendar.time = dateFormatterMax
                         maxDate = calendar.timeInMillis
                     }
+                    getDoctorTimes(doctor)
                 } else {
                     binding.calendarView.maxDate = System.currentTimeMillis()
                     binding.calendarView.minDate = System.currentTimeMillis()
                     binding.nextBtn.isEnabled = false
                     Snackbar.make(view!!, "No Reservations Available", Snackbar.LENGTH_SHORT).show()
                 }
-                getDoctorTimes(doctor)
-            } catch (e: Exception) {
-                binding.calendarView.maxDate = System.currentTimeMillis()
-                binding.calendarView.minDate = System.currentTimeMillis()
-                binding.nextBtn.isEnabled = false
-                Snackbar.make(view!!, "No Reservations Available", Snackbar.LENGTH_SHORT).show()
             }
         }
-    }
+
 
     private fun getDoctorTimes(doctor: DoctorModel) {
         CoroutineScope(Dispatchers.Main).launch {

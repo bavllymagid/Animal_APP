@@ -1,9 +1,6 @@
 package com.evapharma.animalhealth.mainflow.booking.data.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.evapharma.animalhealth.mainflow.booking.data.local.model.LocalBooking
 import com.evapharma.animalhealth.mainflow.booking.data.mappers.LocalToBooking
 import com.evapharma.animalhealth.mainflow.booking.domain.model.BookingModel
@@ -15,4 +12,7 @@ interface BookingDao {
 
     @Query("select * from LocalBooking")
     suspend fun getBookings() : List<LocalBooking>
+
+    @Query("DELETE FROM LocalBooking")
+    suspend fun dropTable()
 }

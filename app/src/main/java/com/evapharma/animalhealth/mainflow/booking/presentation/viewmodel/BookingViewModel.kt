@@ -23,7 +23,6 @@ class BookingViewModel @Inject constructor(
 
     suspend fun getUpComingBookings(id:String):List<BookingModel>{
         return getBookings.execute(id)
-
     }
 
     suspend fun getDoctorDays(id:String):List<String>{

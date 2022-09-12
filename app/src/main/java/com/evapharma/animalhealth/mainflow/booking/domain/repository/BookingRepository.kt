@@ -13,4 +13,5 @@ interface BookingRepository {
     suspend fun cacheBookings(bookingList: List<LocalBooking>)
     suspend fun getMyBookings(): List<LocalBooking>
     suspend fun getPrevBookings(id:String, pageNum:Int): BookingList?
+    suspend fun deleteLocal()
 }

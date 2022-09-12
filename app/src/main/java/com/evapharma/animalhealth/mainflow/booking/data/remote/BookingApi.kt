@@ -2,6 +2,7 @@ package com.evapharma.animalhealth.mainflow.booking.data.remote
 
 import com.evapharma.animalhealth.mainflow.booking.domain.model.*
 import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -23,10 +24,10 @@ interface BookingApi {
     ): Response<List<DateTimeSlot>>
 
     @POST("Appointment/addAppointment")
-    suspend fun sendDoctorAppointment(
+     suspend fun sendDoctorAppointment(
         @Header("Authorization") authToken: String,
         @Body appointment: AppointmentModel
-    ): Response<String>
+    ): Response<BookResponseModel>
 
     @GET("Appointment/UpComingBooking")
     suspend fun getUpComingBookings(
