@@ -1,5 +1,7 @@
 package com.evapharma.animalhealth.mainflow.booking.presentation.ui
 
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
@@ -8,6 +10,7 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.evapharma.animalhealth.R
+import com.evapharma.animalhealth.authflow.presentation.ui.AuthActivity
 import com.evapharma.animalhealth.mainflow.booking.presentation.adapters.DoctorListAdapter
 import com.evapharma.animalhealth.mainflow.ApplicationActivity
 import com.evapharma.animalhealth.databinding.FragmentSelectDoctorBinding
@@ -21,6 +24,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
@@ -29,6 +33,8 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
     private lateinit var adapter: DoctorListAdapter
     lateinit var doctorViewModel:BookingViewModel
     lateinit var postsRequest: PostsRequest
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,13 +97,18 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
     }
 
     override fun onBookAppointmentClicked(doctor: DoctorModel) {
-        val bookAppointmentFragment = BookAppointmentFragment()
-        val bundle = Bundle()
-        bundle.putParcelable("doctor", doctor)
-        bookAppointmentFragment.arguments = bundle
-        requireActivity().supportFragmentManager.commit {
-            addToBackStack(this.toString())
-            replace(R.id.nav_container, bookAppointmentFragment)
+        if(sharedPreferences.contains("User")) {
+            val bookAppointmentFragment = BookAppointmentFragment()
+            val bundle = Bundle()
+            bundle.putParcelable("doctor", doctor)
+            bookAppointmentFragment.arguments = bundle
+            requireActivity().supportFragmentManager.commit {
+                addToBackStack(this.toString())
+                replace(R.id.nav_container, bookAppointmentFragment)
+            }
+        }else{
+            val intent = Intent(requireActivity() , AuthActivity::class.java)
+            startActivity(intent)
         }
     }
 
