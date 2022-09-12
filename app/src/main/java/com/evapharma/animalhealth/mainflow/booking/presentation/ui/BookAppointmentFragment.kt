@@ -147,6 +147,7 @@ class BookAppointmentFragment : Fragment() {
                     cnt = 0
                     Snackbar.make(view!!,"Something went wrong Please try again later", Snackbar.LENGTH_LONG).show()
                 }else{
+                    Snackbar.make(view!!,"Reservation Succeeded", Snackbar.LENGTH_LONG).show()
                     transferTo(FeedsFragment())
                 }
         }
@@ -212,6 +213,7 @@ class BookAppointmentFragment : Fragment() {
                     binding.nextBtn.isEnabled = true
                 } else {
                     binding.nextBtn.isEnabled = false
+                    Snackbar.make(view!!, "Day $currentDay No Reservations Available", Snackbar.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 binding.nextBtn.isEnabled = false
