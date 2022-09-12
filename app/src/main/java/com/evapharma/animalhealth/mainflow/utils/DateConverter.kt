@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
+import kotlin.math.abs
 
 object DateConverter {
     @SuppressLint("SimpleDateFormat")
@@ -68,16 +69,15 @@ object DateConverter {
 
     @SuppressLint("SimpleDateFormat")
     fun stringToMonth(date: String):String{
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-            .parse(date)
-        println("Date$dateFormat")
-        val tk = StringTokenizer(dateFormat?.toString() ?: "a b c d")
-        val day = tk.nextToken()
-        val month = tk.nextToken()
-        val dayCalNum = tk.nextToken()
-        val time = tk.nextToken()
-
         return try {
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+                .parse(date)
+            println("Date$dateFormat")
+            val tk = StringTokenizer(dateFormat?.toString() ?: "a b c d")
+            val day = tk.nextToken()
+            val month = tk.nextToken()
+            val dayCalNum = tk.nextToken()
+            val time = tk.nextToken()
             return "$dayCalNum $month"
         } catch (e: ParseException) {
             "Time Not Found"
@@ -87,8 +87,16 @@ object DateConverter {
     @SuppressLint("SimpleDateFormat")
     fun stringToTime(date: String): String {
         return try {
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-                .parse(date)
+            var dateFormat = Date()
+
+            try {
+                dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                    .parse(date) as Date
+            }catch (e:Exception){
+                dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                    .parse(date) as Date
+            }
+
             println("Date$dateFormat")
             val tk = StringTokenizer(dateFormat.toString())
             val day = tk.nextToken()
@@ -106,4 +114,19 @@ object DateConverter {
             "Time Not Found"
         }
     }
+
+    @SuppressLint("SimpleDateFormat")
+    fun timeComparator(date: String): Boolean {
+        return try {
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                    .parse(date)
+            val nowTime = Date()
+            val dateDiff = nowTime.time - dateFormat!!.time
+            val minute: Long = TimeUnit.MILLISECONDS.toMinutes(dateDiff)
+            return abs(minute) <= 10
+        } catch (e: ParseException) {
+            false
+        }
+    }
+
 }

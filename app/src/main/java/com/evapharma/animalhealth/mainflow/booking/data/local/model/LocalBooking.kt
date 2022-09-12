@@ -5,12 +5,12 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class LocalBooking(
+    @PrimaryKey
     val appointmentId: Int,
     val date: String,
     val doctor: String,
     val isCancelled: Boolean,
     val isFollowUp: Boolean,
     val price: Int,
-    @PrimaryKey
     val slotId: Int
 )

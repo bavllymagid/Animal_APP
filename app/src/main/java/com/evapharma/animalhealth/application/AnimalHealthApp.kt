@@ -13,8 +13,6 @@ class AnimalHealthApp : Application() {
     }
 
     companion object {
-
         lateinit  var appContext: Context
-
     }
 }

@@ -13,4 +13,8 @@ class BookingLocalDataSourceImpl @Inject constructor(private val db:BookingDao) 
         return db.getBookings()
     }
 
+    override suspend fun deleteData() {
+        db.dropTable()
+    }
+
 }

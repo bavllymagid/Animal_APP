@@ -1,6 +1,5 @@
 package com.evapharma.animalhealth.mainflow.booking.data.repository
 
-import android.graphics.Bitmap
 import com.evapharma.animalhealth.mainflow.booking.data.local.BookingLocalDataSource
 import com.evapharma.animalhealth.mainflow.booking.data.local.model.LocalBooking
 import com.evapharma.animalhealth.mainflow.booking.data.remote.BookingRemoteDataSource
@@ -26,8 +25,8 @@ class BookingRepositoryImpl @Inject constructor(val remoteDataSource: BookingRem
         return remoteDataSource.sendDoctorAppointment(token,appointment)
     }
 
-    override suspend fun getBookingsRemote(id: String, pageNum: Int): List<BookingModel> {
-        return remoteDataSource.getBookings(id, pageNum)
+    override suspend fun getBookingsRemote(id: String): List<BookingModel> {
+        return remoteDataSource.getBookings(id)
     }
 
 
@@ -38,5 +37,14 @@ class BookingRepositoryImpl @Inject constructor(val remoteDataSource: BookingRem
     override suspend fun getMyBookings(): List<LocalBooking> {
         return localDataSource.getBookings()
     }
+
+    override suspend fun getPrevBookings(id: String, pageNum: Int): BookingList? {
+        return remoteDataSource.getPreviousBookings(id,pageNum)
+    }
+
+    override suspend fun deleteLocal() {
+        localDataSource.deleteData()
+    }
+
 
 }

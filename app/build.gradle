@@ -95,6 +95,13 @@ dependencies {
     //coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
 
+    //read more text
+    implementation 'kr.co.prnd:readmore-textview:1.0.0'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+
 
 
 }

@@ -8,10 +8,7 @@ object BookingToLocal {
     fun bookingToLocal(booking: List<BookingModel>) : List<LocalBooking>{
         val list = ArrayList<LocalBooking>()
         for(item in booking){
-            list.add(
-                LocalBooking(item.appointmentId, item.date, objectToJson(item.doctor), item.isCancelled,
-                item.isFollowUp,item.price,item.slotId)
-            )
+            list.add( LocalBooking(item.appointmentId, item.date, objectToJson(item.doctor), item.isCancelled, item.isFollowUp,item.price,item.slotId))
         }
         return list
     }

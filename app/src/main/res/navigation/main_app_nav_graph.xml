@@ -9,7 +9,11 @@
         android:id="@+id/bookingsFragment"
         android:name="com.evapharma.animalhealth.mainflow.booking.presentation.ui.ui.BookingsFragment"
         android:label="fragment_bookings"
-        tools:layout="@layout/fragment_bookings" />
+        tools:layout="@layout/fragment_bookings" >
+        <action
+            android:id="@+id/action_bookingsFragment_to_prevBookingFragment"
+            app:destination="@id/prevBookingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/feedsFragment"
         android:name="com.evapharma.animalhealth.mainflow.feed.presentation.ui.FeedsFragment"
@@ -53,4 +57,9 @@
             android:id="@+id/action_feedSearchFragment_to_feedsFragment"
             app:destination="@id/feedsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/prevBookingFragment"
+        android:name="com.evapharma.animalhealth.mainflow.booking.presentation.ui.PrevBookingFragment"
+        android:label="fragment_prev_booking"
+        tools:layout="@layout/fragment_prev_booking" />
 </navigation>

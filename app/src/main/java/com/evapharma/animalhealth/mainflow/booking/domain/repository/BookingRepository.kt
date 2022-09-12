@@ -9,7 +9,9 @@ interface BookingRepository {
     suspend fun getDoctorDays(id:String): List<String>
     suspend fun getDoctorsTime(id:String, day:String): List<DateTimeSlot>
     suspend fun sendDoctorAppointment(token:String, appointment: AppointmentModel) : Boolean
-    suspend fun getBookingsRemote(id:String, pageNum:Int) : List<BookingModel>
+    suspend fun getBookingsRemote(id:String) : List<BookingModel>
     suspend fun cacheBookings(bookingList: List<LocalBooking>)
     suspend fun getMyBookings(): List<LocalBooking>
+    suspend fun getPrevBookings(id:String, pageNum:Int): BookingList?
+    suspend fun deleteLocal()
 }
