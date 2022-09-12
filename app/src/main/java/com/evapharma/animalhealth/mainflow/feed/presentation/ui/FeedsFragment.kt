@@ -126,7 +126,7 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
     override fun onItemClicked(feedObject: Feed) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val article = feedViewModel.getArticleBody(feedObject.postId)
+                val article = feedViewModel.getArticleBody(feedObject.id)
                 withContext(Dispatchers.Main){
                     binding.initBar.visibility = View.VISIBLE
                     if(article != null) {

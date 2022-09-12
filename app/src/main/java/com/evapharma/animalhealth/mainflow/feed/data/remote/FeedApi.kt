@@ -17,7 +17,7 @@ interface FeedApi {
     @GET("Search/Search")
     suspend fun getPostsByKeyWord(@Query("KeyWord") keyWord:String, @Query("xPage") pageNum: Int): Response<FeedX>
 
-    @GET("HomePage/DisplayArticleDetails?Id=1")
+    @GET("HomePage/DisplayArticleDetails")
     suspend fun getArticleById(@Query("Id") id:Int) : Response<Article>
     
     @GET("{url}")

@@ -30,7 +30,7 @@ class FeedDetailsFragment : Fragment() {
         val post = arguments?.getParcelable<Article>("arc")
 
 
-        binding.title.text = post?.title ?: "Title"
+        binding.title.text = post?.heading ?: "Title"
         binding.date.text = DateConverter.covertTimeToText(post?.publishDate)
 
         binding.articleBody.text = post?.body ?: "Body"

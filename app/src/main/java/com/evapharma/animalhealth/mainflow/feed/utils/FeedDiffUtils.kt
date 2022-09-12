@@ -5,7 +5,7 @@ import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 
 class FeedDiffUtils :DiffUtil.ItemCallback<Feed>(){
     override fun areItemsTheSame(oldItem: Feed, newItem: Feed): Boolean {
-        return oldItem.postId == newItem.postId
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: Feed, newItem: Feed): Boolean {
