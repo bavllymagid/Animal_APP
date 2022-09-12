@@ -1,5 +1,6 @@
 package com.evapharma.animalhealth.mainflow.booking.presentation.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.evapharma.animalhealth.R
+import com.evapharma.animalhealth.authflow.presentation.ui.AuthActivity
 import com.evapharma.animalhealth.authflow.presentation.viewmodel.AuthViewModel
 import com.evapharma.animalhealth.databinding.FragmentBookingsBinding
 import com.evapharma.animalhealth.mainflow.booking.domain.model.BookingModel
@@ -46,6 +48,12 @@ class BookingsFragment : Fragment() {
 
         binding.previousBtn.setOnClickListener{
             transferTo(PrevBookingFragment())
+        }
+
+        binding.signOutBtn.setOnClickListener{
+            val intent = Intent(requireActivity(), AuthActivity::class.java)
+            startActivity(intent)
+            requireActivity().finishAffinity()
         }
 
         getUpComing()

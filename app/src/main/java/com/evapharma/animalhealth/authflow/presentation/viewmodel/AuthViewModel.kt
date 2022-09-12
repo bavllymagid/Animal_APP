@@ -30,4 +30,8 @@ class AuthViewModel @Inject constructor(private val register: Register,
     suspend fun getLocalToken():String{
         return getLocalToken.execute()
     }
+
+    fun clearToken(){
+        getLocalToken.clearExecute()
+    }
 }

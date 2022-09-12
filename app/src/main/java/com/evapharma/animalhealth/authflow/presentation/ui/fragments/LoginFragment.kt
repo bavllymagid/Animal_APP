@@ -33,6 +33,7 @@ class LoginFragment : Fragment() {
         //inflating login fragment
         binding = FragmentLoginBinding.inflate(layoutInflater)
         loginViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
+        loginViewModel.clearToken()
         //Going From The login Screen To the Home Screen Without account
         binding.SkipBtn.setOnClickListener()
         {

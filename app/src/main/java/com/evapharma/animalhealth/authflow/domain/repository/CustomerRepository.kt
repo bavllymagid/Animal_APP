@@ -9,4 +9,5 @@ interface CustomerRepository {
     suspend fun registerCustomer(customer: CustomerModel):RegResponseModel?
     suspend fun getTokenRemote(user: LoginModel): String
     suspend fun getLocalToken():String
+    fun clearToken()
 }

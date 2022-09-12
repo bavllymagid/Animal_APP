@@ -7,4 +7,8 @@ class GetLocalToken @Inject constructor(val repository: CustomerRepository) {
     suspend fun execute():String{
         return repository.getLocalToken()
     }
+
+    fun clearExecute(){
+        repository.clearToken()
+    }
 }

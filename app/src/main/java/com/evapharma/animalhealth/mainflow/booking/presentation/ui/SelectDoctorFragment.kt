@@ -31,7 +31,7 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
 
     lateinit var binding: FragmentSelectDoctorBinding
     private lateinit var adapter: DoctorListAdapter
-    lateinit var doctorViewModel:BookingViewModel
+    private lateinit var doctorViewModel:BookingViewModel
     lateinit var postsRequest: PostsRequest
     @Inject
     lateinit var sharedPreferences: SharedPreferences
@@ -48,7 +48,7 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
         adapter = DoctorListAdapter(this)
 
         getDoctors(false,"")
-        //pagination remaining
+
         binding.doctorsList.adapter = adapter
 
         binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -69,6 +69,7 @@ class SelectDoctorFragment : Fragment() , DoctorListAdapter.OnDoctorSelected{
             }
         })
 
+        //pagination
         binding.doctorsList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)

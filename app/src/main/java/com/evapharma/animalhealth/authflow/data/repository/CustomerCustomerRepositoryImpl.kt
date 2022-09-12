@@ -26,5 +26,9 @@ class CustomerCustomerRepositoryImpl @Inject constructor(private val remoteDataS
         return localDataSource.getCurrentUserToken()
     }
 
+    override fun clearToken() {
+        localDataSource.clearSavedToken()
+    }
+
 
 }
