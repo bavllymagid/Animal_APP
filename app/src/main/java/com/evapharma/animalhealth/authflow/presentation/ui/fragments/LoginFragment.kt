@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.evapharma.animalhealth.R
@@ -104,9 +105,13 @@ class LoginFragment : Fragment() {
                     if (authToken == "") {
                         Snackbar.make(view!!, "The Account is not found", Snackbar.LENGTH_LONG).show()
                     } else {
-                        val intent = Intent(context?.applicationContext, ApplicationActivity::class.java)
-                        startActivity(intent)
-                        requireActivity().finishAffinity()
+                        val bundle = Bundle()
+                        bundle.putString("log","log")
+                        val fragment = OtpFragment()
+                        fragment.arguments = bundle
+                        requireActivity().supportFragmentManager.commit {
+                            replace(R.id.fragmentContainerView, fragment)
+                        }
                     }
 
                 }
