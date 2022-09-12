@@ -13,6 +13,7 @@ import com.evapharma.animalhealth.databinding.FeedItemBinding
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.utils.FeedDiffUtils
 import com.evapharma.animalhealth.mainflow.utils.DateConverter
+import com.evapharma.animalhealth.utils.ImageLoader
 
 class SearchFeedAdapter(private val onItemSelected: OnItemSelected) : ListAdapter<Feed, SearchFeedAdapter.FeedViewHolder>(
     FeedDiffUtils()
@@ -34,24 +35,31 @@ class SearchFeedAdapter(private val onItemSelected: OnItemSelected) : ListAdapte
 
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
         val post = getItem(position)
-            holder.binding.apply {
-                if(post.category == "Article"){
-                    titleTv.text = post.authorName
-                    body.visibility = View.GONE
-                }else{
-                    titleTv.text = post.authorName
-                    body.text = post.text
-                    body.visibility = View.VISIBLE
+        holder.binding.apply {
+            if (post.category == "Article") {
+                postImg.visibility = View.VISIBLE
+                titleTv.text = post.authorName
+                body.visibility = View.GONE
+                ImageLoader.loadImageIntoImageView(post.image ?: "", postImg)
+            } else {
+                titleTv.text = post.authorName
+                body.text = post.text
+                body.visibility = View.VISIBLE
+                if (post.image != null) {
+                    postImg.visibility = View.VISIBLE
+                    ImageLoader.loadImageIntoImageView(post.image, postImg)
+                } else {
+                    postImg.visibility = View.GONE
                 }
-                postImg.setImageBitmap(BitmapFactory.decodeResource(AnimalHealthApp.appContext.resources, R.drawable.doctor))
-                date.text = DateConverter.covertTimeToText(post.publishDate)
             }
-            holder.itemView.setOnClickListener{
-                if(post.category == "Article"){
-                    onItemSelected.onItemClicked(post)
-                    setClickable(holder.itemView)
-                }
+            date.text = DateConverter.covertTimeToText(post.publishDate)
+        }
+        holder.itemView.setOnClickListener {
+            if (post.category == "Article") {
+                onItemSelected.onItemClicked(post)
+                setClickable(holder.itemView)
             }
+        }
     }
 
     private fun setClickable(view: View?) {

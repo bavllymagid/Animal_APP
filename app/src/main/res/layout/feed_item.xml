@@ -14,7 +14,7 @@
         app:cardElevation="10dp"
         app:cardMaxElevation="12dp"
         app:cardUseCompatPadding="true"
-        app:cardPreventCornerOverlap="false"
+        app:cardPreventCornerOverlap="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -62,7 +62,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/title_tv"
                 app:readMoreColor="@color/dark_blue"
                 app:readMoreMaxLine="2"
-                app:readMoreText="read more..."/>
+                app:readMoreText="read more..."
+                android:paddingBottom="10dp"/>
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/post_img"

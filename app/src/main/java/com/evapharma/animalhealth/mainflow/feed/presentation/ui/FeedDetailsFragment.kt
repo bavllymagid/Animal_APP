@@ -13,6 +13,7 @@ import com.evapharma.animalhealth.mainflow.feed.domain.model.Article
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.ReferencesAdapter
 import com.evapharma.animalhealth.mainflow.utils.DateConverter
+import com.evapharma.animalhealth.utils.ImageLoader
 import java.util.*
 
 class FeedDetailsFragment : Fragment() {
@@ -33,6 +34,8 @@ class FeedDetailsFragment : Fragment() {
         binding.date.text = DateConverter.covertTimeToText(post?.publishDate)
 
         binding.articleBody.text = post?.body ?: "Body"
+
+        ImageLoader.loadImageIntoImageView(post?.image?:"" , binding.image)
 
         binding.backBtn.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
