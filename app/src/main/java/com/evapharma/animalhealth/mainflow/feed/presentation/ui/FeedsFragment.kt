@@ -134,7 +134,6 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
                     }else{
                         binding.initBar.visibility = View.GONE
                         Snackbar.make(view!!, "Something Went Wrong", Snackbar.LENGTH_SHORT).show()
-                        binding.refresh.isRefreshing = true
                     }
                 }
             }catch (e:Exception){

@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.databinding.FragmentFeedSearchBinding
 import com.evapharma.animalhealth.mainflow.ApplicationActivity
+import com.evapharma.animalhealth.mainflow.feed.domain.model.Article
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.domain.model.PostsRequest
 import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.SearchFeedAdapter
 import com.evapharma.animalhealth.mainflow.feed.presentation.viewmodel.FeedViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +33,7 @@ class FeedSearchFragment : Fragment(), SearchFeedAdapter.OnItemSelected {
     lateinit var adapter: SearchFeedAdapter
     private lateinit var feedViewModel: FeedViewModel
     lateinit var post: PostsRequest
+    var searchList = ArrayList<Feed>()
 
 
 
@@ -55,15 +58,18 @@ class FeedSearchFragment : Fragment(), SearchFeedAdapter.OnItemSelected {
         binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 binding.searchData.visibility = View.INVISIBLE
+                binding.initBar.visibility = View.VISIBLE
                 post.keyword = binding.searchBar.query.toString()
                 CoroutineScope(Dispatchers.IO).launch {
                     val list = getResponse()
                     withContext(Dispatchers.Main) {
                         binding.searchBar.clearFocus()
-                        adapter.submitList(list)
-                        if(list.isEmpty()){
+                        adapter.submitList(searchList)
+                        binding.initBar.visibility = View.GONE
+                        if(searchList.isEmpty()){
                             binding.searchData.text = "No Data To Be Displayed"
                             binding.searchData.visibility = View.VISIBLE
+                            binding.initBar.visibility = View.GONE
                         }
                     }
                 }
@@ -105,7 +111,7 @@ class FeedSearchFragment : Fragment(), SearchFeedAdapter.OnItemSelected {
         return binding.root
     }
 
-    private fun transferTo(fragment: Fragment, item: Feed? = null) {
+    private fun transferTo(fragment: Fragment, item: Article? = null) {
         val bundle = Bundle()
         bundle.putParcelable("arc", item)
         fragment.arguments = bundle
@@ -115,7 +121,22 @@ class FeedSearchFragment : Fragment(), SearchFeedAdapter.OnItemSelected {
     }
 
     override fun onItemClicked(feedObject: Feed) {
-        transferTo(FeedDetailsFragment(), feedObject)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val article = feedViewModel.getArticleBody(feedObject.id)
+                withContext(Dispatchers.Main){
+                    binding.initBar.visibility = View.VISIBLE
+                    if(article != null) {
+                        transferTo(FeedDetailsFragment(), article)
+                    }else{
+                        binding.initBar.visibility = View.GONE
+                        Snackbar.make(view!!, "Something Went Wrong", Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+            }catch (e:Exception){
+                Snackbar.make(view!!, "Something Went Wrong", Snackbar.LENGTH_SHORT).show()
+            }
+        }
     }
 
     suspend fun paginate(): ArrayList<Feed> {
@@ -134,19 +155,17 @@ class FeedSearchFragment : Fragment(), SearchFeedAdapter.OnItemSelected {
         return list
     }
 
-    suspend fun getResponse(): ArrayList<Feed>{
-        var list = ArrayList<Feed>()
+    suspend fun getResponse(){
         try {
             val response = feedViewModel.getSearchResult(post)
             if (response != null) {
-                list = response.articlesPosts as ArrayList<Feed>
+                searchList = response.articlesPosts as ArrayList<Feed>
                 post.page = response.currentPage
                 post.maxPage = response.totalPages
             }
         }catch (e: Exception) {
             println(e.message.toString())
         }
-        return list
     }
 
 }

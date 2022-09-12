@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.databinding.FragmentFeedDetailsBinding
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Article
@@ -38,7 +39,9 @@ class FeedDetailsFragment : Fragment() {
         ImageLoader.loadImageIntoImageView(post?.image?:"" , binding.image)
 
         binding.backBtn.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+            requireActivity().supportFragmentManager.commit {
+                replace(R.id.nav_container, FeedsFragment())
+            }
         }
 
 
