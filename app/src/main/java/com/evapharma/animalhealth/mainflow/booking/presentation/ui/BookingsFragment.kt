@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import com.evapharma.animalhealth.R
@@ -53,6 +54,14 @@ class BookingsFragment : Fragment() {
             startActivity(intent)
             requireActivity().finishAffinity()
         }
+
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            })
 
         getUpComing()
 
