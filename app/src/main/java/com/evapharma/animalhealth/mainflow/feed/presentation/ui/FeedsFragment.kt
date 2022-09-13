@@ -119,6 +119,12 @@ class FeedsFragment : Fragment(), FeedAdapter.OnItemSelected {
         fragment.arguments = bundle
         requireActivity().supportFragmentManager.commit {
             addToBackStack(this.toString())
+            setCustomAnimations(
+                R.anim.slide_down,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_up
+            )
             replace(R.id.nav_container, fragment)
         }
     }

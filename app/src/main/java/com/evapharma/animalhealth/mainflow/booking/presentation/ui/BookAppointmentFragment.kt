@@ -157,6 +157,12 @@ class BookAppointmentFragment : Fragment() {
 
     private fun transferTo(fragment: Fragment) {
         requireActivity().supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.slide_down,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_up
+            )
             replace(R.id.nav_container, fragment)
         }
 
