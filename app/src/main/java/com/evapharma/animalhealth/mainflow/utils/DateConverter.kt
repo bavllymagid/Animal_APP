@@ -122,7 +122,7 @@ object DateConverter {
                     .parse(date)
             val nowTime = Date()
             val dateDiff = nowTime.time - dateFormat!!.time
-            val minute: Long = TimeUnit.MILLISECONDS.toMinutes(dateDiff)
+            var minute: Long = TimeUnit.MILLISECONDS.toMinutes(dateDiff)
             return abs(minute) <= 10
         } catch (e: ParseException) {
             false

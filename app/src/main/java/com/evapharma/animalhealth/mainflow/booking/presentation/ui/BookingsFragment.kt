@@ -101,17 +101,24 @@ class BookingsFragment : Fragment() {
     }
 
     private fun getStartingSoon(){
+        var found = 0
         for(item in bookingList){
             if(DateConverter.timeComparator(item.date)){
-                ImageLoader.loadImageIntoImageView(item.doctor.image,binding.profileImage2)
+                ImageLoader.loadImageIntoImageView(item.doctor.image?:"",binding.profileImage2)
                 binding.NameTextview1.text = item.doctor.userName
                 binding.hintTextview2.text = item.doctor.specialization
                 binding.date.text = "${DateConverter.stringToMonth(item.date)}|${DateConverter.stringToTime(item.date)}"
-                return
+                found = 1
+                bookingList.remove(item)
+                binding.cardView.visibility = View.VISIBLE
+                binding.noDataStartingSoon.visibility = View.INVISIBLE
+                break
             }
         }
-        binding.cardView.visibility = View.INVISIBLE
-        binding.noDataStartingSoon.visibility = View.VISIBLE
+        if(found == 0){
+            binding.cardView.visibility = View.INVISIBLE
+            binding.noDataStartingSoon.visibility = View.VISIBLE
+        }
     }
 
 
