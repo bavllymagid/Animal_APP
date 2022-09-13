@@ -71,7 +71,7 @@ class BookingsFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                     binding.nestedScrollView.visibility = View.VISIBLE
                 }else{
-                    binding.noDataUpcoming.visibility = View.VISIBLE
+//                    binding.noDataUpcoming.visibility = View.VISIBLE
                     binding.progressBar.visibility = View.GONE
                     binding.nestedScrollView.visibility = View.VISIBLE
                     binding.cardView.visibility = View.GONE
@@ -110,8 +110,10 @@ class BookingsFragment : Fragment() {
                 return
             }
         }
-        binding.cardView.visibility = View.GONE
+        binding.cardView.visibility = View.INVISIBLE
         binding.noDataStartingSoon.visibility = View.VISIBLE
     }
+
+
 
 }

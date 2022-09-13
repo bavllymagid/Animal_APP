@@ -84,6 +84,7 @@ class BookAppointmentFragment : Fragment() {
             if (doctor != null) {
                 getDoctorTimes(doctor)
             }
+            binding.timeTv.text = currentDay
         }
 
         binding.timeRc.onItemClickListener =
@@ -114,6 +115,7 @@ class BookAppointmentFragment : Fragment() {
 
         binding.apply {
             doctorNameTv.text = doctor?.userName
+            specializationTv2.text = doctor?.specialization
             timeTv.text = DateConverter.stringToDate(doctor?.nearestSlot?.startAt ?: "")
         }
 
@@ -184,12 +186,11 @@ class BookAppointmentFragment : Fragment() {
                     }
                 }
                 if (list.isNotEmpty()) {
-                    currentDay = list.max()
                     val dateFormatterMin = SimpleDateFormat("yyyy-MM-dd").parse(list[0])
                     val dateFormatterMax = SimpleDateFormat("yyyy-MM-dd").parse(list.max())
-                    calendar.time = dateFormatterMin
-                    binding.calendarView.maxDate = calendar.timeInMillis
                     calendar.time = dateFormatterMax
+                    binding.calendarView.maxDate = calendar.timeInMillis
+                    calendar.time = dateFormatterMin
                     binding.calendarView.minDate = calendar.timeInMillis
                     getDoctorTimes(doctor)
                 } else {

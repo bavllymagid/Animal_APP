@@ -64,7 +64,10 @@ class MainActivity : AppCompatActivity() {
                     val mIntent = Intent(applicationContext, ApplicationActivity::class.java)
                     startActivity(mIntent)
                     finishAffinity()
-                } else {
+                }else if(newToken == "404"){
+                    throw Throwable()
+                }
+                else {
                     getSharedPreferences("User", MODE_PRIVATE).edit().clear().apply()
                     val mIntent = Intent(applicationContext, AuthActivity::class.java)
                     startActivity(mIntent)
