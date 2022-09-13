@@ -186,6 +186,7 @@ class BookAppointmentFragment : Fragment() {
                     }
                 }
                 if (list.isNotEmpty()) {
+                    currentDay = list[0]
                     val dateFormatterMin = SimpleDateFormat("yyyy-MM-dd").parse(list[0])
                     val dateFormatterMax = SimpleDateFormat("yyyy-MM-dd").parse(list.max())
                     calendar.time = dateFormatterMax
