@@ -107,7 +107,7 @@ class BookingsFragment : Fragment() {
                 ImageLoader.loadImageIntoImageView(item.doctor.image?:"",binding.profileImage2)
                 binding.NameTextview1.text = item.doctor.userName
                 binding.hintTextview2.text = item.doctor.specialization
-                binding.date.text = "${DateConverter.stringToMonth(item.date)}|${DateConverter.stringToTime(item.date)}"
+                binding.date.text = "${DateConverter.stringToMonth(item.date)} | ${DateConverter.stringToTime(item.date)}"
                 found = 1
                 bookingList.remove(item)
                 binding.cardView.visibility = View.VISIBLE
