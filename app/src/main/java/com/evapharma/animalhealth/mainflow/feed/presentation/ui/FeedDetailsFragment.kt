@@ -6,10 +6,14 @@ import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.databinding.FragmentFeedDetailsBinding
+import com.evapharma.animalhealth.mainflow.booking.presentation.ui.SelectDoctorFragment
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Article
 import com.evapharma.animalhealth.mainflow.feed.domain.model.Feed
 import com.evapharma.animalhealth.mainflow.feed.presentation.adapters.ReferencesAdapter
@@ -46,9 +50,27 @@ class FeedDetailsFragment : Fragment() {
                     R.anim.fade_in,
                     R.anim.slide_up
                 )
+                requireActivity().supportFragmentManager.popBackStack()
                 replace(R.id.nav_container, FeedsFragment())
             }
         }
+
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().supportFragmentManager.commit {
+                        setCustomAnimations(
+                            R.anim.slide_down,
+                            R.anim.fade_out,
+                            R.anim.fade_in,
+                            R.anim.slide_up
+                        )
+                        requireActivity().supportFragmentManager.popBackStack()
+                        replace(R.id.nav_container, FeedsFragment())
+                    }
+                }
+            })
 
 
        val  cardView = binding.baseCardview
