@@ -1,12 +1,14 @@
 package com.evapharma.animalhealth.mainflow.booking.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.evapharma.animalhealth.mainflow.booking.domain.model.*
 import com.evapharma.animalhealth.mainflow.booking.domain.usecases.BookAnAppointment
 import com.evapharma.animalhealth.mainflow.booking.domain.usecases.GetDoctorList
 import com.evapharma.animalhealth.mainflow.booking.domain.usecases.GetDoctorsAvailDateTime
 import com.evapharma.animalhealth.mainflow.booking.domain.usecases.GetBookings
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,5 +41,11 @@ class BookingViewModel @Inject constructor(
 
     suspend fun getPrevBookings(id:String, pageNum: Int):BookingList?{
         return getBookings.executePrev(id,pageNum)
+    }
+
+    fun dropDatabase(){
+        viewModelScope.launch {
+            getBookings.dropDatabase()
+        }
     }
 }

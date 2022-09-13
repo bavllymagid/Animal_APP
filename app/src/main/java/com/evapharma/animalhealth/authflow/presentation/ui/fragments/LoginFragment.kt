@@ -14,6 +14,7 @@ import com.evapharma.animalhealth.authflow.domain.model.LoginModel
 import com.evapharma.animalhealth.authflow.presentation.viewmodel.AuthViewModel
 import com.evapharma.animalhealth.databinding.FragmentLoginBinding
 import com.evapharma.animalhealth.mainflow.ApplicationActivity
+import com.evapharma.animalhealth.mainflow.booking.presentation.viewmodel.BookingViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -25,6 +26,7 @@ import kotlinx.coroutines.withContext
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var loginViewModel: AuthViewModel
+    lateinit var deleteViewModel: BookingViewModel
     private var authToken = ""
 
     override fun onCreateView(
@@ -34,7 +36,9 @@ class LoginFragment : Fragment() {
         //inflating login fragment
         binding = FragmentLoginBinding.inflate(layoutInflater)
         loginViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
+        deleteViewModel = ViewModelProvider(this)[BookingViewModel::class.java]
         loginViewModel.clearToken()
+        deleteViewModel.dropDatabase()
         //Going From The login Screen To the Home Screen Without account
         binding.SkipBtn.setOnClickListener()
         {

@@ -8,14 +8,12 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.evapharma.animalhealth.R
 import com.evapharma.animalhealth.authflow.presentation.ui.AuthActivity
 import com.evapharma.animalhealth.databinding.ActivityMainBinding
-import com.evapharma.animalhealth.databinding.CustomRegDialogBinding
 import com.evapharma.animalhealth.databinding.SomethingWentWrongAlertLayoutBinding
 import com.evapharma.animalhealth.mainflow.ApplicationActivity
+import com.evapharma.animalhealth.mainflow.booking.presentation.viewmodel.BookingViewModel
 import com.evapharma.animalhealth.presentation.viewmodel.MainViewModel
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

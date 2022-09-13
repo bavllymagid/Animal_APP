@@ -24,4 +24,8 @@ class GetBookings @Inject constructor(val repository: BookingRepository) {
     suspend fun executePrev(id: String, pageNum:Int):BookingList? {
         return repository.getPrevBookings(id,pageNum)
     }
+
+    suspend fun dropDatabase(){
+        repository.deleteLocal()
+    }
 }
