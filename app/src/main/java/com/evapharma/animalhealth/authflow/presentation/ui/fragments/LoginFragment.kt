@@ -53,21 +53,26 @@ class LoginFragment : Fragment() {
         }
         binding.SignInBTN.setOnClickListener()
         {
+            binding.phoneInput.isErrorEnabled = false
+            binding.PassWordInput.isErrorEnabled = false
             val mobileNumber = binding.phoneEdt.text.toString()
             if (mobileNumber.isBlank() || mobileNumber.isEmpty() || mobileNumber.length > 11) {
-                binding.phoneEdt.error = "Please enter a valid mobile number"
+                binding.phoneInput.isErrorEnabled = true
+                binding.phoneInput.error = "Please enter a valid mobile number"
             } else {
                 val mobileService = mobileNumber.subSequence(0, 3)
                 if (!(mobileService == "010" || mobileService == "011" || mobileService == "012" || mobileService == "015")
                 ) {
-                    binding.phoneEdt.error = "Please enter a valid mobile number"
+                    binding.phoneInput.isErrorEnabled = true
+                    binding.phoneInput.error = "Please enter a valid mobile number"
                 } else {
                     val password = binding.passwordEdt.text.toString()
                     if (!(containsNumber(password) && containsUpperCase(password) && containsUpperCase(
                             password
                         ) && password.length > 7)
                     ) {
-                        binding.passwordEdt.error =
+                        binding.PassWordInput.isErrorEnabled = true
+                        binding.PassWordInput.error =
                             "Password should at least be of 8 characters and contains an upper case letter, a special character and a digit"
                     } else {
                         loginUser()
@@ -107,7 +112,7 @@ class LoginFragment : Fragment() {
                     authToken = loginViewModel.getToken(user)
 
                     if (authToken == "") {
-                        Snackbar.make(view!!, "The Account is not found", Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(view!!, "Username or Password is Not correct", Snackbar.LENGTH_LONG).show()
                     } else {
                         val bundle = Bundle()
                         bundle.putString("log","log")

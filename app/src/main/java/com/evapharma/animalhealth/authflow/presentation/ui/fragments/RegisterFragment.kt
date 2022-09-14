@@ -42,6 +42,9 @@ class RegisterFragment : Fragment() {
         }
 
         binding.RegisterBtn.setOnClickListener {
+            binding.PasswordInput.isErrorEnabled = false
+            binding.textInputLayout2.isErrorEnabled = false
+            binding.textInputLayout.isErrorEnabled = false
             val customer = CustomerModel(binding.nameInput.text.toString(), binding.mobileInput.text.toString(), binding.PasswordInputText.text.toString())
             Log.d("Customer Model", "Name: ${customer.UserName} ,  password: ${customer.Password}, number: ${customer.PhoneNumber}")
             CoroutineScope(Dispatchers.IO).launch {
@@ -49,22 +52,26 @@ class RegisterFragment : Fragment() {
                 withContext(Dispatchers.Main){
 
                     if(binding.nameInput.text.toString().isBlank() || binding.nameInput.text.toString().isEmpty()){
-                        binding.nameInput.setError("Please enter a valid username")
+                        binding.textInputLayout.isErrorEnabled = true
+                        binding.textInputLayout.error = "Please enter a valid username"
                     }
                     else{
                         val mobileNumber = binding.mobileInput.text.toString()
-                        if(mobileNumber.isBlank() || mobileNumber.isEmpty()  || mobileNumber.length > 11){
-                            binding.mobileInput.setError("Please enter a valid mobile number")
+                        if(mobileNumber.isBlank() || mobileNumber.isEmpty()  || mobileNumber.length > 11 || mobileNumber.length < 11){
+                            binding.textInputLayout2.isErrorEnabled = true
+                            binding.textInputLayout2.error = "Please enter a valid mobile number"
                         }
                         else{
                         val mobileService = mobileNumber.subSequence(0,3)
                         if(!(mobileService.equals("010") || mobileService.equals("011") || mobileService.equals("012") || mobileService.equals("015"))){
-                            binding.mobileInput.setError("Please enter a valid mobile number")
+                            binding.textInputLayout2.isErrorEnabled = true
+                            binding.textInputLayout2.error = "Please enter a valid mobile number"
                         }
                         else{
                             val password = binding.PasswordInputText.text.toString()
                             if(!(containsNumber(password) && containsUpperCase(password) && containsUpperCase(password) && password.length>7)){
-                                binding.PasswordInputText.setError("Password should at least be of 8 characters and contains an upper case letter, a special character and a digit")
+                                binding.PasswordInput.isErrorEnabled = true
+                                binding.PasswordInput.error = "Password should at least be of 8 characters and contains an upper case letter, a special character and a digit"
                             }
                             else{
                                 var success = true
@@ -72,6 +79,7 @@ class RegisterFragment : Fragment() {
                                 try {
                                     val response = registerViewModel.registerCustomer(customer)
                                     myResponse = response
+                                    success = myResponse.isSuccess
                                 }
                                 catch (e: NullPointerException){
                                     success = false
@@ -84,6 +92,9 @@ class RegisterFragment : Fragment() {
                                     Log.d("responseFlag:", myResponse.isSuccess.toString())
                                     Log.d("responseMessage", myResponse.message)
                                     findNavController().navigate(R.id.action_registerFragment_to_otpFragment, bundle)
+                                }else{
+                                    binding.textInputLayout2.isErrorEnabled = true
+                                    binding.textInputLayout2.error = "The phone number is already registered"
                                 }
 
                             }
