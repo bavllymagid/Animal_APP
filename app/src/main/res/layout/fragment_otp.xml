@@ -57,21 +57,12 @@
                     <TextView
 
                         android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/code_sent_to"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/textView3"
-
-                        android:layout_width="138dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/PhoneTv"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="20sp" />
 
                 </TableRow>
 
@@ -80,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/enter_the_4_digit_code_below"
+                    android:text="@string/enter_the_6_digit_code_below"
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
                     app:layout_constraintHorizontal_bias="0.498"
@@ -117,7 +108,7 @@
                             android:background="@color/white"
                             android:inputType="phone"
                             android:maxLength="1"
-                            android:textSize="16sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -141,7 +132,7 @@
                             android:background="@color/white"
                             android:inputType="phone"
                             android:maxLength="1"
-                            android:textSize="16sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -164,7 +155,7 @@
                             android:background="@color/white"
                             android:inputType="phone"
                             android:maxLength="1"
-                            android:textSize="16sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -189,7 +180,7 @@
                             android:background="@color/white"
                             android:inputType="phone"
                             android:maxLength="1"
-                            android:textSize="16sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -212,7 +203,7 @@
                             android:background="@color/white"
                             android:inputType="phone"
                             android:maxLength="1"
-                            android:textSize="16sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -236,7 +227,7 @@
                             android:background="@color/white"
                             android:inputType="phone"
                             android:maxLength="1"
-                            android:textSize="16sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>

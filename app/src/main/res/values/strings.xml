@@ -18,8 +18,8 @@
     <string name="verify_mobile_number">Verify Mobile Number</string>
     <string name="timer">1:30</string>
     <string name="send_code">Send Code</string>
-    <string name="enter_the_4_digit_code_below">Enter the 4 digit code below</string>
-    <string name="code_sent_to">Code Sent to:</string>
+    <string name="enter_the_6_digit_code_below">Enter the 6 digit code below</string>
+    <string name="code_sent_to">Code Sent</string>
     <string name="PhoneTv">+20106 846 2870</string>
     <string name="the_code_will_be_expired_in">The code will be expired in:</string>
     <string name="or">OR</string>
